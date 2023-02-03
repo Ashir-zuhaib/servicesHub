@@ -1,9 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import { Inter } from "@next/font/google";
+import { Layout, Col, Row, Space, Menu } from "antd";
+import { CategoryCard } from "@/components/Home/categories-card/categories-card";
+import { HomeCarousel } from "@/components/Home/home-carousel/home-carousel";
+const { Header, u } = Layout;
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -14,110 +16,70 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+      <Layout className="bg-white">
+        {/* <Header className="header">
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            style={{ lineHeight: "64px" }}
           >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+            <Menu.Item key="1">nav 1</Menu.Item>
+            <Menu.Item key="2">nav 2</Menu.Item>
+            <Menu.Item key="3">nav 3</Menu.Item>
+          </Menu>
+        </Header> */}
+        <Row justify="center" gutter={[16, 16]}>
+          <Col span={20}>
+            <Row justify="center" gutter={[16, 16]}>
+              <Col span={6}>
+                <Space
+                  direction="vertical"
+                  size="middle"
+                  style={{ display: "flex" }}
+                >
+                  <CategoryCard
+                    imageSrc="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    redirectionLink="#"
+                  />
+                  <CategoryCard
+                    imageSrc="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    redirectionLink="#"
+                  />
+                </Space>
+              </Col>
+              <Col span={18}>
+                <HomeCarousel />
+              </Col>
+              <Col span={6}>
+                <CategoryCard
+                  imageSrc="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  redirectionLink="#"
+                />
+              </Col>
+              <Col span={6}>
+                <CategoryCard
+                  imageSrc="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  redirectionLink="#"
+                />
+              </Col>
+              <Col span={6}>
+                <CategoryCard
+                  imageSrc="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  redirectionLink="#"
+                />
+              </Col>
+              <Col span={6}>
+                <CategoryCard
+                  imageSrc="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  redirectionLink="#"
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Layout>
     </>
-  )
+  );
 }
