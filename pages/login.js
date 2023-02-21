@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import logo from "./Images/sampleLogo.png";
+import Logo from "./Images/sampleLogo.png";
 import { Wrapper } from "../styles/login";
-import { Button, Checkbox, Col, Form, Input, Row } from "antd";
+import { Button, Checkbox, Col, Form, Input, Row, Image } from "antd";
 import { Select, Space } from "antd";
 import swal from "sweetalert";
 import firebase from "../config";
@@ -87,7 +87,7 @@ const Login = () => {
           .firestore()
           .collection("Users")
           .doc(user.uid)
-          .add({
+          .set({
             full_name: values.full_name,
             email: values.email,
             phone: values.phone,
@@ -297,7 +297,13 @@ const Login = () => {
               <div class="overlay">
                 <div class="overlay-panel overlay-left">
                   <div class="social-container">
-                    <img src={logo} alt="" style={{ background: "#000" }} />
+                    <Image
+                    preview={false}
+                      src="https://firebasestorage.googleapis.com/v0/b/serviceshub-46f1a.appspot.com/o/sampleLogo.png?alt=media&token=56bda3b8-295e-4b99-9ab1-51a825e46203"
+                      alt="service hub logo"
+                      style={{height:200, width:200}}
+
+                    />
                   </div>
                   <h1>Log in</h1>
                   <p>Login in here if you already have an account </p>
@@ -313,7 +319,9 @@ const Login = () => {
 
                 <div class="overlay-panel overlay-right">
                   <div class="social-container">
-                    <img src={logo} alt="" style={{ background: "#000" }} />
+                  <img src="https://firebasestorage.googleapis.com/v0/b/serviceshub-46f1a.appspot.com/o/sampleLogo.png?alt=media&token=56bda3b8-295e-4b99-9ab1-51a825e46203"  
+                  style={{height:200,width:200}}
+                  />
                   </div>
                   <h1>Create Account!</h1>
                   <p>Sign up if you still don't have an account ... </p>
