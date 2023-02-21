@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { Inter } from "@next/font/google";
 import { Layout, Col, Row, Space, Menu } from "antd";
 import { CategoryCard } from "@/components/Home/categories-card/categories-card";
@@ -25,7 +26,7 @@ export default function Home() {
             defaultSelectedKeys={["2"]}
             style={{ lineHeight: "64px" }}
           >
-            <Menu.Item key="1">Log In</Menu.Item>
+            <Menu.Item key="1"><Link href="/login">Log In</Link></Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item>
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
