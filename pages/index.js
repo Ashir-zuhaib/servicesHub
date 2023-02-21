@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout className="bg-white">
-        {/* <Header className="header">
+        <Header className="header">
           <div className="logo" />
           <Menu
             theme="dark"
@@ -25,11 +25,11 @@ export default function Home() {
             defaultSelectedKeys={["2"]}
             style={{ lineHeight: "64px" }}
           >
-            <Menu.Item key="1">nav 1</Menu.Item>
+            <Menu.Item key="1">Log In</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item>
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
-        </Header> */}
+        </Header>
         <Row justify="center" gutter={[16, 16]}>
           <Col span={20}>
             <Row justify="center" gutter={[16, 16]}>
