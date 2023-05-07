@@ -1,0 +1,21 @@
+.AddressSelection svg {
+  color: var(--dawaai-blue);
+}
+.AddressSelection span {
+  font-size: 14px !important;
+  font-weight: 600;
+}
+.contactContainer p,
+.contactContainer div {
+  white-space: nowrap;
+}
+@media (max-width: 1000px) {
+  .contactContainer div {
+    font-size: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .contactContainer div {
+    font-size: 8px;
+  }
+}

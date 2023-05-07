@@ -1,0 +1,42 @@
+.modalDescription fieldset {
+  border-radius: 15px;
+}
+.AddressLabelGroup label span:first-child svg {
+  display: none;
+}
+.LabelHeading {
+  color: var(--dawaai-blue) !important;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+.selectLabel {
+  display: flex;
+  color: var(--dawaai-blue);
+  align-items: center;
+  padding: 6px 12px;
+  background-color: var(--gray-bg);
+  border-radius: 5px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.selectLabel svg {
+  margin-right: 5px;
+}
+@media (max-width: 768px) {
+  .selectLabel {
+    padding: 6px 6px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+  }
+  .selectLabel svg {
+    margin-right: 2px;
+  }
+}

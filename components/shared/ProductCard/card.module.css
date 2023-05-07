@@ -1,0 +1,24 @@
+.productCard {
+  background: #ffffff;
+  border: 1px solid #ddebf8;
+  box-sizing: border-box;
+  border-radius: 16px;
+  position: relative;
+  padding: 12px;
+}
+.ctaAtcart {
+  font-style: normal;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  color: var(--dawaai-blue) !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin-top: 12px !important;
+  text-transform: initial;
+  display: flex;
+  align-items: center;
+}
+.ctaAtcart:hover {
+  background-color: var(--dawaai-blue) !important;
+  color: var(--white) !important;
+}

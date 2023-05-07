@@ -1,0 +1,5 @@
+.simpleAccordion {
+  min-height: 48px !important;
+  height: 48px;
+  max-height: fit-content;
+}

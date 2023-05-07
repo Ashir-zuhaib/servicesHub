@@ -1,0 +1,21 @@
+.sideCart {
+  width: 28vw;
+  padding: 1rem 0.5rem;
+}
+.sideCart span {
+  font-size: 14px;
+  color: var(--light-text);
+}
+.sideCart .removeIcon {
+  padding: 7px;
+  background-color: var(--gray-bg);
+  border-radius: 50%;
+}
+.sideCart .totalDivider {
+  border-bottom-width: medium;
+}
+@media (max-width: 768px) {
+  .sideCart {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,59 @@
+/* Update Quantity Button Group For Gray */
+.updateQtyButtonsGray button {
+  min-width: 35px;
+  max-width: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 32px;
+  margin: 8px auto;
+  border-color: var(--gray-bg);
+  background-color: var(--gray-bg);
+  color: var(--dark-text);
+}
+.updateQtyButtonsGray button:hover,
+.updateQtyButtonsGray button:focus {
+  border-color: var(--gray-bg) !important;
+  background-color: var(--gray-bg);
+}
+
+.updateQtyButtonsGray input,
+.updateQtyButtonsGray input:hover,
+.updateQtyButtonsGray input:focus,
+.updateQtyButtonsGray input:focus-visible {
+  width: 100%;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background-color: var(--gray-bg);
+  text-align: center;
+}
+/* Update Quantity Button Group For White */
+
+.updateQtyButtons button {
+  min-width: 35px;
+  max-width: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 32px;
+  margin: 8px auto;
+  border-color: var(--white);
+  background-color: var(--white);
+  color: var(--dark-text);
+}
+.updateQtyButtons button:hover,
+.updateQtyButtons button:focus {
+  border-color: var(--white) !important;
+  background-color: var(--white);
+}
+
+.updateQtyButtons input,
+.updateQtyButtons input:hover,
+.updateQtyButtons input:focus,
+.updateQtyButtons input:focus-visible {
+  width: 100%;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background-color: var(--white);
+  text-align: center;
+}

@@ -1,0 +1,36 @@
+/* h2 */
+.subTitle,
+/* h1 */
+.Heading {
+  font-size: 24px;
+  font-weight: 600;
+  color: #191c24;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* h1 */
+.title {
+  color: var(--dawaai-blue);
+  font-weight: bold;
+  font-size: 24px;
+}
+/* h6 */
+.subHeading {
+  color: #191c24;
+}
+/*h6 */
+.subHeadingBlue,
+.subHeading {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dawaai-blue);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/* h6 */
+.subHeadingBlue {
+  color: var(--dawaai-blue);
+}
+.subHeading {
+  color: #191c24;
+}

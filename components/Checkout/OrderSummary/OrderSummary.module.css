@@ -1,0 +1,9 @@
+.discountedPrice {
+  color: var(--deep-yellow);
+  font-weight: 600;
+}
+.actualPrice {
+  color: var(--blury-gray);
+  text-decoration: line-through;
+  font-size: 12px;
+}

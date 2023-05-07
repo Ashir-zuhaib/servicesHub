@@ -1,0 +1,84 @@
+/* Material UI classes override Start */
+@media (min-width: 1200px) {
+  .MuiContainer-maxWidthLg {
+    max-width: 1200px !important;
+    width: 1200px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .MuiContainer-maxWidthLg {
+    max-width: 1024px !important;
+    width: 1024px !important;
+  }
+}
+/* Material UI classes override End */
+
+*,
+body {
+  font-family: Inter, sans-serif !important;
+}
+:root {
+  --dawaai-blue: #003b82;
+  --pane-padding: 5px 42px;
+  --border-gray: #ddebf8;
+  --light-text: #afaeae;
+  --gray-bg: #f1f1f1;
+  --dark-text: #161616;
+  --sea-green: #32aa9e;
+  --deep-yellow: #f39939;
+  --blury-gray: #838bad;
+  --white: #fff;
+  --dawaai-dark-blue: #012d63;
+  --outline: #c9c7c7;
+  --light-blue: #E6F4FF;
+}
+.primary-color {
+  background: var(--dawaai-blue);
+}
+h1,
+h2,
+h3 {
+  color: #191c24;
+  font-weight: 600;
+}
+
+p,
+span,
+h4,
+h5,
+h6 {
+  color: #191c24;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+  cursor: pointer !important;
+}
+
+/*            HEADER STYLING START            */
+header {
+  padding-top: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1.5px solid var(--outline);
+}
+
+header .Mui-customized {
+  width: 100%;
+}
+
+header a.text-modified {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #191c24;
+  text-transform: uppercase;
+  display: inline-flex;
+}
+
+header .productSearchField .MuiOutlinedInput-notchedOutline {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+/*        HEADER STYLING END              */
