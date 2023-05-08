@@ -31,7 +31,7 @@ function Header({ isMobile }: header) {
               </Link>
             </Grid>
             {!isMobile ? (
-              <Grid item lg={6} sx={{ display: "flex" }}>
+              <Grid item lg={6} sx={{ display: "flex" }} style={{width:50}}>
                 <MainSearch />
               </Grid>
             ) : (

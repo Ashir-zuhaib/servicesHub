@@ -12,12 +12,13 @@ const Home: any = ({isMobile}:home) => {
       <Layout isMobile={isMobileValue}>
         <Container maxWidth="lg">
           <BrandCarousel isMobile={isMobileValue}/>
-          <ProductsContainerWithButton
-            title={"All Medicines"}
+         <ProductsContainerWithButton
+            title={"All Services"}
             buttonText={"View All"}
             buttonLink={"/Medicines"}
             isMobile={isMobileValue}
           />
+          
         </Container>
       </Layout>
     </>

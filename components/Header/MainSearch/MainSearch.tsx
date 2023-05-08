@@ -15,7 +15,7 @@ function MainSearch() {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Search medicines and services"
+              label="Search Your Help"
               InputProps={{
                 ...params.InputProps,
                 type: "search",

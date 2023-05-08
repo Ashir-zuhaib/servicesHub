@@ -10,21 +10,9 @@ interface brandsCard {
   imgWidth: string;
   imgHeight: string;
   title: string;
-  logoWidth: string;
-  logoUrl: string;
-  logoHeight: string;
 }
 
-function BrandsCard({
-  id,
-  imgUrl,
-  imgWidth,
-  imgHeight,
-  title,
-  logoWidth,
-  logoUrl,
-  logoHeight,
-}: brandsCard) {
+function BrandsCard({ id, imgUrl, imgWidth, imgHeight, title }: brandsCard) {
   return (
     <>
       <Grid container spacing={2}>
@@ -32,16 +20,7 @@ function BrandsCard({
           <Box
             flexDirection={"column"}
             justifyContent={"space-around"}
-            className={Styles.boxStyles}
-          >
-            <Grid container justifyContent={"center"}>
-              <Image
-                src={logoUrl}
-                alt={title}
-                width={logoWidth}
-                height={logoHeight}
-              />
-            </Grid>
+            className={Styles.boxStyles}>
             <Grid container justifyContent={"center"}>
               {" "}
               <Image
@@ -52,7 +31,8 @@ function BrandsCard({
               />
             </Grid>
             <Grid container justifyContent={"center"}>
-              <Link href="https://dawaai.pk"><span className={Styles.brandName}>{title}</span>
+              <Link href="https://dawaai.pk">
+                <span className={Styles.brandName}>{title}</span>
               </Link>
             </Grid>
           </Box>

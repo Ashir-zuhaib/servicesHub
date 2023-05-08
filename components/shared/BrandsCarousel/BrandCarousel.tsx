@@ -12,32 +12,58 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
   const [isLoading, setLoading] = useState(true);
 
   const getData = () => {
-    fetch("https://fakestoreapi.com/products", {
-      headers: {
-        "Content-Type": "popular brands/json",
-        Accept: "popular brands/json",
+    let brandsdata = [
+      {
+        id: "1",
+        title: "Carpenter",
+        img: "/carpenter.png",
       },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (brandsdata) {
-        setLoading(false);
-        setData(brandsdata);
-      });
+      {
+        id: "2",
+        title: "electrician",
+        img: "/electrician.png",
+      },
+      {
+        id: "3",
+        title: "Plumber",
+        img: "/plumber.png",
+      },
+      {
+        id: "4",
+        title: "House Help",
+        img: "/carpenter.png",
+      },
+    ];
+    // fetch("https://fakestoreapi.com/products", {
+    //   headers: {
+    //     "Content-Type": "popular brands/json",
+    //     Accept: "popular brands/json",
+    //   },
+    // })
+    //   .then(function (response) {
+    //     return response.json();
+    //   })
+    //   .then(function (brandsdata) {
+    //     console.log(brandsdata)
+    //     setLoading(false);
+    //     setData(brandsdata);
+    //   });
+    setLoading(false);
+    setData(brandsdata);
   };
   useEffect(() => {
     getData();
   }, []);
-
+  {
+    data.map((item) => console.log(item.id));
+  }
   return isLoading ? (
     <>
       <Grid
         container
         columnSpacing={{ xs: 0, sm: 0, md: 2 }}
         columns={{ xs: 12, sm: 0, md: 12, lg: 12 }}
-        className={"py-5"}
-      >
+        className={"py-5"}>
         {isMobile ? (
           <>
             <Grid item xs={12} md={12}>
@@ -81,25 +107,20 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
     <Grid
       container
       columnSpacing={{ xs: 2, sm: 2, md: 2 }}
-      columns={{ xs: 12, sm: 2, md: 12, lg: 12 }}
-    >
+      columns={{ xs: 12, sm: 2, md: 12, lg: 12 }}>
       <ProductCarousel
         show={3}
         infiniteLoop={true}
-        carouselTitle={"Popular Brands"}
-        isMobile={isMobile}
-      >
+        carouselTitle={"Popular Categories"}
+        isMobile={isMobile}>
         {data.map((item) => (
           <Grid container item xs={8} md={4}>
             <BrandsCard
               id={item["id"]}
-              imgUrl={"/product-images/product-img-1.jpg"}
-              imgWidth={"130"}
+              imgUrl={item["img"]}
+              imgWidth={"190"}
               imgHeight={"130"}
               title={item["title"]}
-              logoWidth={"70"}
-              logoUrl={"/brands-logo/brand-logo.webp"}
-              logoHeight={"70"}
             />
           </Grid>
         ))}

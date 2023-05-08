@@ -7,7 +7,7 @@ function Breadcrumb() {
   return (
     <Grid container item xs={12}>
       <Stack direction="row" alignItems="center" className={Styles.breadcrumb}>
-        <Link href="/About">
+        <Link href="/About" legacyBehavior>
           <a>About Us</a>
         </Link>
         <NavigateNextIcon fontSize="small" />

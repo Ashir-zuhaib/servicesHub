@@ -1,6 +1,6 @@
 import Skeleton from '@mui/material/Skeleton';
 import Image from 'next/image';
-import websiteLogo from '../../../public/dawaai-logo.png';
+import websiteLogo from '../../../public/service-logo.png';
 
 
 
