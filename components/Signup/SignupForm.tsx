@@ -1,7 +1,8 @@
-import React from "react";
-import Styles from "./login.module.css";
+import React, { useEffect } from "react";
+import Styles from "./signup.module.css";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import firebase from "../../config" 
 import {
   Stack,
   Typography,
@@ -9,35 +10,83 @@ import {
   InputAdornment,
   Button,
   IconButton,
+  InputLabel,
+  Select,
+  MenuItem
 } from "@mui/material";
 import {
   LockOutlined,
   PersonOutlineOutlined,
   VisibilityOffOutlined,
   VisibilityOutlined,
+  Call
 } from "@mui/icons-material";
-
-interface loginForm {
+interface MenuItemData {
+    value: string;
+    key: string;
+  }
+interface signupForm {
+  fullName: string;
+  setFullName: React.Dispatch<React.SetStateAction<string>>;
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
+  phone: string;
+  setPhone: React.Dispatch<React.SetStateAction<string>>;
+  location: [],
+  setLocation: React.Dispatch<React.SetStateAction<[]>>,
   userPassword: string;
   setUserPassword: React.Dispatch<React.SetStateAction<string>>;
+  area: [];
+  setArea: React.Dispatch<React.SetStateAction<[]>>;
   submitLoginForm: () => void;
   errorMessage: string;
 }
-export default function LoginForm({
+export default function SignupForm({
+    fullName,
+    setFullName,
   email,
   setEmail,
+  phone,
+  setPhone,
+  location,
+  setLocation,
   userPassword,
   setUserPassword,
   submitLoginForm,
+  area,
+  setArea,
   errorMessage,
-}: loginForm) {
+}: signupForm) {
   // Change Password to Text Field
+  
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
+  const getLocation = async () => {
+    let locationArray: [] = [];
+    let getLocation = await firebase.firestore().collection("Location").get();
+    console.log("location size", getLocation.size);
+    
+    getLocation.docs.forEach((doc) => {
+      let data = doc.data();
+      data.key = doc.id;
+      locationArray.push(data);
+      setLocation(locationArray);
+    });
+   
+  };
+  console.log("locationArray", location);
+  
+  useEffect(() => {
+    // getRoles();
+    getLocation();
+  }, []);
+  const handleAreaChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const selectedArea = location?.find((item) => item.value === event.target.value);
+    if (selectedArea) {
+      setArea(selectedArea.key);
+    }
+  };
   return (
     <Grid item xs={12} md={4} className={Styles.formContainer}>
       <div className="login-form-container px-2">
@@ -49,14 +98,29 @@ export default function LoginForm({
         >
           <div className={Styles.headingDiv}>
             <Typography className={Styles.loginText} variant="h3">
-              Login
+              Sign up
             </Typography>
             <Typography className={Styles.loginPara} variant="subtitle1">
-              Login to your account to get your medicines
+              Create account to get our services
             </Typography>
           </div>
           <br />
           <TextField
+            className={Styles.idField}
+            id="outlined-basic"
+            label="Full Name"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonOutlineOutlined />
+                </InputAdornment>
+              ),
+            }}
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+            <TextField
             className={Styles.idField}
             id="outlined-basic"
             label="Email"
@@ -70,6 +134,21 @@ export default function LoginForm({
             }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            className={Styles.idField}
+            id="outlined-basic"
+            label="Phone"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Call />
+                </InputAdornment>
+              ),
+            }}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
           <TextField
             className={`${Styles.passwordField} mb-3`}
@@ -104,14 +183,31 @@ export default function LoginForm({
               ),
             }}
           />
-          <p className="has-text-center is-size-14 h-15 has-text-danger">{errorMessage}</p>
+           <InputLabel    id="demo-simple-select-label">Location</InputLabel>
+  <Select
+    className={Styles.idField}
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={area?.value}
+    label="Location"
+    onChange={handleAreaChange}
+  >
+     {location?.map((item) => (
+          <MenuItem key={item.key} value={item.value}>
+            {item.value}
+          </MenuItem>
+        ))}
+  </Select>
+          <p className="has-text-center is-size-14 h-15 has-text-danger">
+            {errorMessage}
+          </p>
           <Button
             className={Styles.loginButton}
             variant="contained"
             type="submit"
             onClick={submitLoginForm}
           >
-            Login
+            Sign up
           </Button>
         </Stack>
       </div>

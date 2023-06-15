@@ -5,12 +5,12 @@ import Grid from "@mui/material/Grid";
 import { useState } from "react";
 
 export default function LoginMain() {
-  const [userId, setUserId] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const submitLoginForm = () => {
-    if (userId == "" || userPassword == "") {
+    if (email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");
     } else {
       setErrorMessage("");
@@ -21,8 +21,8 @@ export default function LoginMain() {
     <Grid container style={{ minHeight: "100vh", position: "relative" }}>
       <LoginView />
       <LoginForm
-        userId={userId}
-        setUserId={setUserId}
+        email={email}
+        setEmail={setEmail}
         userPassword={userPassword}
         setUserPassword={setUserPassword}
         submitLoginForm={submitLoginForm}

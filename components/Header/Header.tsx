@@ -8,10 +8,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Cartsheet from "../Cartsheet/Cartsheet";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import Link from "next/link";
+import DropdownComponent from "../DropDownLogin/dropdown";
 interface header {
   isMobile: boolean;
 }
 function Header({ isMobile }: header) {
+  
   return (
     <header>
       <Container maxWidth="xl">
@@ -43,7 +45,8 @@ function Header({ isMobile }: header) {
             </Grid>
             {!isMobile ? (
               <Grid item>
-                <ProfileModal />
+                {/* <ProfileModal /> */}
+                <DropdownComponent />
               </Grid>
             ) : (
               ""
