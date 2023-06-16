@@ -14,7 +14,7 @@ export default function LoginView() {
                         <ViewHeader/>
                     </Grid>
                     <Grid item style={{display: 'flex', alignItems: "flex-end", marginLeft: '5%'}}>
-                        <Typography className={Styles.aboutDawaai} variant='h4'>An Employee Medical Benefits Platform Designed For Enterprises To Support Their Employees</Typography>
+                        <Typography className={Styles.aboutDawaai} variant='h4'>Welcome To Service Hub </Typography>
                     </Grid>
                     <Grid item style={{display: 'flex', alignItems: "flex-end"}}>
                         <div className={Styles.pngPak}>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Styles from "./signup.module.css";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
-import firebase from "../../config" 
+import firebase from "../../config";
 import {
   Stack,
   Typography,
@@ -12,19 +12,21 @@ import {
   IconButton,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
+  Checkbox,
+  FormControlLabel
 } from "@mui/material";
 import {
   LockOutlined,
   PersonOutlineOutlined,
   VisibilityOffOutlined,
   VisibilityOutlined,
-  Call
+  Call,
 } from "@mui/icons-material";
 interface MenuItemData {
-    value: string;
-    key: string;
-  }
+  value: string;
+  key: string;
+}
 interface signupForm {
   fullName: string;
   setFullName: React.Dispatch<React.SetStateAction<string>>;
@@ -32,59 +34,93 @@ interface signupForm {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   phone: string;
   setPhone: React.Dispatch<React.SetStateAction<string>>;
-  location: [],
-  setLocation: React.Dispatch<React.SetStateAction<[]>>,
+  locations: any[];
+  setLocation: React.Dispatch<React.SetStateAction<any[]>>;
   userPassword: string;
   setUserPassword: React.Dispatch<React.SetStateAction<string>>;
-  area: [];
-  setArea: React.Dispatch<React.SetStateAction<[]>>;
+  area:string;
+  setArea: React.Dispatch<React.SetStateAction<string>>;
+  occupation:string;
+  setOccupation: React.Dispatch<React.SetStateAction<string>>;
+  worker: boolean;
+  setWorker: React.Dispatch<React.SetStateAction<boolean>>;
+  roles: any[];
+  setRoles: React.Dispatch<React.SetStateAction<any[]>>;
   submitLoginForm: () => void;
   errorMessage: string;
 }
 export default function SignupForm({
-    fullName,
-    setFullName,
+  fullName,
+  setFullName,
   email,
   setEmail,
   phone,
   setPhone,
-  location,
+  locations,
   setLocation,
   userPassword,
   setUserPassword,
   submitLoginForm,
   area,
   setArea,
+  worker,
+  setWorker,
+  occupation,
+  setOccupation,
+  roles,
+  setRoles,
   errorMessage,
 }: signupForm) {
   // Change Password to Text Field
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const getLocation = async () => {
-    let locationArray: [] = [];
+    let locationArray: any[] = [];
     let getLocation = await firebase.firestore().collection("Location").get();
     console.log("location size", getLocation.size);
-    
+
     getLocation.docs.forEach((doc) => {
       let data = doc.data();
       data.key = doc.id;
       locationArray.push(data);
       setLocation(locationArray);
     });
-   
   };
-  console.log("locationArray", location);
-  
+
+  const getRoles = async()=>{
+    let rolesArray = [];
+    let getRoles = await firebase.firestore().collection("Roles").get();
+    console.log("Roles size", getRoles.size);
+
+    getRoles.docs.forEach((doc) => {
+      let data = doc.data();
+      data.key = doc.id;
+      rolesArray.push(data);
+      setRoles(rolesArray);
+    });
+  }
+  console.log("locationArray", locations);
+
   useEffect(() => {
-    // getRoles();
+    getRoles();
     getLocation();
   }, []);
   const handleAreaChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    const selectedArea = location?.find((item) => item.value === event.target.value);
+    const selectedArea = locations?.find(
+      (item) => item.value === event.target.value
+    );
     if (selectedArea) {
       setArea(selectedArea.key);
+    }
+  };
+  const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const selectedOccupation = roles?.find(
+      (item) => item.value === event.target.value
+    );
+    if (selectedOccupation) {
+      setOccupation(selectedOccupation.key);
     }
   };
   return (
@@ -120,7 +156,7 @@ export default function SignupForm({
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
-            <TextField
+          <TextField
             className={Styles.idField}
             id="outlined-basic"
             label="Email"
@@ -183,21 +219,40 @@ export default function SignupForm({
               ),
             }}
           />
-           <InputLabel    id="demo-simple-select-label">Location</InputLabel>
-  <Select
-    className={Styles.idField}
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={area?.value}
-    label="Location"
-    onChange={handleAreaChange}
-  >
-     {location?.map((item) => (
-          <MenuItem key={item.key} value={item.value}>
-            {item.value}
-          </MenuItem>
-        ))}
-  </Select>
+          <InputLabel id="demo-simple-select-label">Location</InputLabel>
+          <Select
+            className={Styles.idField}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={area?.value}
+            label="Location"
+            onChange={handleAreaChange}
+          >
+            {locations?.map((item) => (
+              <MenuItem key={item.key} value={item.value}>
+                {item.value}
+              </MenuItem>
+            ))}
+          </Select>
+          <FormControlLabel control={<Checkbox  onChange={(e)=>setWorker(e.target.checked)} />} label="Sign up as Worker" />
+          {worker?
+          (<>
+          <InputLabel id="demo-simple-select-label">Occupation</InputLabel>
+          <Select
+            className={Styles.idField}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={occupation?.value}
+            label="Occupation"
+            onChange={handleRoleChange}
+          >
+            {roles?.map((item) => (
+              <MenuItem key={item.key} value={item.value}>
+                {item.value}
+              </MenuItem>
+            ))}
+          </Select>
+          </>):""}
           <p className="has-text-center is-size-14 h-15 has-text-danger">
             {errorMessage}
           </p>

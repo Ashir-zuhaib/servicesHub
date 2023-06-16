@@ -9,11 +9,32 @@ import Cartsheet from "../Cartsheet/Cartsheet";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import Link from "next/link";
 import DropdownComponent from "../DropDownLogin/dropdown";
+import firebase from "../../config";
+import React from "react";
+import { useState, useEffect } from "react";
+
+
 interface header {
   isMobile: boolean;
+  currentUserId:string;
+  userData:string
+  setUserData:React.Dispatch<React.SetStateAction<string>>;
 }
-function Header({ isMobile }: header) {
-  
+ function Header({ isMobile }: header) {
+   const [userData, setUserData]= useState<string>("")
+  //  const [logout, setLogout] = useState
+  const checkLogin = async()=>{
+    let currentUserId =  await localStorage?.getItem("uid")
+    console.log("current uid", currentUserId);
+    await firebase.firestore().collection("Users").doc(currentUserId).get().then((doc)=>{
+
+      setUserData(doc.data())
+    })
+
+  }
+  useEffect(()=>{
+    checkLogin()
+  },[])
   return (
     <header>
       <Container maxWidth="xl">
@@ -45,9 +66,11 @@ function Header({ isMobile }: header) {
             </Grid>
             {!isMobile ? (
               <Grid item>
-                {/* <ProfileModal /> */}
+               { userData?
+                <ProfileModal userData ={userData} />:
                 <DropdownComponent />
-              </Grid>
+              }
+                </Grid>
             ) : (
               ""
             )}
