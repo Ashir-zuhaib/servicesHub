@@ -1,0 +1,71 @@
+/* CLASSES FOR SMALL STYLING */
+
+.text-dawaai-blue {
+  color: var(--dawaai-blue);
+}
+.text-dawaai-blue:hover {
+  color: var(--dawaai-blue);
+}
+.text-light {
+  color: var(--light-text);
+}
+.text-blury {
+  color: var(--blury-gray);
+}
+.is-size-14 {
+  font-size: 14px;
+}
+.underline {
+  text-decoration: underline;
+}
+.bg-light-blue {
+  background-color: var(--light-blue);
+}
+.bg-gray {
+  background-color: var(--gray-bg);
+}
+.hover-no-bg:hover {
+  background-color: transparent !important;
+}
+/* Border Radius */
+.br-sm {
+  border-radius: 5px !important;
+}
+.br-md {
+  border-radius: 10px !important;
+}
+.br-lg {
+  border-radius: 15px !important;
+}
+.br-xl {
+  border-radius: 20px !important;
+}
+.br-full {
+  border-radius: 100% !important;
+}
+.w-100 {
+  width: 100%;
+}
+.h-15{
+  height: 15px;
+}
+@media (min-width: 768px) {
+  .m5-desktop {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+/*   CLASSES FOR SMALL STYLING END      */
+
+/* Medicine A to Z Page Tabs Class Override */
+.MedicinesTabContainer .MuiTabs-indicator {
+  background-color: transparent !important;
+}
+.MedicinesTabContainer .Mui-selected {
+  background-color: var(--dawaai-blue);
+  color: #fff;
+}
+.MedicinesTabContainer .MuiBox-root {
+  padding: 5px;
+}
+/* Medicine A to Z Page Tabs Class Override End */

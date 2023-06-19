@@ -1,0 +1,32 @@
+.buttonContainer {
+  border: #3b3b3b 1px dashed;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right-color: #b4afaf!important;
+  border-left-color: #b4afaf!important;
+}
+.instructions {
+  border: 1px solid var(--blury-gray);
+}
+.instructions ul{
+  list-style-type: disc;
+  padding-left: 25px;
+}
+.instructions li{
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.ImgContainer{
+  width: fit-content;
+  position: relative;
+}
+.imageCross{
+  position: absolute;
+  top: -1px;
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 100%;
+  right: 1px;
+}

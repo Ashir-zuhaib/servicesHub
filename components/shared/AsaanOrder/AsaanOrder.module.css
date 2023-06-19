@@ -1,0 +1,19 @@
+.customStyle {
+/* Dawai Color Palette/Input */
+background: #F9F9FC !important;
+/* Dawai Color Palette/Dawaai Blue */
+border: 2px solid var(--dawaai-blue) !important;
+box-sizing: border-box !important;
+border-radius: 6px !important;
+color:var(--dawaai-blue) !important;
+font-size:0.75rem !important;
+font-weight:600 !important;
+text-transform: capitalize !important;
+padding:8px 15px !important;
+}
+.customStyle:hover {
+    border: 2px solid #003B82 !important;
+}
+.customStyledIcon {
+    color:var(--dawaai-blue) !important;
+}
