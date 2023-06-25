@@ -1,5 +1,5 @@
 .AddressSelection svg {
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
 }
 .AddressSelection span {
   font-size: 14px !important;

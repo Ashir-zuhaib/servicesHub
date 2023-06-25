@@ -5,9 +5,9 @@ const AddNewAddressLabel = () => {
     <Button
       variant="text"
       startIcon={
-        <AddCircleOutlineIcon className="text-dawaai-blue" fontSize="large" />
+        <AddCircleOutlineIcon className="text-primary-color" fontSize="large" />
       }
-      className="text-dawaai-blue hover-no-bg is-capitalized"
+      className="text-primary-color hover-no-bg is-capitalized"
     >
       Add New Address
     </Button>

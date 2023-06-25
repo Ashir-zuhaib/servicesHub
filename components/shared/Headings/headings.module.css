@@ -10,7 +10,7 @@
 }
 /* h1 */
 .title {
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
   font-weight: bold;
   font-size: 24px;
 }
@@ -23,13 +23,13 @@
 .subHeading {
   font-size: 18px;
   font-weight: 600;
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
   margin-top: 5px;
   margin-bottom: 5px;
 }
 /* h6 */
 .subHeadingBlue {
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
 }
 .subHeading {
   color: #191c24;

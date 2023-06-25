@@ -16,7 +16,7 @@ const AvailableBalance = () => {
           alignItems="center"
         >
           <p className="is-size-4 has-text-weight-bold">Rs. 2578.00</p>
-          <span className="text-dawaai-blue">
+          <span className="text-primary-color">
             <AccessTimeIcon />
           </span>
         </Stack>

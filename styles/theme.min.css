@@ -18,7 +18,7 @@ body {
   font-family: Inter, sans-serif !important;
 }
 :root {
-  --dawaai-blue: #003b82;
+  --primary-color: #108a00;
   --pane-padding: 5px 42px;
   --border-gray: #ddebf8;
   --light-text: #afaeae;
@@ -30,10 +30,10 @@ body {
   --white: #fff;
   --dawaai-dark-blue: #012d63;
   --outline: #c9c7c7;
-  --light-blue: #E6F4FF;
+  --light-blue: #e6f4ff;
 }
 .primary-color {
-  background: var(--dawaai-blue);
+  background: var(--primary-color);
 }
 h1,
 h2,
@@ -48,6 +48,11 @@ h4,
 h5,
 h6 {
   color: #191c24;
+}
+
+a{
+  text-transform: capitalize;
+  color: #000000de;
 }
 a:hover,
 a:focus {
@@ -80,5 +85,6 @@ header .productSearchField .MuiOutlinedInput-notchedOutline {
   border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  width: 500px;
 }
 /*        HEADER STYLING END              */

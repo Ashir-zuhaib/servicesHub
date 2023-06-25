@@ -1,6 +1,5 @@
 import EditAddressIcon from "./AddressModal/EditAddressIcon";
 import AddressLabel from "./AddressLabel";
-import FastService from "../../shared/FastService/FastService";
 import Styles from "./AddressSection.module.css";
 import AddressModal from "./AddressModal/AddressForm";
 import { Grid, Stack } from "@mui/material";
@@ -39,7 +38,6 @@ const Address = () => {
         >
           <p>+92-3302345678</p>
           <Stack direction="row" justifyContent="flex-end" alignItems="center">
-            <FastService fastHeight="15" fastWidth="50" isMobile={false} />
             delivery location
           </Stack>
         </Stack>
