@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid";
 import Styles from "../ProductCard/card.module.css";
-import ProductImg from "../../services/productImg/productImg";
-import ProductTitle from "../../services/productTitle/productTitle";
-import ProductPrice from "../../services/productPrice/productPrice";
+import ProductImg from "../../ServicesCard/productImg/productImg";
+import ProductTitle from "../../ServicesCard/productTitle/productTitle";
+import ProductPrice from "../../ServicesCard/productPrice/productPrice";
 import Button from "@mui/material/Button";
 
 interface CardProperties {
