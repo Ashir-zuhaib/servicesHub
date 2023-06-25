@@ -49,6 +49,11 @@ h5,
 h6 {
   color: #191c24;
 }
+
+a{
+  text-transform: capitalize;
+  color: #000000de;
+}
 a:hover,
 a:focus {
   text-decoration: underline;

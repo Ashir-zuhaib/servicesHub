@@ -45,7 +45,7 @@ export default function ProfileModal() {
                 <span className="is-size-7">Available Credit</span>
                 <p className="has-text-weight-bold is-size-4">Rs, 19.927</p>
               </div>
-              <Link href="https://dawaai.pk" legacyBehavior>
+              <Link href="#" legacyBehavior>
                 <a className="is-size-7 has-text-weight-bold text-primary-color underline">
                   View History
                 </a>
