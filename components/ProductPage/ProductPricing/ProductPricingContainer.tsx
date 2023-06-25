@@ -20,7 +20,7 @@ const ProductPricingContainer = () => {
         <p className={Styles.discount}>Get 10% Off</p>
       </Stack>
       <p className="is-size-7 has-text-weight-semibold mt-4">
-        Pack Size: <span className={"text-dawaai-blue"}>10 Strips</span>
+        Pack Size: <span className={"text-primary-color"}>10 Strips</span>
       </p>
       <Stack
         direction={{ xs: "row", md: "column" }}

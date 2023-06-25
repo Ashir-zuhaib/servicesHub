@@ -1,34 +1,34 @@
 /* Outlined Button with small rounded borders */
 .paddedRoundCenterBtn {
   width: 100%;
-  border: 2px solid var(--dawaai-blue);
+  border: 2px solid var(--primary-color);
   border-radius: 6px;
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
   margin: 10px auto;
   text-transform: capitalize;
 
 }
 .paddedRoundCenterBtn:hover {
-  border: 2px solid var(--dawaai-blue);
+  border: 2px solid var(--primary-color);
 }
 
 .primaryButton {
   width: 100%;
   height: 2.79rem;
   margin: 15px auto;
-  background-color: var(--dawaai-blue);
+  background-color: var(--primary-color);
   text-transform: capitalize;
 
 }
 .primaryButton:hover {
   color: white;
   text-decoration: underline;
-  background-color: var(--dawaai-blue);
+  background-color: var(--primary-color);
 }
 .addToCart,
 .roundedButton {
   margin: 12px auto;
-  background-color: var(--dawaai-blue);
+  background-color: var(--primary-color);
   color: var(--white);
   width: 100%;
   text-transform: capitalize;

@@ -9,7 +9,7 @@ const productsData = [
     isActive: true,
     vendor: "Novartis",
     productimg: "/product-images/product.png",
-    title: "Panadol",
+    title: "Carpenter",
     discount: "15% Off",
     packSize: "10",
     actualPrice: "230",
@@ -20,7 +20,7 @@ const productsData = [
     isActive: true,
     vendor: "Novartis",
     productimg: "/product-images/product.png",
-    title: "Panadol",
+    title: "Carpenter",
     discount: "15% Off",
     packSize: "10",
     actualPrice: "230",
@@ -31,7 +31,7 @@ const productsData = [
     isActive: true,
     vendor: "Novartis",
     productimg: "/product-images/product.png",
-    title: "Panadol",
+    title: "Carpenter",
     discount: "15% Off",
     packSize: "10",
     actualPrice: "230",
@@ -42,7 +42,7 @@ const productsData = [
     isActive: true,
     vendor: "Novartis",
     productimg: "/product-images/product.png",
-    title: "Panadol",
+    title: "Carpenter",
     discount: "15% Off",
     packSize: "10",
     actualPrice: "230",
@@ -53,7 +53,7 @@ const productsData = [
     isActive: true,
     vendor: "Novartis",
     productimg: "/product-images/product.png",
-    title: "Panadol",
+    title: "Carpenter",
     discount: "15% Off",
     packSize: "10",
     actualPrice: "230",
@@ -64,7 +64,7 @@ const productsData = [
     isActive: true,
     vendor: "Novartis",
     productimg: "/product-images/product.png",
-    title: "Panadol",
+    title: "Carpenter",
     discount: "15% Off",
     packSize: "10",
     actualPrice: "230",
@@ -97,7 +97,7 @@ const ProductsContainer = ({ isMobile, isLoading }: productsContainer) => {
           <Grid item xs={6} md={3} key={productsData.id}>
             <ProductCard
               productImg={productsData.productimg}
-              ProductName={"Panadol"}
+              ProductName={"Carpenter"}
               VendorName={"Novartis"}
               PackSize={"10"}
               ProductType={"Tablets"}

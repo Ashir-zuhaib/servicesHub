@@ -24,7 +24,7 @@ const UploadPrescriptionModalContent = () => {
             />
             <Button
               component="span"
-              className="underline text-dawaai-blue is-capitalized"
+              className="underline text-primary-color is-capitalized"
             >
               Browse Files
             </Button>
@@ -39,7 +39,7 @@ const UploadPrescriptionModalContent = () => {
             <XCircle className={Styles.imageCross} size={26} />
             <Image src={prescription} width={100} height={115} />
           </div>
-          <p className="text-dawaai-blue has-text-weight-semibold is-size-7">Max 5 Prescription can be uploaded.</p>
+          <p className="text-primary-color has-text-weight-semibold is-size-7">Max 5 Prescription can be uploaded.</p>
         </Stack>
         <PrimaryButton buttonText="Upload" customStyleClasses="br-md" />
       </Grid>

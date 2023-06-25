@@ -4,7 +4,6 @@ import ProductImg from "../../services/productImg/productImg";
 import ProductTitle from "../../services/productTitle/productTitle";
 import ProductPrice from "../../services/productPrice/productPrice";
 import Button from "@mui/material/Button";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 
 interface CardProperties {
   productImg: string;
@@ -38,7 +37,7 @@ const ProductCard = ({
             Price={45}
           />
           <Button className={Styles.ctaAtcart} variant="text">
-            <LocalMallOutlinedIcon sx={{ marginRight: "12px" }} /> Book Noe
+             Book Now
           </Button>
         </Grid>
       </Grid>

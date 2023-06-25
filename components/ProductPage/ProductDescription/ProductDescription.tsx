@@ -7,7 +7,7 @@ const productDetails = () => {
   return (
     <div className={Styles.productDescription}>
       <p className="has-text-weight-semibold is-size-6">Brand Name</p>
-      <Title title={"Panadol Extra"} />
+      <Title title={"Carpenter Extra"} />
       <p className="mb-3">Pack Size 4 </p>
       <Divider />
       <PrescriptionRequired />

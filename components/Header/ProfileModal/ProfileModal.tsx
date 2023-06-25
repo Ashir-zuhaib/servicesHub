@@ -46,7 +46,7 @@ export default function ProfileModal() {
                 <p className="has-text-weight-bold is-size-4">Rs, 19.927</p>
               </div>
               <Link href="https://dawaai.pk" legacyBehavior>
-                <a className="is-size-7 has-text-weight-bold text-dawaai-blue underline">
+                <a className="is-size-7 has-text-weight-bold text-primary-color underline">
                   View History
                 </a>
               </Link>

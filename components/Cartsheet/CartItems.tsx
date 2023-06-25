@@ -11,7 +11,7 @@ function CartItems() {
       <ProductsListing
         id={"4"}
         imgUrl={ProductImage}
-        title={"Panadol"}
+        title={"Carpenter"}
         packSize={"100 ml bottle"}
         price={200}
         qtyValue={3}
@@ -19,7 +19,7 @@ function CartItems() {
       <ProductsListing
         id={"5"}
         imgUrl={ProductImage}
-        title={"Panadol"}
+        title={"Carpenter"}
         packSize={"100 ml bottle"}
         price={200}
         qtyValue={3}
@@ -27,7 +27,7 @@ function CartItems() {
       <ProductsListing
         id={"7"}
         imgUrl={ProductImage}
-        title={"Panadol"}
+        title={"Carpenter"}
         packSize={"100 ml bottle"}
         price={200}
         qtyValue={3}

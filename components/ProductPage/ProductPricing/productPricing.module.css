@@ -21,7 +21,7 @@
   margin-left: 7px;
 }
 .packBtn {
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
   border-color: #a0a0a0;
   font-size: 12px;
   text-transform: capitalize;

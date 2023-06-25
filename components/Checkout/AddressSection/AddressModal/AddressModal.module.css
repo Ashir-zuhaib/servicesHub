@@ -5,7 +5,7 @@
   display: none;
 }
 .LabelHeading {
-  color: var(--dawaai-blue) !important;
+  color: var(--primary-color) !important;
   font-size: 14px;
   font-weight: 600;
   margin-left: 10px;
@@ -13,7 +13,7 @@
 }
 .selectLabel {
   display: flex;
-  color: var(--dawaai-blue);
+  color: var(--primary-color);
   align-items: center;
   padding: 6px 12px;
   background-color: var(--gray-bg);

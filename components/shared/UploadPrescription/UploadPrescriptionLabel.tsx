@@ -4,10 +4,10 @@ const UploadPrescriptionLabel = () => {
   return (
     <Stack
       direction="row"
-      className="text-dawaai-blue has-text-weight-semibold underline my-2"
+      className="text-primary-color has-text-weight-semibold underline my-2"
     >
       <UploadCloud size={25} />
-      <p className="ml-3 text-dawaai-blue is-size-14">Upload Prescription</p>
+      <p className="ml-3 text-primary-color is-size-14">Upload Prescription</p>
     </Stack>
   );
 };
