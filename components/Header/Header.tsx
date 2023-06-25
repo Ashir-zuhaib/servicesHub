@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import DawaaiLogo from "./Logo/Logo";
+import WebsiteLogo from "./Logo/Logo";
 import MainSearch from "./MainSearch/MainSearch";
 import Styles from "./header.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,18 +20,17 @@ function Header({ isMobile }: header) {
             container
             columnSpacing={{ xs: 2, sm: 2, md: 2 }}
             columns={{ xs: 12, sm: 12, md: 12 }}
-            className={Styles.headerTop}
-          >
+            className={Styles.headerTop}>
             <Grid item lg="auto">
               {isMobile ? <MenuIcon fontSize="large" className="mr-2" /> : ""}
               <Link href={"/"} legacyBehavior>
                 <a>
-                  <DawaaiLogo logoSkeleton={false} width={156} height={43} />
+                  <WebsiteLogo />
                 </a>
               </Link>
             </Grid>
             {!isMobile ? (
-              <Grid item lg={6} sx={{ display: "flex" }} style={{width:50}}>
+              <Grid item lg={6} sx={{ display: "flex" }} style={{ width: 500,marginRight:'11%' }}>
                 <MainSearch />
               </Grid>
             ) : (

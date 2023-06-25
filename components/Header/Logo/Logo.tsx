@@ -1,31 +1,12 @@
-import Skeleton from '@mui/material/Skeleton';
-import Image from 'next/image';
-import websiteLogo from '../../../public/service-logo.png';
+import Skeleton from "@mui/material/Skeleton";
+import Image from "next/image";
+import websiteLogo from "../../../public/logo.png";
 
-
-
-interface LogoProps {
-    logoSkeleton: boolean
-    width: number | string
-    height: number | string
-}
-
-function DawaaiLogo({logoSkeleton, width, height}: LogoProps ) {
-const skeletonBeforLogo = logoSkeleton
-
-return (
+function WebsiteLogo() {
+  return (
     <>
-    {skeletonBeforLogo ? (
-        <Skeleton variant="rectangular" width={156} height={43} />
-    ) : (
-        <Image
-        src={websiteLogo}
-        alt="Dawaai Logo"
-        width={width} 
-        height={height}
-      />
-    )}
+      <Image src={websiteLogo} alt="Logo" width={180} height={60} />
     </>
-)
+  );
 }
-export default DawaaiLogo
+export default WebsiteLogo;

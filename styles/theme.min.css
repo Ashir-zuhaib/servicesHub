@@ -80,5 +80,6 @@ header .productSearchField .MuiOutlinedInput-notchedOutline {
   border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  width: 500px;
 }
 /*        HEADER STYLING END              */
