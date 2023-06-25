@@ -2,10 +2,8 @@ import Layout from "../components/layout";
 import Container from "@mui/material/Container";
 import BrandCarousel from "../components/shared/BrandsCarousel/BrandCarousel";
 import ProductsContainerWithButton from "../components/shared/ProductsContainer/ProductsContainerWithButton";
-interface home {
-  isMobile: boolean;
-}
-const Home: any = ({ isMobile }: home) => {
+
+const Home: any = () => {
   let isMobileValue = false;
   return (
     <>
@@ -14,7 +12,6 @@ const Home: any = ({ isMobile }: home) => {
           <BrandCarousel isMobile={isMobileValue} />
           <ProductsContainerWithButton
             title={"All Services"}
-            isMobile={isMobileValue}
           />
         </Container>
       </Layout>

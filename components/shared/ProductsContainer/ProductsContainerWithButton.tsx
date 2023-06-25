@@ -4,17 +4,15 @@ import SubTitle from "../Headings/SubTitle";
 
 interface productsContainerWithButton {
   title: string;
-  isMobile: boolean;
 }
 
 const ProductsContainerWithButton = ({
-  title,
-  isMobile,
+  title
 }: productsContainerWithButton) => {
   return (
     <>
       <SubTitle title={title} />
-      <ProductsContainer isMobile={isMobile} isLoading={false} />
+      <ProductsContainer/>
     </>
   );
 };

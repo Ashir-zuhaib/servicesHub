@@ -14,7 +14,6 @@ interface CardProperties {
   DiscountedPrice: string | number;
   ActualPrice: string | number;
   CurrencyIdentifier: string;
-  isMobile: boolean;
 }
 
 const ProductCard = ({
