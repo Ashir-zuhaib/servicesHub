@@ -13,15 +13,21 @@ const style = {
   p: 2,
   borderRadius: "20px",
 };
-
-export default function ProfileModal( userData) {
+interface ProfileModal {
+  currentUserId:string;
+  userData:string;
+  setUserData:React.Dispatch<React.SetStateAction<string>>;
+}
+export default function ProfileModal( userData,{ setUserData}:ProfileModal) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 console.log("userData", userData);
 console.log("fullName", userData.full_name);
 const handleLogout =()=>{
-  
+  localStorage.clear()
+  setOpen(false)
+  setUserData(null)
 }
   return (
     <div>

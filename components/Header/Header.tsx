@@ -17,24 +17,25 @@ import { useState, useEffect } from "react";
 interface header {
   isMobile: boolean;
   currentUserId:string;
-  userData:string
-  setUserData:React.Dispatch<React.SetStateAction<string>>;
+  userData:string;
 }
  function Header({ isMobile }: header) {
-   const [userData, setUserData]= useState<string>("")
+   const [userData, setUserData]= useState<any[]>(null)
   //  const [logout, setLogout] = useState
   const checkLogin = async()=>{
     let currentUserId =  await localStorage?.getItem("uid")
     console.log("current uid", currentUserId);
-    await firebase.firestore().collection("Users").doc(currentUserId).get().then((doc)=>{
-
-      setUserData(doc.data())
-    })
-
+    if(currentUserId){
+      await firebase.firestore().collection("Users").doc(currentUserId).get().then((doc)=>{   
+         const firebaseUserData = doc.data() as any; // Type casting to any
+        setUserData(firebaseUserData); 
+      })
+    }
+    
   }
   useEffect(()=>{
     checkLogin()
-  },[])
+  },[userData])
   return (
     <header>
       <Container maxWidth="xl">
@@ -67,7 +68,7 @@ interface header {
             {!isMobile ? (
               <Grid item>
                { userData?
-                <ProfileModal userData ={userData} />:
+                <ProfileModal userData ={userData} setUserData ={setUserData} />:
                 <DropdownComponent />
               }
                 </Grid>
