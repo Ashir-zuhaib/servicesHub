@@ -15,7 +15,7 @@ const OrderItems = ({ imgUrl }: orderItems) => {
       <Grid container item xs={11} justifyContent="center" alignItems="center">
         <Grid item xs={8}>
           <Stack className="px-3" direction="column">
-            <p className="text-dawaai-blue is-size-7">Brand Name</p>
+            <p className="text-primary-color is-size-7">Brand Name</p>
             <Stack direction="row" alignItems="center">
               <p className="has-text-weight-semibold is-size-14 mr-2 ">
                 Medicine Name

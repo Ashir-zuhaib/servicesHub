@@ -7,9 +7,9 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: 5,
     top: 5,
-    border: `2px solid #003B82`,
+    border: `2px solid #108a00`,
     padding: '0 4px',
-    background:'#003B82',
+    background:'#108a00',
     width: '20px',
     height: '20px'
   },

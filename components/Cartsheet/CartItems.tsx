@@ -1,10 +1,9 @@
 import Styles from "./Cartsheet.module.css";
 import Divider from "@mui/material/Divider";
 import PrimaryButtonLink from "../shared/Buttons/PrimaryButtonLink";
-import CartSheetHeader from "./CartSheetHeader";
 import ProductsListing from "./ProductsListing";
 import TextInColumnForPricing from "../shared/TextInTwoColumns/TextInColumnForPricing";
-import ProductImage from "/public/product-images/product-img-2.jpg";
+import ProductImage from "/public/product-images/product.png";
 function CartItems() {
   return (
     <div className={Styles.sideCart}>
@@ -12,7 +11,7 @@ function CartItems() {
       <ProductsListing
         id={"4"}
         imgUrl={ProductImage}
-        title={"Panadol"}
+        title={"Carpenter"}
         packSize={"100 ml bottle"}
         price={200}
         qtyValue={3}
@@ -20,7 +19,7 @@ function CartItems() {
       <ProductsListing
         id={"5"}
         imgUrl={ProductImage}
-        title={"Panadol"}
+        title={"Carpenter"}
         packSize={"100 ml bottle"}
         price={200}
         qtyValue={3}
@@ -28,7 +27,7 @@ function CartItems() {
       <ProductsListing
         id={"7"}
         imgUrl={ProductImage}
-        title={"Panadol"}
+        title={"Carpenter"}
         packSize={"100 ml bottle"}
         price={200}
         qtyValue={3}

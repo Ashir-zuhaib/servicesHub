@@ -1,6 +1,6 @@
 .customStyle {
 font-size:0.75rem;
-color:var(--dawaai-blue);
+color:var(--primary-color);
 font-weight:600;
 text-transform:capitalize;
 }

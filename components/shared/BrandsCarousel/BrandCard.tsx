@@ -31,7 +31,7 @@ function BrandsCard({ id, imgUrl, imgWidth, imgHeight, title }: brandsCard) {
               />
             </Grid>
             <Grid container justifyContent={"center"}>
-              <Link href="https://dawaai.pk">
+              <Link href="#">
                 <span className={Styles.brandName}>{title}</span>
               </Link>
             </Grid>

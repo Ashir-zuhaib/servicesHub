@@ -1,10 +1,10 @@
 /* CLASSES FOR SMALL STYLING */
 
-.text-dawaai-blue {
-  color: var(--dawaai-blue);
+.text-primary-color {
+  color: var(--primary-color);
 }
-.text-dawaai-blue:hover {
-  color: var(--dawaai-blue);
+.text-primary-color:hover {
+  color: var(--primary-color);
 }
 .text-light {
   color: var(--light-text);
@@ -62,7 +62,7 @@
   background-color: transparent !important;
 }
 .MedicinesTabContainer .Mui-selected {
-  background-color: var(--dawaai-blue);
+  background-color: var(--primary-color);
   color: #fff;
 }
 .MedicinesTabContainer .MuiBox-root {

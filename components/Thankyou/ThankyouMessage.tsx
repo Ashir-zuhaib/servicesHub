@@ -7,7 +7,7 @@ const ThankyouMessage = () => {
   return (
     <Stack direction={{ xs: "column", md: "row" }} alignItems="center">
       <div>
-        <Image src={thankyou} width={150} height={150} />
+        <Image src={thankyou} width={150} height={150} alt="test" />
       </div>
       <div className="has-text-centered-mobile">
         <Heading
