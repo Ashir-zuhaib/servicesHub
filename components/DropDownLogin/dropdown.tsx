@@ -3,8 +3,8 @@ import { Dropdown, message, Space } from 'antd';
 import Link from 'next/link';
 
 const DropdownComponent = () =>{
-    const onClick = ({ key }) => {
-        message.info(`Click on item ${key}`);
+    const onClick = ({ key}) => {
+        message.info(`Page loading...` );
         if(key == "1"){
             window.location.href = './Login';
         }

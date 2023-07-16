@@ -264,6 +264,8 @@ export default function SignupForm({
           >
             Sign up
           </Button>
+
+          <Button className={Styles.belowBtn} onClick={()=>window.location.href ="./login"} >Already have Account? Login Now</Button>
         </Stack>
       </div>
       <div className={Styles.copyrightDiv}>
