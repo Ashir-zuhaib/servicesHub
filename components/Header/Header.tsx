@@ -13,29 +13,32 @@ import firebase from "../../config";
 import React from "react";
 import { useState, useEffect } from "react";
 
-
 interface header {
   isMobile: boolean;
-  currentUserId:string;
-  userData:string;
+  currentUserId: string;
+  userData: string;
 }
- function Header({ isMobile }: header) {
-   const [userData, setUserData]= useState<any[]>(null)
+function Header({ isMobile }: header) {
+  const [userData, setUserData] = useState<any[]>(null);
   //  const [logout, setLogout] = useState
-  const checkLogin = async()=>{
-    let currentUserId =  await localStorage?.getItem("uid")
+  const checkLogin = async () => {
+    let currentUserId = await localStorage?.getItem("uid");
     console.log("current uid", currentUserId);
-    if(currentUserId){
-      await firebase.firestore().collection("Users").doc(currentUserId).get().then((doc)=>{   
-         const firebaseUserData = doc.data() as any; // Type casting to any
-        setUserData(firebaseUserData); 
-      })
+    if (currentUserId) {
+      await firebase
+        .firestore()
+        .collection("Users")
+        .doc(currentUserId)
+        .get()
+        .then((doc) => {
+          const firebaseUserData = doc.data() as any; // Type casting to any
+          setUserData(firebaseUserData);
+        });
     }
-    
-  }
-  useEffect(()=>{
-    checkLogin()
-  },[userData])
+  };
+  useEffect(() => {
+    checkLogin();
+  }, [userData]);
   return (
     <header>
       <Container maxWidth="xl">
@@ -66,7 +69,11 @@ interface header {
             )}
             {!isMobile ? (
               <Grid item>
-                <Link href={"/ProductPage"}> Login / signup</Link>
+                {userData ? (
+                  <ProfileModal userData={userData} setUserData={setUserData} />
+                ) : (
+                  <DropdownComponent />
+                )}
               </Grid>
             ) : (
               ""

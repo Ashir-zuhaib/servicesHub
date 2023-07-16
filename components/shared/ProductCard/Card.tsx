@@ -8,12 +8,6 @@ import Button from "@mui/material/Button";
 interface CardProperties {
   productImg: string;
   ProductName: string;
-  VendorName: string;
-  PackSize: string;
-  ProductType: string;
-  DiscountedPrice: string | number;
-  ActualPrice: string | number;
-  CurrencyIdentifier: string;
 }
 
 const ProductCard = ({
@@ -32,9 +26,6 @@ const ProductCard = ({
         <Grid item direction="row" justifyContent="center" alignItems="center">
           <ProductImg imgWidth={212} imgHeight={198} productImg={productImg} />
           <ProductTitle ProductName={ProductName} TagName={"p"} />
-          <ProductPrice
-            Price={45}
-          />
           <Button className={Styles.ctaAtcart} variant="text">
              Book Now
           </Button>

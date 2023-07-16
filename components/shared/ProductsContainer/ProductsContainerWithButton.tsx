@@ -5,17 +5,19 @@ import PrimaryButtonLink from "../Buttons/PrimaryButtonLink";
 
 interface productsContainerWithButton {
   title: string;
+  showAll: boolean;
 }
 
 const ProductsContainerWithButton = ({
   title,
+  showAll,
 }: productsContainerWithButton) => {
   return (
     <>
       <SubTitle title={title} />
-      <ProductsContainer />
-      <div className="w-25 has-text-centered">
-        <PrimaryButtonLink buttonLink="Services" buttonText="View All" />
+      <ProductsContainer showAll={false} />
+      <div className="has-text-centered">
+        <OutlinedRoundedButton buttonLink="Services" buttonText="View All" />
       </div>
     </>
   );

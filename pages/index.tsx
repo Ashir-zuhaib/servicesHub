@@ -14,6 +14,7 @@ const Home: any = () => {
           <CardCarousel isMobile={isMobileValue} />
           <ProductsContainerWithButton
             title={"All Services"}
+            showAll={false}
           />
         </Container>
       </Layout>
