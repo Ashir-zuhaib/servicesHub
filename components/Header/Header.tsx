@@ -54,23 +54,20 @@ interface header {
               </Link>
             </Grid>
             {!isMobile ? (
-              <Grid item lg={6} sx={{ display: "flex" }} style={{ width: 500,marginRight:'11%' }}>
+              <Grid
+                item
+                lg={6}
+                sx={{ display: "flex" }}
+                style={{ width: 500, marginRight: "11%" }}>
                 <MainSearch />
               </Grid>
             ) : (
               ""
             )}
-
-            <Grid item lg="auto">
-              <Cartsheet />
-            </Grid>
             {!isMobile ? (
               <Grid item>
-               { userData?
-                <ProfileModal userData ={userData} setUserData ={setUserData} />:
-                <DropdownComponent />
-              }
-                </Grid>
+                <Link href={"/ProductPage"}> Login / signup</Link>
+              </Grid>
             ) : (
               ""
             )}
