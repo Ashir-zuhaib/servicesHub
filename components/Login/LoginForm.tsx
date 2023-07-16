@@ -18,16 +18,16 @@ import {
 } from "@mui/icons-material";
 
 interface loginForm {
-  userId: string;
-  setUserId: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
   userPassword: string;
   setUserPassword: React.Dispatch<React.SetStateAction<string>>;
   submitLoginForm: () => void;
   errorMessage: string;
 }
 export default function LoginForm({
-  userId,
-  setUserId,
+  email,
+  setEmail,
   userPassword,
   setUserPassword,
   submitLoginForm,
@@ -59,7 +59,7 @@ export default function LoginForm({
           <TextField
             className={Styles.idField}
             id="outlined-basic"
-            label="User ID"
+            label="Email"
             variant="outlined"
             InputProps={{
               startAdornment: (
@@ -68,8 +68,8 @@ export default function LoginForm({
                 </InputAdornment>
               ),
             }}
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             className={`${Styles.passwordField} mb-3`}
@@ -113,11 +113,12 @@ export default function LoginForm({
           >
             Login
           </Button>
+          <Button className={Styles.belowBtn}  >Dont have Account? Signup Now</Button>
         </Stack>
-      </div>
+      </div>  
       <div className={Styles.copyrightDiv}>
         <Typography variant="subtitle1" className={Styles.bottomPara}>
-          © 2022 Dawaai.pk, All Rights Reserved.
+          © 2023 ServiceHub.pk, All Rights Reserved.
         </Typography>
       </div>
     </Grid>

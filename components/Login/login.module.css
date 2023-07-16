@@ -78,7 +78,12 @@
   font-weight: 600;
   color: white;
 }
-
+.belowBtn{
+  justify-content: center;
+  position: absolute;
+  top: 73%;
+  left: 25%;
+}
 @media (max-width: 900px) {
   .idField {
     width: 100%;
@@ -98,7 +103,12 @@
     bottom: 0px;
     color: #878ca3;
   }
-
+  .belowBtn{
+    justify-content: center;
+    position: absolute;
+    top: 73%;
+    right: 25%;
+  }
   .pngPak {
     display: none;
   }
@@ -140,7 +150,15 @@
     padding-bottom: 20px
 
   }
-
+  .belowBtn{
+    justify-content: center;
+    position: absolute;
+    top: 90%;
+    left: 12%;
+    font-size: 13px;
+    padding-bottom: 20px;
+    white-space: nowrap;
+  }
   .ellipse2 {
     top: -50px;
   }

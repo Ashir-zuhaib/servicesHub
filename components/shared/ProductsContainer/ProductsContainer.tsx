@@ -1,84 +1,28 @@
 import Grid from "@mui/material/Grid";
 import ProductCard from "../ProductCard/Card";
+import React,{useEffect,useState} from 'react'
+import { getAllService } from "../../../utils/getData";
 
-const productsData = [
-  {
-    id: 1,
-    isActive: true,
-    vendor: "Novartis",
-    productimg: "/product-images/product.png",
-    title: "Carpenter",
-    discount: "15% Off",
-    packSize: "10",
-    actualPrice: "230",
-    types: "Tablets",
-  },
-  {
-    id: 2,
-    isActive: true,
-    vendor: "Novartis",
-    productimg: "/product-images/product.png",
-    title: "Carpenter",
-    discount: "15% Off",
-    packSize: "10",
-    actualPrice: "230",
-    types: "Tablets",
-  },
-  {
-    id: 3,
-    isActive: true,
-    vendor: "Novartis",
-    productimg: "/product-images/product.png",
-    title: "Carpenter",
-    discount: "15% Off",
-    packSize: "10",
-    actualPrice: "230",
-    types: "Tablets",
-  },
-  {
-    id: 4,
-    isActive: true,
-    vendor: "Novartis",
-    productimg: "/product-images/product.png",
-    title: "Carpenter",
-    discount: "15% Off",
-    packSize: "10",
-    actualPrice: "230",
-    types: "Tablets",
-  },
-  {
-    id: 5,
-    isActive: true,
-    vendor: "Novartis",
-    productimg: "/product-images/product.png",
-    title: "Carpenter",
-    discount: "15% Off",
-    packSize: "10",
-    actualPrice: "230",
-    types: "Tablets",
-  },
-  {
-    id: 6,
-    isActive: true,
-    vendor: "Novartis",
-    productimg: "/product-images/product.png",
-    title: "Carpenter",
-    discount: "15% Off",
-    packSize: "10",
-    actualPrice: "230",
-    types: "Tablets",
-  },
-];
+
 
 const ProductsContainer = () => {
+  const [productsData, setProductData]=useState([])
+  useEffect(()=>{
+    const fetchData = async () => {
+      const data = await getAllService();
+      setProductData(data);
+    };
+  
+    fetchData();
+  },[])
   const n = 8;
   return (
     <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
-      {productsData.map((productsData, i) => (
-        <Grid item xs={6} md={3} key={productsData.id}>
+      {productsData?.map((productsData, i) => (
+        <Grid item xs={6} md={3} key={productsData?.id}>
           <ProductCard
-            productImg={productsData.productimg}
-            ProductName={"Carpenter"}
+            productImg={productsData?.img}
+            ProductName={productsData?.name}
             VendorName={"Novartis"}
             PackSize={"10"}
             ProductType={"Tablets"}

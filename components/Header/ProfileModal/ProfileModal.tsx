@@ -13,12 +13,22 @@ const style = {
   p: 2,
   borderRadius: "20px",
 };
-
-export default function ProfileModal() {
+interface ProfileModal {
+  currentUserId:string;
+  userData:string;
+  setUserData:React.Dispatch<React.SetStateAction<string>>;
+}
+export default function ProfileModal( userData,{ setUserData}:ProfileModal) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+console.log("userData", userData);
+console.log("fullName", userData.full_name);
+const handleLogout =()=>{
+  localStorage.clear()
+  setOpen(false)
+  setUserData(null)
+}
   return (
     <div>
       <Button onClick={handleOpen}>
@@ -34,7 +44,7 @@ export default function ProfileModal() {
           <div className="bg-gray px-4 py-4 br-xl">
             <Stack alignItems="center" direction="row" className="mb-2">
               <Avatar />
-              <p className="has-text-weight-semibold ml-2">Mahnoor</p>
+              <p className="has-text-weight-semibold ml-2">{userData.userData.full_name}</p>
             </Stack>
             <Stack
               alignItems="center"
@@ -51,6 +61,9 @@ export default function ProfileModal() {
                 </a>
               </Link>
             </Stack>
+            <Button variant="contained" color="primary" onClick={handleLogout}>
+      Log out
+    </Button>
           </div>
         </Box>
       </Modal>

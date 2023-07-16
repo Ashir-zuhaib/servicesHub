@@ -4,6 +4,7 @@ import BrandsCard from "./BrandCard";
 import { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import { getAllService } from "../../../utils/getData";
 interface BrandCarousel {
   isMobile: boolean;
 }
@@ -11,52 +12,14 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  const getData = () => {
-    let brandsdata = [
-      {
-        id: "1",
-        title: "Carpenter",
-        img: "/carpenter.png",
-      },
-      {
-        id: "2",
-        title: "electrician",
-        img: "/electrician.png",
-      },
-      {
-        id: "3",
-        title: "Plumber",
-        img: "/plumber.png",
-      },
-      {
-        id: "4",
-        title: "House Help",
-        img: "/carpenter.png",
-      },
-    ];
-    // fetch("https://fakestoreapi.com/products", {
-    //   headers: {
-    //     "Content-Type": "popular brands/json",
-    //     Accept: "popular brands/json",
-    //   },
-    // })
-    //   .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (brandsdata) {
-    //     console.log(brandsdata)
-    //     setLoading(false);
-    //     setData(brandsdata);
-    //   });
-    setLoading(false);
-    setData(brandsdata);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-  {
-    data.map((item) => console.log(item.id));
-  }
+  useEffect(()=>{
+    const fetchData = async () => {
+      const serviceData = await getAllService();
+      setData(serviceData);
+    };
+  
+    fetchData();
+  },[])
   return isLoading ? (
     <>
       <Grid
@@ -120,7 +83,7 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
               imgUrl={item["img"]}
               imgWidth={"190"}
               imgHeight={"130"}
-              title={item["title"]}
+              title={item["name"]}
             />
           </Grid>
         ))}

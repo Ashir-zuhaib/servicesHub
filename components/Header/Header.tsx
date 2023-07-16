@@ -8,10 +8,34 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Cartsheet from "../Cartsheet/Cartsheet";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import Link from "next/link";
+import DropdownComponent from "../DropDownLogin/dropdown";
+import firebase from "../../config";
+import React from "react";
+import { useState, useEffect } from "react";
+
+
 interface header {
   isMobile: boolean;
+  currentUserId:string;
+  userData:string;
 }
-function Header({ isMobile }: header) {
+ function Header({ isMobile }: header) {
+   const [userData, setUserData]= useState<any[]>(null)
+  //  const [logout, setLogout] = useState
+  const checkLogin = async()=>{
+    let currentUserId =  await localStorage?.getItem("uid")
+    console.log("current uid", currentUserId);
+    if(currentUserId){
+      await firebase.firestore().collection("Users").doc(currentUserId).get().then((doc)=>{   
+         const firebaseUserData = doc.data() as any; // Type casting to any
+        setUserData(firebaseUserData); 
+      })
+    }
+    
+  }
+  useEffect(()=>{
+    checkLogin()
+  },[userData])
   return (
     <header>
       <Container maxWidth="xl">
@@ -42,8 +66,11 @@ function Header({ isMobile }: header) {
             </Grid>
             {!isMobile ? (
               <Grid item>
-                <ProfileModal />
-              </Grid>
+               { userData?
+                <ProfileModal userData ={userData} setUserData ={setUserData} />:
+                <DropdownComponent />
+              }
+                </Grid>
             ) : (
               ""
             )}
