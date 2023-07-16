@@ -1,14 +1,14 @@
-import ProductCarousel from ".././ItemsCarousel/carouselItems";
+import ProductCarousel from "../ItemsCarousel/carouselItems";
 import Grid from "@mui/material/Grid";
-import BrandsCard from "./BrandCard";
+import Card from "./Card";
 import { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { getAllService } from "../../../utils/getData";
-interface BrandCarousel {
+interface CardCarousel {
   isMobile: boolean;
 }
-function BrandsCarousel({ isMobile }: BrandCarousel) {
+function CardCarousel({ isMobile }: CardCarousel) {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -19,6 +19,7 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
     };
   
     fetchData();
+    setLoading(false)
   },[])
   return isLoading ? (
     <>
@@ -78,11 +79,11 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
         isMobile={isMobile}>
         {data.map((item) => (
           <Grid container item xs={8} md={4}>
-            <BrandsCard
+            <Card
               id={item["id"]}
               imgUrl={item["img"]}
-              imgWidth={"190"}
-              imgHeight={"130"}
+              imgWidth={190}
+              imgHeight={130}
               title={item["name"]}
             />
           </Grid>
@@ -91,4 +92,4 @@ function BrandsCarousel({ isMobile }: BrandCarousel) {
     </Grid>
   );
 }
-export default BrandsCarousel;
+export default CardCarousel;

@@ -1,6 +1,6 @@
 import Layout from "../components/layout";
 import Container from "@mui/material/Container";
-import BrandCarousel from "../components/shared/BrandsCarousel/BrandCarousel";
+import CardCarousel from "../components/shared/CardsCarousel/CardCarousel";
 import ProductsContainerWithButton from "../components/shared/ProductsContainer/ProductsContainerWithButton";
 import { HomeCarousel } from "../components/HomeCarousel/HomeCarousel";
 
@@ -11,7 +11,7 @@ const Home: any = () => {
       <Layout isMobile={isMobileValue}>
         <Container maxWidth="lg">
           <HomeCarousel />
-          <BrandCarousel isMobile={isMobileValue} />
+          <CardCarousel isMobile={isMobileValue} />
           <ProductsContainerWithButton
             title={"All Services"}
           />
