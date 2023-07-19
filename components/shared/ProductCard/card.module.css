@@ -2,9 +2,9 @@
   background: #ffffff;
   border: 1px solid #ddebf8;
   box-sizing: border-box;
-  border-radius: 16px;
+  border-radius: 8px;
   position: relative;
-  padding: 12px;
+  overflow: hidden;
 }
 .ctaAtcart {
   font-style: normal;

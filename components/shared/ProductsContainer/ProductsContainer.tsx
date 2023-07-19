@@ -20,7 +20,7 @@ const ProductsContainer = ({ showAll }: productContainer) => {
   const displayedItems = productsData
     .slice(0, 3) // Extract first 5 items
     .map((productsData) => (
-      <Grid item xs={6} md={3} key={productsData?.id}>
+      <Grid item xs={6} md={4} key={productsData?.id}>
         <ProductCard
           productImg={productsData?.img}
           ProductName={productsData?.name}
@@ -31,7 +31,7 @@ const ProductsContainer = ({ showAll }: productContainer) => {
     <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
       {showAll
         ? productsData?.map((productsData, i) => (
-            <Grid item xs={6} md={3} key={productsData?.id}>
+            <Grid item xs={6} md={4} key={productsData?.id}>
               <ProductCard
                 productImg={productsData?.img}
                 ProductName={productsData?.name}
