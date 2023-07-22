@@ -1,24 +1,29 @@
-.productCard {
+.CategoryCard {
   background: #ffffff;
-  border: 1px solid #ddebf8;
   box-sizing: border-box;
   border-radius: 8px;
-  position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ddebf8;
+
 }
 .ctaAtcart {
-  font-style: normal;
   font-weight: 600 !important;
   font-size: 16px !important;
   color: var(--primary-color) !important;
   text-align: center !important;
-  width: 100% !important;
-  margin-top: 12px !important;
+  width: 60% !important;
+  margin: 12px auto!important;
   text-transform: initial;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: #fff !important;
 }
-.ctaAtcart:hover {
-  background-color: var(--primary-color) !important;
-  color: var(--white) !important;
+.rating {
+  color: #f29d43;
+}
+.border {
+  border: 1px solid #ddebf8;
 }

@@ -12,7 +12,8 @@
 .title {
   color: var(--primary-color);
   font-weight: bold;
-  font-size: 24px;
+  font-size: 32px;
+  margin-bottom: 16px!important;
 }
 /* h6 */
 .subHeading {
