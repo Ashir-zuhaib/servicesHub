@@ -82,8 +82,8 @@ function CardCarousel({ isMobile }: CardCarousel) {
             <Card
               id={item["id"]}
               imgUrl={item["img"]}
-              imgWidth={190}
-              imgHeight={130}
+              imgWidth={350}
+              imgHeight={160}
               title={item["name"]}
             />
           </Grid>

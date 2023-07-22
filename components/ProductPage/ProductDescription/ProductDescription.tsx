@@ -4,8 +4,8 @@ import Divider from "@mui/material/Divider";
 const productDetails = () => {
   return (
     <div className={Styles.productDescription}>
-      <p className="has-text-weight-semibold is-size-6">Brand Name</p>
-      <Title title={"Carpenter Extra"} />
+      <p className="has-text-weight-semibold is-size-6">Carpenter</p>
+      <Title title={"Ali Raza"} />
       <p className="mb-3">Pack Size 4 </p>
       <Divider />
       <p className="my-2">
