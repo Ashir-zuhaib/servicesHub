@@ -1,7 +1,6 @@
 import ProductsContainer from "./ProductsContainer";
 import OutlinedRoundedButton from "../Buttons/OutlinedRoundedButton";
 import SubTitle from "../Headings/SubTitle";
-import PrimaryButtonLink from "../Buttons/PrimaryButtonLink";
 
 interface productsContainerWithButton {
   title: string;

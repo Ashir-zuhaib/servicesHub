@@ -1,0 +1,29 @@
+.CategoryCard {
+  background: #ffffff;
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ddebf8;
+
+}
+.ctaAtcart {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  color: var(--primary-color) !important;
+  text-align: center !important;
+  width: 60% !important;
+  margin: 12px auto!important;
+  text-transform: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff !important;
+}
+.rating {
+  color: #f29d43;
+}
+.border {
+  border: 1px solid #ddebf8;
+}
