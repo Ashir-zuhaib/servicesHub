@@ -1,37 +1,44 @@
 import Grid from "@mui/material/Grid";
 import ProductCard from "../ProductCard/Card";
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from "react";
 import { getAllService } from "../../../utils/getData";
 
+interface productContainer {
+  showAll: boolean;
+}
 
-
-const ProductsContainer = () => {
-  const [productsData, setProductData]=useState([])
-  useEffect(()=>{
+const ProductsContainer = ({ showAll }: productContainer) => {
+  const [productsData, setProductData] = useState([]);
+  useEffect(() => {
     const fetchData = async () => {
       const data = await getAllService();
       setProductData(data);
     };
-  
     fetchData();
-  },[])
-  const n = 8;
+  }, []);
+
+  const displayedItems = productsData
+    .slice(0, 3) // Extract first 5 items
+    .map((productsData) => (
+      <Grid item xs={6} md={4} key={productsData?.id}>
+        <ProductCard
+          productImg={productsData?.img}
+          ProductName={productsData?.name}
+        />
+      </Grid>
+    ));
   return (
     <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
-      {productsData?.map((productsData, i) => (
-        <Grid item xs={6} md={3} key={productsData?.id}>
-          <ProductCard
-            productImg={productsData?.img}
-            ProductName={productsData?.name}
-            VendorName={"Novartis"}
-            PackSize={"10"}
-            ProductType={"Tablets"}
-            DiscountedPrice={"15% OFF"}
-            ActualPrice={"230"}
-            CurrencyIdentifier={"Rs"}
-          />
-        </Grid>
-      ))}
+      {showAll
+        ? productsData?.map((productsData, i) => (
+            <Grid item xs={6} md={4} key={productsData?.id}>
+              <ProductCard
+                productImg={productsData?.img}
+                ProductName={productsData?.name}
+              />
+            </Grid>
+          ))
+        : displayedItems}
     </Grid>
   );
 };

@@ -1,6 +1,5 @@
 import Layout from "../components/layout";
-import Breadcrumb from "../components/shared/Breadcrumb/Breadcrumb";
-import ProductImage from "/public/product-images/product-img-1.jpg";
+import ProductImage from "/public/carpenter.png";
 import Image from "next/image";
 import ProductDescription from "../components/ProductPage/ProductDescription/ProductDescription";
 import ProductPricingContainer from "../components/ProductPage/ProductPricing/ProductPricingContainer";
@@ -39,10 +38,9 @@ const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
           ) : (
             <>
               <Grid item xs={12}>
-                <Breadcrumb />
               </Grid>
               <Grid item xs={12} md={3}>
-                <Image src={ProductImage} />
+                <Image src={ProductImage} alt="hhd" />
               </Grid>
               <Grid item xs={12} md={5}>
                 <ProductDescription />

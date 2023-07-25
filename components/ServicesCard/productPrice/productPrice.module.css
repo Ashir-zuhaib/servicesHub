@@ -1,21 +1,14 @@
 .productPricing > p {
   font-weight: 600;
-  font-size: 18px;
-  text-transform: capitalize;
-  color: #f29d43;
+  font-size: 16px;
+  color: #32aa9e;
 }
 .productPricing > p > span {
   font-weight: normal;
-  font-size: 14px;
-  text-decoration-line: line-through;
-  text-transform: capitalize;
+  font-size: 16px;
   color: #878ca3;
 }
-@media (max-width: 768px) {
-  .productPricing > p {
-    font-size: 14px;
-  }
-  .productPricing > p > span {
-    font-size: 12px;
-  }
+.productPricing{
+  display: flex;
+  align-items: center;
 }

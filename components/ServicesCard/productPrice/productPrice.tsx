@@ -6,7 +6,9 @@ interface ProductPrice {
 function ProductPrice({ Price }: ProductPrice) {
   return (
     <div className={Styles.productPricing}>
-      <p>Rs {Price} </p>
+      <p>
+        Rs. {Price} <span>/ hour</span>{" "}
+      </p>
     </div>
   );
 }

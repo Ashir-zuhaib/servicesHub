@@ -2,17 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Styles from "./brand-cards.module.css";
+import Styles from "./cards.module.css";
 
-interface brandsCard {
+interface card {
   id: number;
   imgUrl: string;
-  imgWidth: string;
-  imgHeight: string;
+  imgWidth: number;
+  imgHeight: number;
   title: string;
 }
 
-function BrandsCard({ id, imgUrl, imgWidth, imgHeight, title }: brandsCard) {
+function Card({ id, imgUrl, imgWidth, imgHeight, title }: card) {
   return (
     <>
       <Grid container spacing={2}>
@@ -42,4 +42,4 @@ function BrandsCard({ id, imgUrl, imgWidth, imgHeight, title }: brandsCard) {
   );
 }
 
-export default BrandsCard;
+export default Card;
