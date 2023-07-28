@@ -31,5 +31,19 @@ const getWorkerByService =async(role)=>{
 }
     return services
 }
+const getAllLocation =async()=>{
+    
+    let locations = []
+    await firebase.firestore().collection("Location").get()
+    .then((querySnapshot)=>{
+        console.log("sixe", querySnapshot.size);       
+        querySnapshot.forEach((doc)=>{
+            let data = doc.data()
+            data.id = doc.id
+            locations.push(data)
+        })
+    })
+    return locations
+}
 
-export {getAllService, getWorkerByService}
+export {getAllService, getWorkerByService, getAllLocation}

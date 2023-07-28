@@ -24,6 +24,7 @@ const ProductsContainer = ({ showAll }: productContainer) => {
         <ProductCard
           productImg={productsData?.img}
           ProductName={productsData?.name}
+          productId={productsData?.id}
         />
       </Grid>
     ));
@@ -35,6 +36,7 @@ const ProductsContainer = ({ showAll }: productContainer) => {
               <ProductCard
                 productImg={productsData?.img}
                 ProductName={productsData?.name}
+                productId={productsData?.id}
               />
             </Grid>
           ))

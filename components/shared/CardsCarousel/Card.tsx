@@ -3,6 +3,7 @@ import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Styles from "./cards.module.css";
+import { useRouter } from 'next/router';
 
 interface card {
   id: number;
@@ -13,6 +14,8 @@ interface card {
 }
 
 function Card({ id, imgUrl, imgWidth, imgHeight, title }: card) {
+  const router = useRouter();
+
   return (
     <>
       <Grid container spacing={2}>
@@ -30,10 +33,11 @@ function Card({ id, imgUrl, imgWidth, imgHeight, title }: card) {
                 height={imgHeight}
               />
             </Grid>
-            <Grid container justifyContent={"center"}>
-              <Link href="#">
+            <Grid container justifyContent={"center"}  onClick={()=>router.push({pathname: '/Category',
+            query: {service: id, serviceName:title}})}>
+              {/* <Link> */}
                 <span className={Styles.brandName}>{title}</span>
-              </Link>
+              {/* </Link> */}
             </Grid>
           </Box>
         </Grid>
