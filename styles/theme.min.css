@@ -50,7 +50,7 @@ h6 {
   color: #191c24;
 }
 
-a{
+a {
   text-transform: capitalize;
   color: #000000de;
 }
@@ -87,4 +87,3 @@ header .productSearchField .MuiOutlinedInput-notchedOutline {
   border-bottom-left-radius: 20px;
   width: 500px;
 }
-/*        HEADER STYLING END              */

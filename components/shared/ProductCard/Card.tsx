@@ -8,18 +8,9 @@ import Button from "@mui/material/Button";
 interface CardProperties {
   productImg: string;
   ProductName: string;
-  VendorName: string;
-  PackSize: string;
-  ProductType: string;
-  DiscountedPrice: string | number;
-  ActualPrice: string | number;
-  CurrencyIdentifier: string;
 }
 
-const ProductCard = ({
-  productImg,
-  ProductName
-}: CardProperties) => {
+const ProductCard = ({ productImg, ProductName }: CardProperties) => {
   return (
     <>
       <Grid
@@ -27,17 +18,19 @@ const ProductCard = ({
         direction="row"
         justifyContent="space-between"
         alignItems="flex-start"
-        className={Styles.productCard}
-      >
+        className={Styles.productCard}>
         <Grid item direction="row" justifyContent="center" alignItems="center">
-          <ProductImg imgWidth={212} imgHeight={198} productImg={productImg} />
-          <ProductTitle ProductName={ProductName} TagName={"p"} />
-          <ProductPrice
-            Price={45}
-          />
-          <Button className={Styles.ctaAtcart} variant="text">
-             Book Now
-          </Button>
+          <ProductImg imgWidth={350} imgHeight={158} productImg={productImg} />
+          <div className="px-2 pb-2">
+            <ProductTitle ProductName={ProductName} TagName={"p"} />
+            <p className="mb-0">
+              Lorem ipsum dolor sit,Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis
+              incidunt maxime fugiat...
+            </p>
+            <Button className={Styles.ctaAtcart} variant="text">
+              Book Now
+            </Button>
+          </div>
         </Grid>
       </Grid>
     </>

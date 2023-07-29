@@ -13,29 +13,32 @@ import firebase from "../../config";
 import React from "react";
 import { useState, useEffect } from "react";
 
-
 interface header {
   isMobile: boolean;
-  currentUserId:string;
-  userData:string;
+  currentUserId: string;
+  userData: string;
 }
- function Header({ isMobile }: header) {
-   const [userData, setUserData]= useState<any[]>(null)
+function Header({ isMobile }: header) {
+  const [userData, setUserData] = useState<any[]>(null);
   //  const [logout, setLogout] = useState
-  const checkLogin = async()=>{
-    let currentUserId =  await localStorage?.getItem("uid")
+  const checkLogin = async () => {
+    let currentUserId = await localStorage?.getItem("uid");
     console.log("current uid", currentUserId);
-    if(currentUserId){
-      await firebase.firestore().collection("Users").doc(currentUserId).get().then((doc)=>{   
-         const firebaseUserData = doc.data() as any; // Type casting to any
-        setUserData(firebaseUserData); 
-      })
+    if (currentUserId) {
+      await firebase
+        .firestore()
+        .collection("Users")
+        .doc(currentUserId)
+        .get()
+        .then((doc) => {
+          const firebaseUserData = doc.data() as any; // Type casting to any
+          setUserData(firebaseUserData);
+        });
     }
-    
-  }
-  useEffect(()=>{
-    checkLogin()
-  },[userData])
+  };
+  useEffect(() => {
+    checkLogin();
+  }, [userData]);
   return (
     <header>
       <Container maxWidth="xl">
@@ -54,23 +57,24 @@ interface header {
               </Link>
             </Grid>
             {!isMobile ? (
-              <Grid item lg={6} sx={{ display: "flex" }} style={{ width: 500,marginRight:'11%' }}>
+              <Grid
+                item
+                lg={6}
+                sx={{ display: "flex" }}
+                style={{ width: 500, marginRight: "11%" }}>
                 <MainSearch />
               </Grid>
             ) : (
               ""
             )}
-
-            <Grid item lg="auto">
-              <Cartsheet />
-            </Grid>
             {!isMobile ? (
               <Grid item>
-               { userData?
-                <ProfileModal userData ={userData} setUserData ={setUserData} />:
-                <DropdownComponent />
-              }
-                </Grid>
+                {userData ? (
+                  <ProfileModal userData={userData} setUserData={setUserData} />
+                ) : (
+                  <DropdownComponent />
+                )}
+              </Grid>
             ) : (
               ""
             )}
