@@ -5,8 +5,22 @@ import ProductPrice from "../../ServicesCard/productPrice/productPrice";
 import Button from "@mui/material/Button";
 import test from "../../../public/test.png";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { getAllLocation } from "../../../utils/getData";
 
-const CategoryCard = () => {
+interface Title {
+  worker: {};
+}
+const CategoryCard = ({worker}) => {
+  const [locations, setLocation] = useState([])
+  const gettingLocation = async () => {
+    const getLocation = await getAllLocation();
+    const filter =  getLocation.filter(location=>location?.id == worker?.location ?worker.locationName = location.value:"")
+    setLocation(filter);
+  };
+  useEffect(() => {
+    gettingLocation();
+  }, []);
   return (
     <>
       <Grid
@@ -22,16 +36,17 @@ const CategoryCard = () => {
             alignItems="center"
             className={Styles.CategoryCard}>
             <Image
-              src={test}
+              src={worker?.profileImg}
               alt="Picture of the author"
               width={100}
+              height={200}
               placeholder="blur" // Optional blur-up while loading
               blurDataURL="data:..."
               className="p-2"
             />
             <div className="px-2 py-2">
-              <ProductTitle ProductName={"Ali Raza"} TagName={"p"} />
-              <ProductPrice Price={500} />
+              <ProductTitle ProductName={worker?.full_name} TagName={"p"} />
+              <ProductPrice Price={worker?.hourlyRate} />
               <p className={Styles.rating}>
                 <svg
                   width="13"
@@ -47,12 +62,11 @@ const CategoryCard = () => {
                     stroke-linecap="round"
                     stroke-linejoin="round"></path>
                 </svg>
-                4.5/5
+                {worker?.rating?worker?.rating :"N/A"}
               </p>
 
               <p className="mb-0">
-                Areas Available: Nazimabad, North Nazimabad, Liaquatabad,
-                Hyderi, Paposh, F.B Area
+                Areas Available: {worker.locationName}
               </p>
             </div>
           </Grid>
