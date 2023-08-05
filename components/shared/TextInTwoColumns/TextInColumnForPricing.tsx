@@ -7,7 +7,7 @@ interface textInColumnForPricing {
 function TextInColumnForPricing({
   leftText,
   rightText,
-  isBold
+  isBold,
 }: textInColumnForPricing) {
   return (
     <Stack
@@ -15,10 +15,12 @@ function TextInColumnForPricing({
       spacing={2}
       justifyContent="space-between"
       className={"my-3"}
-      alignItems="center"
-    >
-      <p>{leftText}</p>
-      <p className={isBold ? "has-text-weight-semibold" : ""}>Rs.{rightText}</p>
+      alignItems="center">
+      <p className="is-size-6">{leftText}</p>
+      <p
+        className={isBold ? "has-text-weight-semibold is-size-6" : "is-size-6"}>
+        Rs.{rightText}
+      </p>
     </Stack>
   );
 }

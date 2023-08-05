@@ -1,6 +1,6 @@
 import { Grid, Stack } from "@mui/material";
 import Image from "next/image";
-import Wallet from "/public//Static/Wallet.png";
+import Wallet from "../../../public/logo.png";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 const AvailableBalance = () => {
   return (

@@ -17,16 +17,15 @@ function QuantityUpdateButtons({ InputValue, isWhite }: quantityUpdate) {
         aria-label="small button group"
         className={
           isWhite ? Styles.updateQtyButtons : Styles.updateQtyButtonsGray
-        }
-      >
+        }>
         <Button>
-          <RemoveIcon fontSize="small" />
+          <RemoveIcon />
         </Button>
         <Button>
           <input type="text" placeholder="" value={InputValue} />
         </Button>
         <Button>
-          <AddIcon fontSize="small" />
+          <AddIcon />
         </Button>
       </ButtonGroup>
     </div>

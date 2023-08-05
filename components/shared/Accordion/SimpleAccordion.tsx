@@ -16,7 +16,7 @@ export default function SimpleAccordion({
 }: simpleAccordion) {
   return (
     <div>
-      <Accordion className={CustomStylingClasses}>
+      <Accordion className={CustomStylingClasses} expanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

@@ -21,25 +21,22 @@ const AllCategories = () => {
   const processedServiceName = Array.isArray(serviceName)
     ? serviceName.join(", ")
     : serviceName;
-  console.log("processedServiceName", processedServiceName);
-  console.log("workers", workers);
   return (
-    // <>
-    //   {workers?.map((worker) => {
     <Layout>
       <Grid container justifyContent="center" className="py-2 px-2">
         <Grid container item xs={12} md={8}>
           <Title title={processedServiceName} />
-          {workers?.map((worker) => (
-            <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
-              <CategoryCard worker={worker} />
-            </Grid>
-          ))}
+          <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
+            {workers?.map((worker) => (
+              <Grid container item xs={12} md={6}>
+                <CategoryCard worker={worker} />
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
       </Grid>
       ;
     </Layout>
-    // </>
   );
 };
 

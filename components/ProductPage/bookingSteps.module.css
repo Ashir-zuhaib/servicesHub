@@ -1,0 +1,10 @@
+.pricingContainer {
+  border-radius: 10px;
+  background-color: var(--gray-bg) !important;
+  padding: 15px 15px;
+  margin-top: 20px;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
