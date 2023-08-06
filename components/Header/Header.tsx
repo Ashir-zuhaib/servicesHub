@@ -18,7 +18,7 @@ interface header {
   currentUserId: string;
   userData: string;
 }
-function Header({ isMobile }: header) {
+function Header() {
   const [userData, setUserData] = useState<any[]>(null);
   //  const [logout, setLogout] = useState
   const checkLogin = async () => {
@@ -49,43 +49,27 @@ function Header({ isMobile }: header) {
             columns={{ xs: 12, sm: 12, md: 12 }}
             className={Styles.headerTop}>
             <Grid item lg="auto">
-              {isMobile ? <MenuIcon fontSize="large" className="mr-2" /> : ""}
-              <Link href={"/"} legacyBehavior>
-                <a>
-                  <WebsiteLogo />
-                </a>
+              <Link href={"/"}>
+                <WebsiteLogo />
               </Link>
             </Grid>
-            {!isMobile ? (
-              <Grid
-                item
-                lg={6}
-                sx={{ display: "flex" }}
-                style={{ width: 500, marginRight: "11%" }}>
-                <MainSearch />
-              </Grid>
-            ) : (
-              ""
-            )}
-            {!isMobile ? (
-              <Grid item>
-                {userData ? (
-                  <ProfileModal userData={userData} setUserData={setUserData} />
-                ) : (
-                  <DropdownComponent />
-                )}
-              </Grid>
-            ) : (
-              ""
-            )}
-          </Grid>
-          {isMobile ? (
-            <Grid item lg={6} sx={{ display: "flex" }}>
+
+            <Grid
+              item
+              lg={6}
+              sx={{ display: "flex" }}
+              style={{ width: 500, marginRight: "11%" }}>
               <MainSearch />
             </Grid>
-          ) : (
-            ""
-          )}
+
+            <Grid item>
+              {userData ? (
+                <ProfileModal userData={userData} setUserData={setUserData} />
+              ) : (
+                <DropdownComponent />
+              )}
+            </Grid>
+          </Grid>
         </Box>
       </Container>
     </header>

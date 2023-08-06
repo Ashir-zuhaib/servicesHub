@@ -24,6 +24,9 @@
 .bg-gray {
   background-color: var(--gray-bg);
 }
+.bg-white {
+  background-color: #fff;
+}
 .hover-no-bg:hover {
   background-color: transparent !important;
 }
@@ -49,6 +52,9 @@
 .w-100 {
   width: 100%;
 }
+.w-fit {
+  width: fit-content !important;
+}
 .h-15 {
   height: 15px;
 }
@@ -56,6 +62,9 @@
   .m5-desktop {
     margin-right: 10px;
     margin-left: 10px;
+  }
+  .w-lg-65 {
+    width: 65% !important;
   }
 }
 /*   CLASSES FOR SMALL STYLING END      */
@@ -72,3 +81,6 @@
   padding: 5px;
 }
 /* Medicine A to Z Page Tabs Class Override End */
+.box-shadow {
+  box-shadow: 0 0 0 0.125em rgba(25, 118, 210, 0.25);
+}

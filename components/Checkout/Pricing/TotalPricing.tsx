@@ -8,27 +8,28 @@ interface totalPricing {
 const TotalPricing = ({ isBackgroundColor }: totalPricing) => {
   return (
     <div
-      className={isBackgroundColor ? "bg-gray br-lg px-3 py-2" : "px-3 py-2"}
-    >
+      className={isBackgroundColor ? "bg-gray br-lg px-3 py-2" : "px-3 py-2"}>
       <SubHeading title="Order Summary" />
-      <div className="is-size-7">
-        <TextInColumnForPricing
-          leftText={"SubTotal:"}
-          rightText={"320"}
-          isBold={false}
-        />
-      </div>
-      <div className="is-size-7">
-        <TextInColumnForPricing
-          leftText={"ShippingFee:"}
-          rightText={"320"}
-          isBold={false}
-        />
-      </div>
+      <TextInColumnForPricing
+        leftText={"Charges For  1 Hours"}
+        rightText={"500"}
+        isBold={false}
+      />
+      <TextInColumnForPricing
+        leftText={"SubTotal:"}
+        rightText={"1000"}
+        isBold={false}
+      />
+
+      <TextInColumnForPricing
+        leftText={"Service Charges:"}
+        rightText={"200"}
+        isBold={false}
+      />
       <div className="has-text-weight-bold">
         <TextInColumnForPricing
           leftText={"Total:"}
-          rightText={"600"}
+          rightText={"1800"}
           isBold={false}
         />
       </div>

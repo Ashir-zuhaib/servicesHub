@@ -8,7 +8,7 @@ interface layout {
 const layout = ({ children, isMobile }: any) => {
   return (
     <>
-      <Header isMobile={false} />
+      <Header />
       <main>{children}</main>
       <Footer />
     </>

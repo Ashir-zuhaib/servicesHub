@@ -4,7 +4,7 @@ import Styles from "./badges.module.css";
 const StockBadge = () => {
     return (
           <Chip
-            label="In Stock"
+            label="Book Your Service"
             size="small"
             className={Styles.Instock}
           />

@@ -1,18 +1,15 @@
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Image from "next/image";
-import PrescriptionRequiredIcon from "../PrescriptionRequired/PrescriptionRequiredIcon";
 import Styles from "../../Checkout/OrderSummary/OrderSummary.module.css";
-import ProductImage from "/public/product-images/product-img-1.jpg";
+import ProductImage from "../../../public/carpenter.png";
 import { Divider } from "@mui/material";
 
 const OrderSummaryItems = () => {
   return (
     <>
       <Grid container className={"py-2  mt-1"}>
-        <Grid item xs={2}>
-          <Image src={ProductImage} width={70} height={70} />
-        </Grid>
+      
         <Grid
           container
           item
@@ -37,7 +34,6 @@ const OrderSummaryItems = () => {
               justifyContent="center"
               alignItems="end"
             >
-              <PrescriptionRequiredIcon />
               <span className="text-blury">x5</span>
               <p>Rs.3000</p>
             </Stack>
