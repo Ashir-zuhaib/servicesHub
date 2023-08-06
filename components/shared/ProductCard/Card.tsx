@@ -4,13 +4,23 @@ import ProductImg from "../../ServicesCard/productImg/productImg";
 import ProductTitle from "../../ServicesCard/productTitle/productTitle";
 import ProductPrice from "../../ServicesCard/productPrice/productPrice";
 import Button from "@mui/material/Button";
+import { useRouter } from 'next/router';
+
 
 interface CardProperties {
   productImg: string;
   ProductName: string;
+  productId:string;
 }
 
-const ProductCard = ({ productImg, ProductName }: CardProperties) => {
+const ProductCard = ({ productImg, ProductName,productId }: CardProperties) => {
+  const router = useRouter();
+  const handleNavigation = () => {
+    router.push({
+      pathname: '/Category',
+      query: {service: productId, serviceName:ProductName},
+    });
+  };
   return (
     <>
       <Grid
@@ -27,7 +37,7 @@ const ProductCard = ({ productImg, ProductName }: CardProperties) => {
               Lorem ipsum dolor sit,Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis
               incidunt maxime fugiat...
             </p>
-            <Button className={Styles.ctaAtcart} variant="text">
+            <Button onClick={handleNavigation} className={Styles.ctaAtcart} variant="text">
               Book Now
             </Button>
           </div>
