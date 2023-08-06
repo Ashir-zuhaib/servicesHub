@@ -84,3 +84,9 @@
 .box-shadow {
   box-shadow: 0 0 0 0.125em rgba(25, 118, 210, 0.25);
 }
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}

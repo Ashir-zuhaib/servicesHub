@@ -10,13 +10,7 @@ const ThankyouMessage = () => {
         <Image src={thankyou} width={150} height={150} alt="test" />
       </div>
       <div className="has-text-centered-mobile">
-        <Heading
-          title={
-            isMobile
-              ? "Thankyou for Your Order"
-              : "Thank you for shopping with Dawaai!"
-          }
-        />
+        <Heading title="Thankyou for Booking a Service" />
         <p className="is-size-14">
           Your order has been placed. A confirmation email will be sent to you
           at <strong>abc@gmail.com</strong> with you complete order details.
