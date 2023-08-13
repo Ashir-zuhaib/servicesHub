@@ -84,9 +84,18 @@
 .box-shadow {
   box-shadow: 0 0 0 0.125em rgba(25, 118, 210, 0.25);
 }
-.text-center{
+.text-center {
   text-align: center;
 }
-.text-right{
+.text-right {
   text-align: right;
+}
+.page-height {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.page-height main {
+  min-height: 65vh;
 }
