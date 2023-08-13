@@ -1,24 +1,15 @@
 import Grid from "@mui/material/Grid";
 import ProductCard from "../ProductCard/Card";
 import React, { useEffect, useState } from "react";
-import { getAllService } from "../../../utils/getData";
 
 interface productContainer {
   showAll: boolean;
+  productsData: any;
 }
 
-const ProductsContainer = ({ showAll }: productContainer) => {
-  const [productsData, setProductData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllService();
-      setProductData(data);
-    };
-    fetchData();
-  }, []);
-
+const ProductsContainer = ({ showAll, productsData }: productContainer) => {
   const displayedItems = productsData
-    .slice(0, 3) // Extract first 5 items
+    .slice(0, 3) // Extract first
     .map((productsData) => (
       <Grid item xs={6} md={4} key={productsData?.id}>
         <ProductCard

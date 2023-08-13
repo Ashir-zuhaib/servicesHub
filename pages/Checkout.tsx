@@ -1,10 +1,9 @@
 import Layout from "../components/layout";
 import Heading from "../components/shared/Headings/Heading";
-import { Grid, Stack } from "@mui/material";
+import { Grid} from "@mui/material";
 import SimpleAccordion from "../components/shared/Accordion/SimpleAccordion";
 import SubHeading from "../components/shared/Headings/SubHeading";
 import OrderItemsContainer from "../components/Checkout/OrderSummary/OrderItemsContainer";
-import AvailableBalance from "../components/Checkout/AvailableBalance/AvailableBalance";
 import TotalPricing from "../components/Checkout/Pricing/TotalPricing";
 import PrimaryRoundedLinkButton from "../components/shared/Buttons/PrimaryRoundedLinkButton";
 
