@@ -23,14 +23,10 @@ const ProductsContainer = ({ showAll, productsData }: productContainer) => {
   const displayedItems = productsData
     .slice(0, 6) // Extract first
     .map((productsData) => (
-      <Grid item xs={6} md={4} key={productsData?.id}>
+      <Grid item xs={12} sm={6} md={4} key={productsData?.id}>
         <ProductCard
-          productImg={
-            productsData?.img
-          }
-          ProductName={
-            productsData?.name
-          }
+          productImg={productsData?.img}
+          ProductName={productsData?.name}
           productId={productsData?.id}
         />
       </Grid>
@@ -42,11 +38,9 @@ const ProductsContainer = ({ showAll, productsData }: productContainer) => {
         <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
           {showAll
             ? productsData.map((productData) => (
-                <Grid item xs={6} md={4} key={productData?.id}>
+                <Grid item xs={12} sm={6} md={4} key={productData?.id}>
                   <ProductCard
-                    productImg={
-                      productData?.img
-                    }
+                    productImg={productData?.img}
                     ProductName={productData?.name}
                     productId={productData?.id}
                   />

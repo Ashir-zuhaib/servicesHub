@@ -37,9 +37,7 @@ const Home: any = () => {
     <>
       <Layout isMobile={isMobileValue}>
         <Container maxWidth="lg">
-          <div className={"carousel-height"}>
-            <HomeCarousel items={items} />
-          </div>
+          <HomeCarousel items={items} />
           <div className="py-5">
             <CardCarousel data={data} />
           </div>

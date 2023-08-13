@@ -2,10 +2,10 @@ import Layout from "../components/layout";
 import CategoryCard from "../components/shared/CategoryCard/CategoryCard";
 import Title from "../components/shared/Headings/Title";
 import { Grid } from "@mui/material";
-import test from "../public/carpenter.png";
 import { useRouter } from "next/router";
 import { getWorkerByService } from "../utils/getData";
 import { useEffect, useState } from "react";
+
 const AllCategories = () => {
   const [workers, setWorker] = useState([]);
   const router = useRouter();

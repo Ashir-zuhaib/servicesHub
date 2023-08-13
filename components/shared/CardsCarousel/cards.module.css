@@ -4,15 +4,22 @@
   height: 250px;
   overflow: hidden;
 }
-.brandName{
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    width: fit-content;
-    text-align: center;
-    padding-top: 12px;
+@media (max-width: 768px) {
+  .boxStyles {
+    height: 200px;
+  }
 }
-.brandName:hover,.brandName:active,.brandName:focus{
-    text-decoration: underline;
+.brandName {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  width: fit-content;
+  text-align: center;
+  padding-top: 12px;
+}
+.brandName:hover,
+.brandName:active,
+.brandName:focus {
+  text-decoration: underline;
 }

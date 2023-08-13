@@ -111,7 +111,7 @@ function ProductCarousel({
       <div className={Styles.showHeader}>
         <h2>{carouselTitle}</h2>
         <div className={Styles.carouselAssets}>
-          <Link href="/" legacyBehavior>
+          <Link href="AllCategories" legacyBehavior>
             <a>View All</a>
           </Link>
           <div className={Styles.carouselNav}>
