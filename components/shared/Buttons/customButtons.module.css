@@ -40,6 +40,6 @@
 }
 .addToCart:hover,
 .roundedButton:hover {
-  background-color: var(--dawaai-dark-blue);
+  background-color: var(--primary-color);
   color: #fff;
 }

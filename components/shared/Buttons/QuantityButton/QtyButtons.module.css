@@ -1,10 +1,10 @@
 /* Update Quantity Button Group For Gray */
 .updateQtyButtonsGray button {
-  min-width: 35px;
-  max-width: 35px;
+  min-width: 50px;
+  max-width: 50px;
   padding-left: 5px;
   padding-right: 5px;
-  height: 32px;
+  height: 48px;
   margin: 8px auto;
   border-color: var(--gray-bg);
   background-color: var(--gray-bg);
@@ -30,11 +30,11 @@
 /* Update Quantity Button Group For White */
 
 .updateQtyButtons button {
-  min-width: 35px;
-  max-width: 35px;
+  min-width: 60px;
+  max-width: 60px;
   padding-left: 5px;
   padding-right: 5px;
-  height: 32px;
+  height: 48px;
   margin: 8px auto;
   border-color: var(--white);
   background-color: var(--white);

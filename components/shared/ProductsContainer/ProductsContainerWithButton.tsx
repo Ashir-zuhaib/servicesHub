@@ -16,7 +16,10 @@ const ProductsContainerWithButton = ({
       <SubTitle title={title} />
       <ProductsContainer showAll={false} />
       <div className="has-text-centered">
-        <OutlinedRoundedButton buttonLink="Services" buttonText="View All" />
+        <OutlinedRoundedButton
+          buttonLink="AllCategories"
+          buttonText="View All"
+        />
       </div>
     </>
   );

@@ -2,8 +2,9 @@ import Layout from "../components/layout";
 import ProductImage from "/public/carpenter.png";
 import Image from "next/image";
 import ProductDescription from "../components/ProductPage/ProductDescription/ProductDescription";
-import ProductPricingContainer from "../components/ProductPage/ProductPricing/ProductPricingContainer";
+import TimeAndDateContainer from "../components/ProductPage/TimeAndDate/TimeAndDateContainer";
 import { Skeleton, Grid } from "@mui/material";
+import BookingSteps from "../components/ProductPage/BookingSteps";
 interface productDetail {
   isMobile: boolean;
   isLoading: boolean;
@@ -37,16 +38,15 @@ const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
             </>
           ) : (
             <>
-              <Grid item xs={12}>
-              </Grid>
+              <Grid item xs={12}></Grid>
               <Grid item xs={12} md={3}>
                 <Image src={ProductImage} alt="hhd" />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={9}>
                 <ProductDescription />
               </Grid>
-              <Grid item xs={12} md={4}>
-                <ProductPricingContainer />
+              <Grid item xs={12} md={12}>
+                <BookingSteps />
               </Grid>
             </>
           )}

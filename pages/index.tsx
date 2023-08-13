@@ -10,12 +10,18 @@ const Home: any = () => {
     <>
       <Layout isMobile={isMobileValue}>
         <Container maxWidth="lg">
-          <HomeCarousel />
-          <CardCarousel isMobile={isMobileValue} />
-          <ProductsContainerWithButton
-            title={"All Services"}
-            showAll={false}
-          />
+          <div className={'carousel-height'}>
+            <HomeCarousel />
+          </div>
+          <div className="py-5">
+            <CardCarousel isMobile={isMobileValue} />
+          </div>
+          <div className="py-5">
+            <ProductsContainerWithButton
+              title={"All Services"}
+              showAll={false}
+            />
+          </div>
         </Container>
       </Layout>
     </>
