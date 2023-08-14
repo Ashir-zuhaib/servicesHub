@@ -11,14 +11,14 @@ function CardCarousel({ data }: CardCarousel) {
     <Grid
       container
       columnSpacing={{ xs: 2, sm: 2, md: 2 }}
-      columns={{ xs: 12, sm: 2, md: 12, lg: 12 }}>
+      columns={{ xs: 12 }}>
       {data.length ? (
         <ProductCarousel
           show={3}
           infiniteLoop={true}
           carouselTitle={"Popular Categories"}>
           {data.map((item) => (
-            <Grid container item xs={8} md={4} key={item?.id}>
+            <Grid container item xs={8} md={6} lg={4} key={item?.id}>
               <Card
                 id={item?.id}
                 imgUrl={item?.img}
@@ -31,7 +31,7 @@ function CardCarousel({ data }: CardCarousel) {
         </ProductCarousel>
       ) : (
         <>
-          <Grid container item xs={8} md={4} key={1}>
+          <Grid container item xs={8} md={6} lg={4} key={1}>
             <Skeleton
               variant="rectangular"
               width={359}
@@ -40,7 +40,7 @@ function CardCarousel({ data }: CardCarousel) {
             />
             <Skeleton variant="rectangular" width={359} height={40} />
           </Grid>{" "}
-          <Grid container item xs={8} md={4} key={2}>
+          <Grid container item xs={8} md={6} lg={4} key={2}>
             <Skeleton
               variant="rectangular"
               width={359}
@@ -49,7 +49,7 @@ function CardCarousel({ data }: CardCarousel) {
             />
             <Skeleton variant="rectangular" width={359} height={40} />
           </Grid>{" "}
-          <Grid container item xs={8} md={4} key={3}>
+          <Grid container item xs={8} md={6} lg={4} key={3}>
             <Skeleton
               variant="rectangular"
               width={359}

@@ -9,12 +9,14 @@ interface CardProperties {
   productImg: string;
   ProductName: string;
   productId: string;
+  productDescription: string;
 }
 
 const ProductCard = ({
   productImg,
   ProductName,
   productId,
+  productDescription
 }: CardProperties) => {
 
   const router = useRouter();
@@ -44,9 +46,8 @@ const ProductCard = ({
           />
           <div className="px-2 pb-2">
             <ProductTitle ProductName={ProductName} TagName={"p"} />
-            <p className="mb-0">
-              Lorem ipsum dolor sit,Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Facilis incidunt maxime fugiat...
+            <p className="mb-0 elipsis">
+            {productDescription}
             </p>
             <Button
               onClick={handleNavigation}

@@ -1,11 +1,15 @@
 .headerTop {
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 @media (max-width: 768px) {
   .headerTop {
-    justify-content: space-between;
+    justify-content: flex-start;
+  }
+  .profile {
+    position: absolute;
+    right: 18px;
+    top: 35px;
   }
 }
-

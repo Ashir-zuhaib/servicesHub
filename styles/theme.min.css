@@ -81,13 +81,23 @@ header a.text-modified {
 }
 
 header .productSearchField .MuiOutlinedInput-notchedOutline {
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  width: 500px;
+  border-radius: 20px !important;
 }
-.border{
+
+.border {
   border: 1px solid #4a4a4a;
   border-radius: 10px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  .flex-center-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

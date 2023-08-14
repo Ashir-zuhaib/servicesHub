@@ -1,29 +1,20 @@
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import WebsiteLogo from "./Logo/Logo";
 import MainSearch from "./MainSearch/MainSearch";
 import Styles from "./header.module.css";
-import MenuIcon from "@mui/icons-material/Menu";
-import Cartsheet from "../Cartsheet/Cartsheet";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import Link from "next/link";
 import DropdownComponent from "../DropDownLogin/dropdown";
 import firebase from "../../config";
 import React from "react";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import websiteLogo from "../../public/logo.png";
 
-interface header {
-  isMobile: boolean;
-  currentUserId: string;
-  userData: string;
-}
 function Header() {
   const [userData, setUserData] = useState<any[]>(null);
-  //  const [logout, setLogout] = useState
   const checkLogin = async () => {
     let currentUserId = await localStorage?.getItem("uid");
-    console.log("current uid", currentUserId);
     if (currentUserId) {
       await firebase
         .firestore()
@@ -36,41 +27,44 @@ function Header() {
         });
     }
   };
+
   useEffect(() => {
     checkLogin();
   }, [userData]);
+
   return (
     <header>
-      <Container maxWidth="xl">
-        <Box sx={{ flexGrow: 1 }}>
+      <Container maxWidth="lg">
+        <Grid container className={Styles.headerTop}>
           <Grid
-            container
-            columnSpacing={{ xs: 2, sm: 2, md: 2 }}
-            columns={{ xs: 12, sm: 12, md: 12 }}
-            className={Styles.headerTop}>
-            <Grid item lg="auto">
-              <Link href={"/"}>
-                <WebsiteLogo />
-              </Link>
-            </Grid>
-
-            <Grid
-              item
-              lg={6}
-              sx={{ display: "flex" }}
-              style={{ width: 500, marginRight: "11%" }}>
-              <MainSearch />
-            </Grid>
-
-            <Grid item>
-              {userData ? (
-                <ProfileModal userData={userData} setUserData={setUserData} />
-              ) : (
-                <DropdownComponent />
-              )}
-            </Grid>
+            item
+            xs={12}
+            md={9}
+            sx={{
+              display: "block",
+              "@media (min-width: 768px)": {
+                display: "flex",
+              },
+            }}>
+            <Link href={"/"} className="flex-center-lg mr-5">
+              <Image
+                src={websiteLogo}
+                alt="Logo"
+                width={180}
+                height={60}
+                className="my-2"
+              />
+            </Link>
+            <MainSearch />
           </Grid>
-        </Box>
+          <Grid item xs={12} md={'auto'} className={Styles.profile}>
+            {userData ? (
+              <ProfileModal userData={userData} setUserData={setUserData} />
+            ) : (
+              <DropdownComponent />
+            )}
+          </Grid>
+        </Grid>
       </Container>
     </header>
   );

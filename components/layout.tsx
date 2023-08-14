@@ -1,9 +1,5 @@
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
-interface layout {
-  children: any;
-  isMobile: boolean;
-}
 
 const layout = ({ children }: any) => {
   return (
