@@ -6,9 +6,11 @@ import Button from "@mui/material/Button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getAllLocation } from "../../../utils/getData";
+import { useRouter } from "next/router";
 
 interface Title {
   worker: {};
+  id: string;
 }
 const CategoryCard = ({ worker }) => {
   const [locations, setLocation] = useState([]);
@@ -20,6 +22,15 @@ const CategoryCard = ({ worker }) => {
         : ""
     );
     setLocation(filter);
+  };
+  const router = useRouter()
+  const handleNavigation = (id) => {
+    console.log("idddddd",id);
+    
+    router.push({
+      pathname: '/ServiceProvider',
+      query: {providerId: id},
+    });
   };
   useEffect(() => {
     gettingLocation();
@@ -66,7 +77,7 @@ const CategoryCard = ({ worker }) => {
             <p className="mb-0">Areas Available: {worker.locationName}</p>
           </div>
         </Grid>
-        <Button className={Styles.ctaAtcart} variant="text" href={'ServiceProvider'}>
+        <Button onClick={()=>handleNavigation(worker?.id)} className={Styles.ctaAtcart} variant="text" >
           <svg
             className="mr-2"
             xmlns="http://www.w3.org/2000/svg"

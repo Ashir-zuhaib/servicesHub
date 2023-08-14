@@ -1,13 +1,14 @@
 import ProductPrice from "../../ServicesCard/productPrice/productPrice";
 import Divider from "@mui/material/Divider";
 import BookingSteps from "../BookingSteps";
-const productDetails = () => {
+const productDetails = ({userProfile}) => {
+  
   return (
     <div>
-      <p className="has-text-weight-semibold is-size-6">Carpenter</p>
-      <h1 className="is-size-3">Ali Raza</h1>
+      <p className="has-text-weight-semibold is-size-6">{userProfile?.roleName}</p>
+      <h1 className="is-size-3">{userProfile?.full_name}</h1>
       <div className="is-flex">
-        <ProductPrice Price={500} />
+        <ProductPrice Price={userProfile?.hourlyRate} />
         <p className="pl-4">
           <span className="pr-1">
             <svg
@@ -25,13 +26,12 @@ const productDetails = () => {
                 stroke-linejoin="round"></path>
             </svg>
           </span>
-          4.5/5
+          {userProfile?.rating}
         </p>
       </div>
 
       <p className="my-2">
-        <strong>Areas Available:</strong> Nazimabad, North Nazimabad,
-        Liaquatabad, Hyderi, Paposh, F.B Area
+        <strong>Areas Available:</strong> {userProfile?.locationName}
       </p>
       <Divider />
       <p className="my-2">

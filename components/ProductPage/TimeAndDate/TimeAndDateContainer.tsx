@@ -5,11 +5,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-
+import moment from "moment"
+import { getAvailableTime } from "../../../utils/getData";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+  noOfHours:number;
+  
 }
 
 function CustomTabPanel(props: TabPanelProps) {
@@ -27,6 +30,7 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
+
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -34,13 +38,25 @@ function a11yProps(index: number) {
   };
 }
 
-export default function TimeAndDateContainer() {
+export default function TimeAndDateContainer({noOfHours, providerId}) {
   const [value, setValue] = React.useState(0);
-
+  const [selectedDate, setSelectedDate] =React.useState(moment().format("DD-MMM-YYYY"))
+  const [availableTime, setAvailableTime] = React.useState([])
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setSelectedDate(moment().add(newValue,'day').format("DD-MMM-YYYY"))
+    
   };
-
+  console.log("selectedDate",selectedDate);
+  const getTime = async()=>{
+    const time = await getAvailableTime(selectedDate,noOfHours, providerId )
+    console.log("ttttt",time);
+    setAvailableTime(time)
+  }
+  React.useEffect(()=>{ 
+    getTime()
+  },[selectedDate])
+  
   return (
     <div className={Styles.pricingContainer}>
       <Box sx={{ width: "100%" }}>
@@ -49,9 +65,9 @@ export default function TimeAndDateContainer() {
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example">
-            <Tab label="2-Aug-2023" {...a11yProps(0)} />
-            <Tab label="3-Aug-2023" {...a11yProps(1)} />
-            <Tab label="4-Aug-2023" {...a11yProps(2)} />
+            <Tab label={moment().format("DD-MMM-YYYY")} {...a11yProps(0)} />
+            <Tab label={moment().add(1,'day').format("DD-MMM-YYYY")} {...a11yProps(1)} />
+            <Tab label={moment().add(2,'day').format("DD-MMM-YYYY")} {...a11yProps(2)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -61,61 +77,46 @@ export default function TimeAndDateContainer() {
             className="mb-2 mt-4"
             flexWrap={"wrap"}
             justifyContent="start">
+              {
+                availableTime?.map((avTime)=>(
             <Button variant="outlined" size="small" className={Styles.packBtn}>
               <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>{" "}
-            <Button variant="outlined" size="small" className={Styles.packBtn}>
-              <AccessTimeIcon fontSize="small" className="mr-1" />
-              12:00 PM - 01:00 PM
-            </Button>
+              {avTime}
+            </Button>))
+           }
           </Stack>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          Item Two
+        <Stack
+            direction="row"
+            alignItems="center"
+            className="mb-2 mt-4"
+            flexWrap={"wrap"}
+            justifyContent="start">
+              {
+                availableTime?.map((avTime)=>(
+            <Button variant="outlined" size="small" className={Styles.packBtn}>
+              <AccessTimeIcon fontSize="small" className="mr-1" />
+              {avTime}
+            </Button>))
+           }
+          </Stack>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Item Three
+        <Stack
+            direction="row"
+            alignItems="center"
+            className="mb-2 mt-4"
+            flexWrap={"wrap"}
+            justifyContent="start">
+              {
+                availableTime?.map((avTime)=>(
+            <Button variant="outlined" size="small" className={Styles.packBtn}>
+              <AccessTimeIcon fontSize="small" className="mr-1" />
+              {avTime}
+            </Button>))
+           }
+          </Stack>
         </CustomTabPanel>
       </Box>
     </div>
