@@ -72,49 +72,50 @@ const getUser = async (id) => {
   return data;
 };
 const getAvailableTime = async (date, noOfHours, providerId) => {
-    let availableTime = [];
-    let startTime = moment().startOf('day').hour(8).minute(0); // Start at 08:00
+  let availableTime = [];
+  let startTime = moment().startOf('day').hour(8).minute(0); // Start at 08:00
   
-    // Fetch bookings for the given provider and date
-    let bookingsSnapshot = await firebase
-      .firestore()
-      .collection("Bookings")
-      .where("serviceProvider", "==", providerId)
-      .where("apptDate", "==", date)
-      .get();
-  
-    // Iterate over time slots
-    for (let i = 0; i < 12; i++) {
-        let isAvailable = true;
+  // Fetch bookings for the given provider and date
+  let bookingsSnapshot = await firebase
+    .firestore()
+    .collection("Bookings")
+    .where("serviceProvider", "==", providerId)
+    .where("apptDate", "==", date)
+    .get();
+
+  // Iterate over time slots
+  for (let i = 0; i < 12/noOfHours; i++) {
+    let isAvailable = true;
+// console.log("bbbb", bookingsSnapshot.size);
+
+    // Compare each booking with the current time slot
+    bookingsSnapshot.forEach((doc) => {
+      let data = doc.data();
+      let bookingStartTime = moment(data.startTime, "HH:mm");
+      let bookingEndTime = moment(data.endTime, "HH:mm");
+
+      let adjustedStartTime = startTime.clone(); // Create a clone of startTime
+      let adjustedEndTime = adjustedStartTime.clone().add(noOfHours, 'hours'); // Calculate adjusted end time
       
-        // Compare each booking with the current time slot
-        bookingsSnapshot.forEach((doc) => {
-          let data = doc.data();
-          let bookingStartTime = moment(data.startTime, "HH:mm");
-          let bookingEndTime = moment(data.endTime, "HH:mm");
-        
-          let adjustedStartTime = startTime.clone(); // Create a clone of startTime
-          let adjustedEndTime = adjustedStartTime.clone().add(noOfHours, 'hours'); // Calculate adjusted end time
-            console.log("adjustedStartTime", adjustedStartTime, adjustedEndTime);
-            
-          if (
-            (adjustedStartTime > bookingStartTime && adjustedStartTime < bookingEndTime) ||
-            (adjustedEndTime> bookingStartTime&& bookingEndTime<bookingEndTime)
-          ) {
-            isAvailable = false;
-          }
-        });
-      
-        if (isAvailable) {
-          availableTime.push(startTime.format("HH:mm"));
-        }
-      
-        startTime.add(1, 'hour'); // Move to the next time slot
+      if (
+        (adjustedStartTime.isBetween(bookingStartTime, bookingEndTime, null, '[]')) ||
+        (adjustedEndTime.isBetween(bookingStartTime, bookingEndTime, null, '[]')) ||
+        (bookingStartTime.isBetween(adjustedStartTime, adjustedEndTime, null, '[]')) ||
+        (bookingEndTime.isBetween(adjustedStartTime, adjustedEndTime, null, '[]'))
+      ) {
+        isAvailable = false;
       }
-      
-  
-    return availableTime;
-  };
-  
+    });
+
+    if (isAvailable) {
+      availableTime.push(startTime.format("HH:mm"));
+    }
+
+    startTime.add(noOfHours, 'hours'); // Move to the next time slot
+  }
+
+  return availableTime;
+};
+
   
 export { getAllService, getWorkerByService, getAllLocation, getUser,getAvailableTime };

@@ -12,7 +12,6 @@ interface TabPanelProps {
   index: number;
   value: number;
   noOfHours:number;
-  
 }
 
 function CustomTabPanel(props: TabPanelProps) {
@@ -70,7 +69,7 @@ export default function TimeAndDateContainer({noOfHours, providerId}) {
             <Tab label={moment().add(2,'day').format("DD-MMM-YYYY")} {...a11yProps(2)} />
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={0}>
+        <CustomTabPanel value={value} index={0} noOfHours={noOfHours}>
           <Stack
             direction="row"
             alignItems="center"
@@ -81,12 +80,12 @@ export default function TimeAndDateContainer({noOfHours, providerId}) {
                 availableTime?.map((avTime)=>(
             <Button variant="outlined" size="small" className={Styles.packBtn}>
               <AccessTimeIcon fontSize="small" className="mr-1" />
-              {avTime}
+              {avTime} 
             </Button>))
            }
           </Stack>
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
+        <CustomTabPanel value={value} index={1} noOfHours={noOfHours}>
         <Stack
             direction="row"
             alignItems="center"
@@ -102,7 +101,7 @@ export default function TimeAndDateContainer({noOfHours, providerId}) {
            }
           </Stack>
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
+        <CustomTabPanel value={value} index={2} noOfHours={noOfHours}>
         <Stack
             direction="row"
             alignItems="center"
