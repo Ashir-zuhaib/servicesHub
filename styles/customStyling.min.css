@@ -84,3 +84,26 @@
 .box-shadow {
   box-shadow: 0 0 0 0.125em rgba(25, 118, 210, 0.25);
 }
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.page-height {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.page-height main {
+  min-height: 65vh;
+}
+
+.elipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}

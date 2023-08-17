@@ -9,7 +9,6 @@ interface CarouselProperties {
   show: string | any;
   infiniteLoop: boolean;
   carouselTitle: string;
-  isMobile: boolean;
 }
 
 function ProductCarousel({
@@ -17,7 +16,6 @@ function ProductCarousel({
   show,
   infiniteLoop,
   carouselTitle,
-  isMobile,
 }: CarouselProperties) {
   const [currentIndex, setCurrentIndex] = useState(infiniteLoop ? show : 0);
   const [length, setLength] = useState(children.length);
@@ -113,40 +111,34 @@ function ProductCarousel({
       <div className={Styles.showHeader}>
         <h2>{carouselTitle}</h2>
         <div className={Styles.carouselAssets}>
-          <Link href="/" legacyBehavior>
+          <Link href="AllCategories" legacyBehavior>
             <a>View All</a>
           </Link>
-          {!isMobile ? (
-            <div className={Styles.carouselNav}>
-              {(isRepeating || currentIndex > 0) && (
-                <button onClick={prevItem} className={Styles.leftArrow}>
-                  <ChevronLeftIcon />
-                </button>
-              )}
-              {(isRepeating || currentIndex < length - show) && (
-                <button onClick={nextItem} className={Styles.rightArrow}>
-                  <ChevronRightIcon />
-                </button>
-              )}
-            </div>
-          ) : (
-            ""
-          )}
+          <div className={Styles.carouselNav}>
+            {(isRepeating || currentIndex > 0) && (
+              <button onClick={prevItem} className={Styles.leftArrow}>
+                <ChevronLeftIcon />
+              </button>
+            )}
+            {(isRepeating || currentIndex < length - show) && (
+              <button onClick={nextItem} className={Styles.rightArrow}>
+                <ChevronRightIcon />
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <div
         className={Styles.slider}
         onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-      >
+        onTouchMove={handleTouchMove}>
         <div
           className={`${Styles.slides} show-${show}`}
           style={{
             transform: `translateX(-${currentIndex * (100 / show)}%)`,
             transition: !transitionEnabled ? "none" : undefined,
           }}
-          onTransitionEnd={() => handleTransitionEnd()}
-        >
+          onTransitionEnd={() => handleTransitionEnd()}>
           {length > show && isRepeating && renderExtraPrev()}
           {children}
           {length > show && isRepeating && renderExtraNext()}

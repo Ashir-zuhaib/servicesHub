@@ -2,7 +2,6 @@ import Layout from "../components/layout";
 import ProductImage from "/public/carpenter.png";
 import Image from "next/image";
 import ProductDescription from "../components/ProductPage/ProductDescription/ProductDescription";
-import TimeAndDateContainer from "../components/ProductPage/TimeAndDate/TimeAndDateContainer";
 import { Skeleton, Grid } from "@mui/material";
 import BookingSteps from "../components/ProductPage/BookingSteps";
 import { useRouter } from "next/router";

@@ -5,16 +5,18 @@ import SubTitle from "../Headings/SubTitle";
 interface productsContainerWithButton {
   title: string;
   showAll: boolean;
+  data: any;
 }
 
 const ProductsContainerWithButton = ({
   title,
   showAll,
+  data
 }: productsContainerWithButton) => {
   return (
     <>
       <SubTitle title={title} />
-      <ProductsContainer showAll={false} />
+      <ProductsContainer showAll={showAll} productsData={data} />
       <div className="has-text-centered">
         <OutlinedRoundedButton
           buttonLink="AllCategories"

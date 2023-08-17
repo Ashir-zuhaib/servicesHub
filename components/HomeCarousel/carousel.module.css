@@ -1,3 +1,8 @@
 .Carousel{
     max-height: 312px!important;
 }
+@media (max-width: 768px) {
+    .Carousel{
+        max-height: 212px!important;
+    }
+}
