@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Grid from '@mui/material/Grid'
 import { Typography } from '@mui/material'
 import ViewHeader from './ViewHeader'
-import pakistan from '../../public/Login/pakistan.png'
+import pakistan from '../../public/images/pakistan.png'
 
 export default function LoginView() {
 
