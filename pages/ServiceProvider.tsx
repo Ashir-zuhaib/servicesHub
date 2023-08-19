@@ -4,6 +4,13 @@ import Image from "next/image";
 import ProductDescription from "../components/ProductPage/ProductDescription/ProductDescription";
 import { Skeleton, Grid } from "@mui/material";
 import BookingSteps from "../components/ProductPage/BookingSteps";
+import { useRouter } from "next/router";
+import { getAllLocation, getAllService, getUser } from "../utils/getData";
+import { useEffect, useState } from "react";
+interface ServiceProvider {
+  profileImg: string; // Change this type to match the actual type of profileImg
+  // Other properties of the service provider
+}
 interface productDetail {
   isMobile: boolean;
   isLoading: boolean;
@@ -11,6 +18,29 @@ interface productDetail {
 
 const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
   isLoading = false;
+  const router = useRouter();
+  const [serviceProviderData, setServiceProviderData] = useState<ServiceProvider | null>(null);
+  const { providerId } = router.query; 
+  const gettingProviderData = async () => {
+    const providerData = await getUser(providerId);
+    const getService = await getAllService()
+    const filter = getService?.filter((service) =>
+    service?.id == providerData?.role
+      ? (providerData.roleName = service?.name)
+      : ""
+  );
+  const getLocation = await getAllLocation();
+   getLocation?.filter((location) =>
+    location?.id == providerData?.location
+      ? (providerData.locationName = location?.value)
+      : ""
+  );
+    console.log("ProviderData", providerData);
+    setServiceProviderData(providerData);
+  };
+  useEffect(() => {
+    gettingProviderData();
+  }, []);
   return (
     <Layout>
       <Grid container justifyContent="center" className="py-2 px-2">
@@ -39,13 +69,13 @@ const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
             <>
               <Grid item xs={12}></Grid>
               <Grid item xs={12} md={3}>
-                <Image src={ProductImage} alt="hhd" />
+                <Image src={serviceProviderData?.profileImg} width={400} height={1200} alt="hhd" />
               </Grid>
               <Grid item xs={12} md={9}>
-                <ProductDescription />
+                <ProductDescription userProfile = {serviceProviderData} />
               </Grid>
               <Grid item xs={12} md={12}>
-                <BookingSteps />
+                <BookingSteps providerId = {providerId}  />
               </Grid>
             </>
           )}
