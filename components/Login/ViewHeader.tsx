@@ -1,8 +1,8 @@
 import React from 'react'
 import Styles from './login.module.css'
-import ellipseFilled from '../../public/Login/EllipseFilled.svg'
-import ellipse from '../../public/Login/Ellipse.svg'
-import dawaai from '../../public/Login/dawaai.png'
+import ellipseFilled from '../../public/Static/avatar.svg'
+import ellipse from '../../public/Static/avatar.svg'
+import dawaai from '../../public/logo.png'
 import Image from 'next/image'
 
 export default function ViewHeader() {
