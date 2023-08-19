@@ -17,10 +17,14 @@ const steps = [
   "Enter Your Details",
 ];
 
-export default function BookingSteps() {
+export default function BookingSteps({providerId}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-
+  const [count, setCount] = React.useState<number>(1); // Set an initial value, you can change it as needed
+React.useEffect(()=>{
+console.log("steps count", count);
+  
+},[count])
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -87,12 +91,12 @@ export default function BookingSteps() {
             <div className="is-flex is-align-items-center	is-justify-content-center">
               <div className="p-5 border is-flex is-align-items-center box-shadow">
                 <h2 className="mr-3">Select No. of Hours</h2>
-                <QuantityUpdateButtons InputValue={1} isWhite={true} />{" "}
+                <QuantityUpdateButtons InputValue={count} isWhite={true} updateCount={setCount} />{" "}
               </div>
             </div>
           </div>
         ) : activeStep == 1 ? (
-          <TimeAndDateContainer />
+          <TimeAndDateContainer noOfHours= {count} providerId={providerId} />
         ) : (
           <div className={Styles.pricingContainer}>
             <Box

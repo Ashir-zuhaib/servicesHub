@@ -27,7 +27,7 @@ const ProductsListing = ({
     <>
       <Grid container className={"py-4 px-4"}>
         <Grid item xs={3}>
-          <Image src={imgUrl} width={100} height={100} />
+          <Image src={imgUrl} alt="cart" width={100} height={100} />
         </Grid>
         <Grid item xs={9}>
           <Stack direction="row" spacing={2} justifyContent="space-between">
@@ -43,7 +43,7 @@ const ProductsListing = ({
             justifyContent="space-between"
             alignItems="center"
           >
-            <QuantityUpdateButtons InputValue={qtyValue} isWhite={false} />
+            {/* <QuantityUpdateButtons InputValue={qtyValue} updateCount={qtyValue}  isWhite={false} /> */}
             <DeleteOutlineIcon
               color="action"
               fontSize="large"
