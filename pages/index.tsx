@@ -5,6 +5,9 @@ import ProductsContainerWithButton from "../components/shared/ProductsContainer/
 import { HomeCarousel } from "../components/HomeCarousel/HomeCarousel";
 import { getAllService } from "../utils/getData";
 import { useEffect, useState } from "react";
+// DUMMY IMAGES
+import bannerImage1 from "../public/images/banner-img.png";
+import bannerImage2 from "../public/images/banner-img2.png";
 
 const Home: any = () => {
   let isMobileValue = false;
@@ -18,13 +21,23 @@ const Home: any = () => {
     };
     fetchData();
   }, []);
+
+  // CAROUSEL IMAGES
+  var items = [
+    {
+      name: "Random Name #1",
+      imageSrc: bannerImage1,
+    },
+    {
+      name: "Random Name #1",
+      imageSrc: bannerImage2,
+    },
+  ];
   return (
     <>
       <Layout isMobile={isMobileValue}>
         <Container maxWidth="lg">
-          <div className={"carousel-height"}>
-            <HomeCarousel />
-          </div>
+          <HomeCarousel items={items} />
           <div className="py-5">
             <CardCarousel data={data} />
           </div>

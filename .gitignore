@@ -64,3 +64,6 @@ Thumbs.db
 build.sh
 Procfile
 .npmrc
+.vercel
+
+package-lock.json
