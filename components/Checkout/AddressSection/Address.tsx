@@ -4,7 +4,6 @@ import Styles from "./AddressSection.module.css";
 import AddressModal from "./AddressModal/AddressForm";
 import { Grid, Stack } from "@mui/material";
 import CustomModal from "../../shared/Modal/CustomModal";
-import BottomSheet from "../../shared/BottomSheet/BottomSheet";
 
 const Address = () => {
   return (
@@ -21,11 +20,7 @@ const Address = () => {
             ModalBodyToPassDown={<AddressModal />}
             ModalTitle="Edit Address"
           />
-          <BottomSheet
-            labelToPass={<EditAddressIcon />}
-            BodyToPass={<AddressModal />}
-            BottomSheetTitle={"Edit Address"}
-          />
+         
         </Stack>
         <p className="is-size-7 px-5">
           Example: 47/E-2, Block 6, PECHS, Karachi, Sindh, Pakistan.

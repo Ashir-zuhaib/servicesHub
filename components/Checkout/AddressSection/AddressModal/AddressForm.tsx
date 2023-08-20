@@ -1,5 +1,4 @@
 import Stack from "@mui/material/Stack";
-import { Divider } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Styles from "./AddressModal.module.css";
 import MenuItem from "@mui/material/MenuItem";
