@@ -1,5 +1,4 @@
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Image from "next/image";
 import ProductImage from "../../../public/carpenter.png";
 import { Divider } from "@mui/material";

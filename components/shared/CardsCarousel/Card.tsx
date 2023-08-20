@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Styles from "./cards.module.css";

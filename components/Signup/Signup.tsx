@@ -14,7 +14,6 @@ export default function SignupMain() {
   const [locations, setLocation] = useState<any[]>([]);
   const [area, setArea] = useState<string>("");
   const [worker, setWorker] = useState<boolean>(false);
-  // const [worker, setWorker] = useState(false);
   const [occupation, setOccupation] = useState("QUoP0oYjQaPHrMhzznNN");
   const submitLoginForm = async () => {
     if (fullName == "" || email == "" || userPassword == "") {

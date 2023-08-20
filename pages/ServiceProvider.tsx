@@ -1,5 +1,4 @@
 import Layout from "../components/layout";
-import ProductImage from "/public/carpenter.png";
 import Image from "next/image";
 import ProductDescription from "../components/ProductPage/ProductDescription/ProductDescription";
 import { Skeleton, Grid } from "@mui/material";

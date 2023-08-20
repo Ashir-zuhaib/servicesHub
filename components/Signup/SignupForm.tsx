@@ -24,10 +24,6 @@ import {
   VisibilityOutlined,
   Call,
 } from "@mui/icons-material";
-interface MenuItemData {
-  value: string;
-  key: string;
-}
 interface signupForm {
   fullName: string;
   setFullName: React.Dispatch<React.SetStateAction<string>>;
