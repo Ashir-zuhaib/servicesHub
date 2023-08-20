@@ -5,7 +5,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Address from "./Address";
 import AddressModal from "./AddressModal/AddressForm";
 import CustomModal from "../../shared/Modal/CustomModal";
-import BottomSheet from "../../shared/BottomSheet/BottomSheet";
 
 const AddressContainer = () => {
   return (
@@ -17,11 +16,6 @@ const AddressContainer = () => {
           ModalBodyToPassDown={<AddressModal />}
           ModalTitle="Address"
         />
-        <BottomSheet
-            labelToPass={<AddNewAddressLabel />}
-            BodyToPass={<AddressModal />}
-            BottomSheetTitle={"Address"}
-          />
       </Grid>
       <Grid container className="my-1">
         <RadioGroup
