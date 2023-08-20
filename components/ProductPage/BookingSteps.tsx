@@ -4,7 +4,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import QuantityUpdateButtons from "../shared/Buttons/QuantityButton/QuantityUpdateButtons";
 import Styles from "./bookingSteps.module.css";
 import TimeAndDateContainer from "./TimeAndDate/TimeAndDateContainer";
@@ -17,14 +16,13 @@ const steps = [
   "Enter Your Details",
 ];
 
-export default function BookingSteps({providerId}) {
+export default function BookingSteps({ providerId }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-  const [count, setCount] = React.useState<number>(1); // Set an initial value, you can change it as needed
-React.useEffect(()=>{
-console.log("steps count", count);
-  
-},[count])
+  const [count, setCount] = React.useState<number>(1);
+  const [address, setAddress] = React.useState("");
+  const [contact, setContact] = React.useState("");
+
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -46,23 +44,6 @@ console.log("steps count", count);
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   return (
@@ -91,12 +72,16 @@ console.log("steps count", count);
             <div className="is-flex is-align-items-center	is-justify-content-center">
               <div className="p-5 border is-flex is-align-items-center box-shadow">
                 <h2 className="mr-3">Select No. of Hours</h2>
-                <QuantityUpdateButtons InputValue={count} isWhite={true} updateCount={setCount} />{" "}
+                <QuantityUpdateButtons
+                  InputValue={count}
+                  isWhite={true}
+                  updateCount={setCount}
+                />{" "}
               </div>
             </div>
           </div>
         ) : activeStep == 1 ? (
-          <TimeAndDateContainer noOfHours= {count} providerId={providerId} />
+          <TimeAndDateContainer noOfHours={count} providerId={providerId} />
         ) : (
           <div className={Styles.pricingContainer}>
             <Box
@@ -114,11 +99,13 @@ console.log("steps count", count);
                   required
                   id="outlined-required"
                   label="Enter Your Address"
+                  value={address}
                 />
                 <TextField
                   required
                   id="outlined-required"
                   label="Enter Contact Number"
+                  value={contact}
                 />
               </div>
             </Box>
@@ -133,14 +120,15 @@ console.log("steps count", count);
             Back
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
-          {isStepOptional(activeStep) && (
-            <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-              Skip
+          {activeStep == 2 ? (
+            <Button href="/Checkout" variant="contained">
+              Submit
+            </Button>
+          ) : (
+            <Button onClick={handleNext} variant="contained">
+              Next
             </Button>
           )}
-          <Button onClick={handleNext} variant="contained">
-            Next
-          </Button>
         </Box>
       </>
     </Box>
