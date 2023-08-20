@@ -1,6 +1,5 @@
 import React from "react";
 import LoginForm from "./LoginForm";
-import LoginView from "./LoginView";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import firebase from "../../config";
@@ -39,7 +38,6 @@ export default function LoginMain() {
   };
   return (
     <Grid container style={{ minHeight: "100vh", position: "relative" }}>
-      <LoginView />
       <LoginForm
         email={email}
         setEmail={setEmail}
