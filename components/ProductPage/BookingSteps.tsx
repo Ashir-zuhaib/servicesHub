@@ -10,6 +10,7 @@ import Styles from "./bookingSteps.module.css";
 import TimeAndDateContainer from "./TimeAndDate/TimeAndDateContainer";
 import TextField from "@mui/material/TextField";
 import SubTitle from "../shared/Headings/SubTitle";
+import firebase from "../../config";
 
 const steps = [
   "Select the service hours",
@@ -17,14 +18,20 @@ const steps = [
   "Enter Your Details",
 ];
 
-export default function BookingSteps({providerId}) {
+export default function BookingSteps({ providerId }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-  const [count, setCount] = React.useState<number>(1); // Set an initial value, you can change it as needed
-React.useEffect(()=>{
-console.log("steps count", count);
-  
-},[count])
+  const [count, setCount] = React.useState<number>(1);
+  const [bookingData, setBookingData] = React.useState({
+    apptDate: "",
+    startTime: "",
+    endTime: "",
+    noOfHours: 1,
+    address: "", // Add the address field
+    contactNumber: "",
+    serviceProvider:providerId
+  });
+
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -65,6 +72,32 @@ console.log("steps count", count);
     setActiveStep(0);
   };
 
+  const handleSelectDateAndTime = (selectedDate, selectedTime) => {
+    console.log("bookingTIme", selectedDate, selectedTime);
+    
+    setBookingData({
+      ...bookingData,
+      apptDate: selectedDate,
+      startTime: selectedTime,
+    });
+  };
+
+  const handleAddressChange = (event) => {
+    setBookingData({
+      ...bookingData,
+      address: event.target.value,
+    });
+  };
+
+  const handleContactNumberChange = (event) => {
+    setBookingData({
+      ...bookingData,
+      contactNumber: event.target.value,
+    });
+  };
+  const handleSubmit = ()=>{
+    firebase.firestore().collection("Bookings").add(bookingData)
+  }
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -96,7 +129,7 @@ console.log("steps count", count);
             </div>
           </div>
         ) : activeStep == 1 ? (
-          <TimeAndDateContainer noOfHours= {count} providerId={providerId} />
+          <TimeAndDateContainer noOfHours= {count} providerId={providerId} onSelectDateAndTime={handleSelectDateAndTime} />
         ) : (
           <div className={Styles.pricingContainer}>
             <Box
@@ -111,15 +144,19 @@ console.log("steps count", count);
                   <SubTitle title="Complete Your Booking" />
                 </div>
                 <TextField
-                  required
-                  id="outlined-required"
-                  label="Enter Your Address"
-                />
-                <TextField
-                  required
-                  id="outlined-required"
-                  label="Enter Contact Number"
-                />
+                required
+                id="outlined-required"
+                label="Enter Your Address"
+                value={bookingData.address}
+                onChange={handleAddressChange}
+              />
+              <TextField
+                required
+                id="outlined-required"
+                label="Enter Contact Number"
+                value={bookingData.contactNumber}
+                onChange={handleContactNumberChange}
+              />
               </div>
             </Box>
           </div>
@@ -138,9 +175,16 @@ console.log("steps count", count);
               Skip
             </Button>
           )}
+          {
+            activeStep ==2?
+            <Button onClick={handleNext} variant="contained">
+            Submit
+          </Button>
+          :  
           <Button onClick={handleNext} variant="contained">
             Next
           </Button>
+          }
         </Box>
       </>
     </Box>
