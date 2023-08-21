@@ -4,7 +4,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import QuantityUpdateButtons from "../shared/Buttons/QuantityButton/QuantityUpdateButtons";
 import Styles from "./bookingSteps.module.css";
 import TimeAndDateContainer from "./TimeAndDate/TimeAndDateContainer";
@@ -31,7 +30,6 @@ export default function BookingSteps({ providerId }) {
     contactNumber: "",
     serviceProvider:providerId
   });
-
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -124,7 +122,11 @@ export default function BookingSteps({ providerId }) {
             <div className="is-flex is-align-items-center	is-justify-content-center">
               <div className="p-5 border is-flex is-align-items-center box-shadow">
                 <h2 className="mr-3">Select No. of Hours</h2>
-                <QuantityUpdateButtons InputValue={count} isWhite={true} updateCount={setCount} />{" "}
+                <QuantityUpdateButtons
+                  InputValue={count}
+                  isWhite={true}
+                  updateCount={setCount}
+                />{" "}
               </div>
             </div>
           </div>
@@ -170,21 +172,16 @@ export default function BookingSteps({ providerId }) {
             Back
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
-          {isStepOptional(activeStep) && (
-            <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-              Skip
+          {activeStep == 2 ? (
+            <Button href="/Checkout" variant="contained">
+              Submit
+            </Button>
+          ) : (
+            <Button onClick={handleNext} variant="contained">
+              Next
             </Button>
           )}
-          {
-            activeStep ==2?
-            <Button onClick={handleNext} variant="contained">
-            Submit
-          </Button>
-          :  
-          <Button onClick={handleNext} variant="contained">
-            Next
-          </Button>
-          }
+
         </Box>
       </>
     </Box>

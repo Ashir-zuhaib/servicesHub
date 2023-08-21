@@ -3,6 +3,7 @@ import Styles from "./signup.module.css";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import firebase from "../../config";
+import { SelectChangeEvent } from "@mui/material/Select";
 import {
   Stack,
   Typography,
@@ -14,7 +15,7 @@ import {
   Select,
   MenuItem,
   Checkbox,
-  FormControlLabel
+  FormControlLabel,
 } from "@mui/material";
 import {
   LockOutlined,
@@ -23,10 +24,6 @@ import {
   VisibilityOutlined,
   Call,
 } from "@mui/icons-material";
-interface MenuItemData {
-  value: string;
-  key: string;
-}
 interface signupForm {
   fullName: string;
   setFullName: React.Dispatch<React.SetStateAction<string>>;
@@ -38,9 +35,9 @@ interface signupForm {
   setLocation: React.Dispatch<React.SetStateAction<any[]>>;
   userPassword: string;
   setUserPassword: React.Dispatch<React.SetStateAction<string>>;
-  area:string;
+  area: string;
   setArea: React.Dispatch<React.SetStateAction<string>>;
-  occupation:string;
+  occupation: string;
   setOccupation: React.Dispatch<React.SetStateAction<string>>;
   worker: boolean;
   setWorker: React.Dispatch<React.SetStateAction<boolean>>;
@@ -89,7 +86,7 @@ export default function SignupForm({
     });
   };
 
-  const getRoles = async()=>{
+  const getRoles = async () => {
     let rolesArray = [];
     let getRoles = await firebase.firestore().collection("Roles").get();
     console.log("Roles size", getRoles.size);
@@ -100,14 +97,14 @@ export default function SignupForm({
       rolesArray.push(data);
       setRoles(rolesArray);
     });
-  }
+  };
   console.log("locationArray", locations);
 
   useEffect(() => {
     getRoles();
     getLocation();
   }, []);
-  const handleAreaChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleAreaChange = (event: SelectChangeEvent<any>) => {
     const selectedArea = locations?.find(
       (item) => item.value === event.target.value
     );
@@ -115,7 +112,7 @@ export default function SignupForm({
       setArea(selectedArea.key);
     }
   };
-  const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleRoleChange = (event: SelectChangeEvent<{ value: unknown }>) => {
     const selectedOccupation = roles?.find(
       (item) => item.value === event.target.value
     );
@@ -130,8 +127,7 @@ export default function SignupForm({
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-          className={Styles.loginForm}
-        >
+          className={Styles.loginForm}>
           <div className={Styles.headingDiv}>
             <Typography className={Styles.loginText} variant="h3">
               Sign up
@@ -207,8 +203,7 @@ export default function SignupForm({
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
+                    onMouseDown={handleMouseDownPassword}>
                     {showPassword ? (
                       <VisibilityOutlined />
                     ) : (
@@ -224,35 +219,39 @@ export default function SignupForm({
             className={Styles.idField}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={area?.value}
+            value={area["value"]}
             label="Location"
-            onChange={handleAreaChange}
-          >
+            onChange={handleAreaChange}>
             {locations?.map((item) => (
               <MenuItem key={item.key} value={item.value}>
                 {item.value}
               </MenuItem>
             ))}
           </Select>
-          <FormControlLabel control={<Checkbox  onChange={(e)=>setWorker(e.target.checked)} />} label="Sign up as Worker" />
-          {worker?
-          (<>
-          <InputLabel id="demo-simple-select-label">Occupation</InputLabel>
-          <Select
-            className={Styles.idField}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={occupation?.value}
-            label="Occupation"
-            onChange={handleRoleChange}
-          >
-            {roles?.map((item) => (
-              <MenuItem key={item.key} value={item.value}>
-                {item.value}
-              </MenuItem>
-            ))}
-          </Select>
-          </>):""}
+          <FormControlLabel
+            control={<Checkbox onChange={(e) => setWorker(e.target.checked)} />}
+            label="Sign up as Worker"
+          />
+          {worker ? (
+            <>
+              <InputLabel id="demo-simple-select-label">Occupation</InputLabel>
+              <Select
+                className={Styles.idField}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={occupation['vaue']}
+                label="Occupation"
+                onChange={handleRoleChange}>
+                {roles?.map((item) => (
+                  <MenuItem key={item.key} value={item.value}>
+                    {item.value}
+                  </MenuItem>
+                ))}
+              </Select>
+            </>
+          ) : (
+            ""
+          )}
           <p className="has-text-center is-size-14 h-15 has-text-danger">
             {errorMessage}
           </p>
@@ -260,12 +259,15 @@ export default function SignupForm({
             className={Styles.loginButton}
             variant="contained"
             type="submit"
-            onClick={submitLoginForm}
-          >
+            onClick={submitLoginForm}>
             Sign up
           </Button>
 
-          <Button className={Styles.belowBtn} onClick={()=>window.location.href ="./login"} >Already have Account? Login Now</Button>
+          <Button
+            className={Styles.belowBtn}
+            onClick={() => (window.location.href = "./login")}>
+            Already have Account? Login Now
+          </Button>
         </Stack>
       </div>
       <div className={Styles.copyrightDiv}>

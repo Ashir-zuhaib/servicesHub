@@ -1,5 +1,4 @@
 import Layout from "../components/layout";
-import ProductImage from "/public/carpenter.png";
 import Image from "next/image";
 import ProductDescription from "../components/ProductPage/ProductDescription/ProductDescription";
 import { Skeleton, Grid } from "@mui/material";
@@ -8,33 +7,32 @@ import { useRouter } from "next/router";
 import { getAllLocation, getAllService, getUser } from "../utils/getData";
 import { useEffect, useState } from "react";
 interface ServiceProvider {
-  profileImg: string; // Change this type to match the actual type of profileImg
-  // Other properties of the service provider
+  profileImg: string;
 }
-interface productDetail {
-  isMobile: boolean;
+interface ServiceProviderProfile {
   isLoading: boolean;
 }
 
-const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
+const ServiceProviderProfile = ({ isLoading }: ServiceProviderProfile) => {
   isLoading = false;
   const router = useRouter();
-  const [serviceProviderData, setServiceProviderData] = useState<ServiceProvider | null>(null);
-  const { providerId } = router.query; 
+  const [serviceProviderData, setServiceProviderData] =
+    useState<ServiceProvider | null>(null);
+  const { providerId } = router.query;
   const gettingProviderData = async () => {
     const providerData = await getUser(providerId);
-    const getService = await getAllService()
+    const getService = await getAllService();
     const filter = getService?.filter((service) =>
-    service?.id == providerData?.role
-      ? (providerData.roleName = service?.name)
-      : ""
-  );
-  const getLocation = await getAllLocation();
-   getLocation?.filter((location) =>
-    location?.id == providerData?.location
-      ? (providerData.locationName = location?.value)
-      : ""
-  );
+      service?.id == providerData?.role
+        ? (providerData.roleName = service?.name)
+        : ""
+    );
+    const getLocation = await getAllLocation();
+    getLocation?.filter((location) =>
+      location?.id == providerData?.location
+        ? (providerData.locationName = location?.value)
+        : ""
+    );
     console.log("ProviderData", providerData);
     setServiceProviderData(providerData);
   };
@@ -69,13 +67,18 @@ const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
             <>
               <Grid item xs={12}></Grid>
               <Grid item xs={12} md={3}>
-                <Image src={serviceProviderData?.profileImg} width={400} height={1200} alt="hhd" />
+                <Image
+                  src={serviceProviderData?.profileImg}
+                  width={400}
+                  height={1200}
+                  alt="hhd"
+                />
               </Grid>
               <Grid item xs={12} md={9}>
-                <ProductDescription userProfile = {serviceProviderData} />
+                <ProductDescription userProfile={serviceProviderData} />
               </Grid>
               <Grid item xs={12} md={12}>
-                <BookingSteps providerId = {providerId}  />
+                <BookingSteps providerId={providerId} />
               </Grid>
             </>
           )}
@@ -85,4 +88,4 @@ const ProductDetail = ({ isMobile, isLoading }: productDetail) => {
   );
 };
 
-export default ProductDetail;
+export default ServiceProviderProfile;

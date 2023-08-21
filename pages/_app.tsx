@@ -4,6 +4,8 @@ import '../styles/customStyling.min.css'
 import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const AnyComponent = Component as any;
+  return <AnyComponent {...pageProps} />;
 }
+
 export default MyApp
