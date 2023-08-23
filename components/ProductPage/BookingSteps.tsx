@@ -10,7 +10,7 @@ import TimeAndDateContainer from "./TimeAndDate/TimeAndDateContainer";
 import TextField from "@mui/material/TextField";
 import SubTitle from "../shared/Headings/SubTitle";
 import firebase from "../../config";
-
+import { useRouter } from 'next/router';
 const steps = [
   "Select the service hours",
   "Select Desired Time Frame",
@@ -18,6 +18,7 @@ const steps = [
 ];
 
 export default function BookingSteps({ providerId }) {
+  const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const [count, setCount] = React.useState<number>(1);
@@ -28,7 +29,13 @@ export default function BookingSteps({ providerId }) {
     noOfHours: 1,
     address: "", // Add the address field
     contactNumber: "",
-    serviceProvider:providerId
+    serviceProvider:providerId,
+    chargesPerHour:"",
+    serviceCharges:"",
+    subTotal:"",
+    total: "",
+    customerId:"",
+    
   });
   const isStepOptional = (step: number) => {
     return step === 1;
@@ -70,13 +77,14 @@ export default function BookingSteps({ providerId }) {
     setActiveStep(0);
   };
 
-  const handleSelectDateAndTime = (selectedDate, selectedTime) => {
-    console.log("bookingTIme", selectedDate, selectedTime);
+  const handleSelectDateAndTime = (selectedDate, selectedTime, endTime) => {
+    console.log("bookingTIme", selectedDate, selectedTime, endTime);
     
     setBookingData({
       ...bookingData,
       apptDate: selectedDate,
       startTime: selectedTime,
+      endTime:endTime
     });
   };
 
@@ -94,7 +102,12 @@ export default function BookingSteps({ providerId }) {
     });
   };
   const handleSubmit = ()=>{
-    firebase.firestore().collection("Bookings").add(bookingData)
+    console.log("bookingdata", bookingData);
+    router.push({
+      pathname: '/Checkout',
+      query: { bookingData: JSON.stringify(bookingData) }
+    });
+    // firebase.firestore().collection("Bookings").add(bookingData)
   }
   return (
     <Box sx={{ width: "100%" }}>
@@ -173,7 +186,7 @@ export default function BookingSteps({ providerId }) {
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
           {activeStep == 2 ? (
-            <Button href="/Checkout" variant="contained">
+            <Button onClick={handleSubmit} variant="contained">
               Submit
             </Button>
           ) : (

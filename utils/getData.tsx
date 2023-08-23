@@ -59,18 +59,22 @@ const getAllLocation = async () => {
 // Function to check if a service provider is available for the selected hours on a specific date
 
 const getUser = async (id) => {
-  let data;
-  await firebase
-    .firestore()
-    .collection("Users")
-    .doc(id)
-    .get()
-    .then((doc) => {
-      data = doc.data();
+  try {
+    const doc = await firebase.firestore().collection("Users").doc(id).get();
+    if (doc.exists) {
+      const data = doc.data();
       data.id = doc.id;
-    });
-  return data;
+      return data;
+    } else {
+      console.log("User document not found");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return null;
+  }
 };
+
 const getAvailableTime = async (date, noOfHours, providerId) => {
   let availableTime = [];
   let startTime = moment().startOf('day').hour(8).minute(0); // Start at 08:00

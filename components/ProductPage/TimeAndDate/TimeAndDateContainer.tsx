@@ -64,7 +64,7 @@ function TimeSlotButton({
 interface TimeAndDateContainerProps {
   noOfHours: number;
   providerId: string;
-  onSelectDateAndTime: (selectedDate: string, selectedTime: string) => void;
+  onSelectDateAndTime: (selectedDate: string, selectedTime: string, endTime:string) => void;
 }
 
 export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDateAndTime }: TimeAndDateContainerProps) {
@@ -72,7 +72,7 @@ export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDa
   const [selectedDate, setSelectedDate] = React.useState(moment().format("DD-MMM-YYYY"));
   const [availableTime, setAvailableTime] = React.useState([]);
   const [selectedTime, setSelectedTime] = React.useState("");
-
+  const [endTime, setEndTime] = React.useState("")
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     setSelectedDate(moment().add(newValue, 'day').format("DD-MMM-YYYY"));
@@ -88,7 +88,10 @@ export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDa
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
-    onSelectDateAndTime(selectedDate, time);
+    let end = moment(selectedDate+ " " + time).add(noOfHours, 'hours').format("HH:mm") 
+    console.log("end", end);
+    setEndTime(end)
+    onSelectDateAndTime(selectedDate, time, end);
   };
 
   React.useEffect(() => {
