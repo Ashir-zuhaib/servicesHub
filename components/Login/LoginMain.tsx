@@ -4,12 +4,14 @@ import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import firebase from "../../config";
 import swal from "sweetalert";
+import { useRouter } from "next/router";
 
 export default function LoginMain() {
   const [email, setEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-
+  const router = useRouter()
+  const {readyForcheckout} = router.query
   const submitLoginForm = () => {
     if (email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");
@@ -26,6 +28,11 @@ export default function LoginMain() {
         localStorage.setItem("uid", doc.user.uid);
         console.log("uid", doc.user.uid);
         swal("Login Successfull")
+        readyForcheckout?
+          router.push({
+            pathname: "/Checkout",
+            query: { bookingData: JSON.stringify(readyForcheckout) },
+          }):
       location.href = "..";
 
       })

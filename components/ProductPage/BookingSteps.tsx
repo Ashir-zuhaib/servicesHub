@@ -10,7 +10,8 @@ import TimeAndDateContainer from "./TimeAndDate/TimeAndDateContainer";
 import TextField from "@mui/material/TextField";
 import SubTitle from "../shared/Headings/SubTitle";
 import firebase from "../../config";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+
 const steps = [
   "Select the service hours",
   "Select Desired Time Frame",
@@ -29,14 +30,26 @@ export default function BookingSteps({ providerId }) {
     noOfHours: 1,
     address: "", // Add the address field
     contactNumber: "",
-    serviceProvider:providerId,
-    chargesPerHour:"",
-    serviceCharges:"",
-    subTotal:"",
+    serviceProvider: providerId,
+    chargesPerHour: "",
+    serviceCharges: "",
+    subTotal: "",
     total: "",
-    customerId:"",
-    
+    customerId: "",
   });
+  const getCurrentUser = async () => {
+    const currentUser = await localStorage.getItem("uid");
+    // const currentUser = await JSON.parse(currentUserString);
+    setBookingData({
+      ...bookingData,
+      customerId: currentUser,
+    });
+  };
+  React.useEffect(() => {
+    getCurrentUser();
+  }, []);
+  console.log("ggg", bookingData);
+
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -79,12 +92,12 @@ export default function BookingSteps({ providerId }) {
 
   const handleSelectDateAndTime = (selectedDate, selectedTime, endTime) => {
     console.log("bookingTIme", selectedDate, selectedTime, endTime);
-    
+
     setBookingData({
       ...bookingData,
       apptDate: selectedDate,
       startTime: selectedTime,
-      endTime:endTime
+      endTime: endTime,
     });
   };
 
@@ -101,14 +114,19 @@ export default function BookingSteps({ providerId }) {
       contactNumber: event.target.value,
     });
   };
-  const handleSubmit = ()=>{
+  const handleSubmit = () => {
     console.log("bookingdata", bookingData);
-    router.push({
-      pathname: '/Checkout',
-      query: { bookingData: JSON.stringify(bookingData) }
-    });
+    bookingData?.customerId
+      ? router.push({
+          pathname: "/Checkout",
+          query: { bookingData: JSON.stringify(bookingData) },
+        })
+      : router.push({
+          pathname: "/Login",
+          query: { readyForcheckout: JSON.stringify(bookingData) },
+        });
     // firebase.firestore().collection("Bookings").add(bookingData)
-  }
+  };
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -144,7 +162,11 @@ export default function BookingSteps({ providerId }) {
             </div>
           </div>
         ) : activeStep == 1 ? (
-          <TimeAndDateContainer noOfHours= {count} providerId={providerId} onSelectDateAndTime={handleSelectDateAndTime} />
+          <TimeAndDateContainer
+            noOfHours={count}
+            providerId={providerId}
+            onSelectDateAndTime={handleSelectDateAndTime}
+          />
         ) : (
           <div className={Styles.pricingContainer}>
             <Box
@@ -153,25 +175,26 @@ export default function BookingSteps({ providerId }) {
                 "& .MuiTextField-root": { m: 1, width: "60ch" },
               }}
               noValidate
-              autoComplete="off">
+              autoComplete="off"
+            >
               <div className="bg-white w-lg-65 p-4 is-rounded mx-auto has-text-centered br-lg">
                 <div className="pl-2 mb-3">
                   <SubTitle title="Complete Your Booking" />
                 </div>
                 <TextField
-                required
-                id="outlined-required"
-                label="Enter Your Address"
-                value={bookingData.address}
-                onChange={handleAddressChange}
-              />
-              <TextField
-                required
-                id="outlined-required"
-                label="Enter Contact Number"
-                value={bookingData.contactNumber}
-                onChange={handleContactNumberChange}
-              />
+                  required
+                  id="outlined-required"
+                  label="Enter Your Address"
+                  value={bookingData.address}
+                  onChange={handleAddressChange}
+                />
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="Enter Contact Number"
+                  value={bookingData.contactNumber}
+                  onChange={handleContactNumberChange}
+                />
               </div>
             </Box>
           </div>
@@ -181,7 +204,8 @@ export default function BookingSteps({ providerId }) {
             color="inherit"
             disabled={activeStep === 0}
             onClick={handleBack}
-            sx={{ mr: 1 }}>
+            sx={{ mr: 1 }}
+          >
             Back
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
@@ -194,7 +218,6 @@ export default function BookingSteps({ providerId }) {
               Next
             </Button>
           )}
-
         </Box>
       </>
     </Box>

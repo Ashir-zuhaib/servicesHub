@@ -21,8 +21,9 @@ const Checkout: any = () => {
   const [providerData, setProviderData] = useState<any>({});
 
   const setCalculation = async () => {
-    const currentUserString = await localStorage.getItem("user");
-    const currentUser = JSON.parse(currentUserString);
+    const currentUser = await localStorage.getItem("uid");
+    // console.log("currentUserString", currentUserString);
+    // const currentUser = await JSON.parse(currentUserString);
     console.log("Parsed user:", currentUser);
 
     const subTotal = checkoutData?.noOfHours * providerData?.hourlyRate;
@@ -31,15 +32,15 @@ const Checkout: any = () => {
     console.log("serv", serviceCharges);
     const total = Number(subTotal) + Number(serviceCharges);
     console.log("total", total);
-
+    currentUser?
     setCheckoutData({
       ...checkoutData,
       subTotal: subTotal,
       chargesPerHour: providerData?.hourlyRate,
       serviceCharges: serviceCharges,
       total: total,
-      customerId: currentUser?.id,
-    });
+      customerId: currentUser,
+    }):router.push("/Login")
   };
 
   useEffect(() => {

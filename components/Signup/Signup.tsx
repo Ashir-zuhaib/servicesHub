@@ -4,18 +4,23 @@ import firebase from "../../config";
 import { useState } from "react";
 import SignupForm from "./SignupForm";
 import swal from "sweetalert";
+import { useRouter } from "next/router";
+
 export default function SignupMain() {
+  const router = useRouter();
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [hourlyRate, setHourlyRate] = useState<number>(0);
   const [userPassword, setUserPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const [roles, setRoles] = useState<any[]>([]);
   const [locations, setLocation] = useState<any[]>([]);
   const [area, setArea] = useState<string>("");
   const [worker, setWorker] = useState<boolean>(false);
   const [occupation, setOccupation] = useState("QUoP0oYjQaPHrMhzznNN");
-  const submitLoginForm = async () => {
+  const submitSignupForm = async () => {
     if (fullName == "" || email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");
     } else {
@@ -28,13 +33,17 @@ export default function SignupMain() {
         location: area,
         worker: worker,
         occupation: occupation,
+        hourlyRate: hourlyRate,
+        profileImage: profileImage ||""
       };
-      console.log("data", data);
+      console.log("datass", data);
       await onFinish(data);
       // location.href = "..";
     }
   };
   const onFinish = async (values) => {
+    console.log("valusssse", values);
+
     await firebase
       .auth()
       .createUserWithEmailAndPassword(values.email, values.password)
@@ -54,10 +63,14 @@ export default function SignupMain() {
             worker: values.worker,
             role: values.occupation || "",
             location: values.location,
+            hourlyRate: values.hourlyRate,
+            profileImg: profileImage ||""
           })
           .then(() => {
+            localStorage.setItem("uid", user?.uid);
             swal("Account Created");
-            location.href = "..";
+            // location.href = "..";
+            router.push("/");
           })
           .catch((e) => swal("Failed"));
       })
@@ -87,9 +100,13 @@ export default function SignupMain() {
         setWorker={setWorker}
         occupation={occupation}
         setOccupation={setOccupation}
+        hourlyRate={hourlyRate}
+        setHourlyRate={setHourlyRate}
         roles={roles}
         setRoles={setRoles}
-        submitLoginForm={submitLoginForm}
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
+        submitLoginForm={submitSignupForm}
         errorMessage={errorMessage}
       />
     </Grid>

@@ -16,6 +16,7 @@ import {
   VisibilityOffOutlined,
   VisibilityOutlined,
 } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
 interface loginForm {
   email: string;
@@ -37,6 +38,7 @@ export default function LoginForm({
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const router = useRouter();
 
   return (
     <Grid item xs={12} md={4} className={Styles.formContainer}>
@@ -113,7 +115,7 @@ export default function LoginForm({
           >
             Login
           </Button>
-          <Button className={Styles.belowBtn}  >Dont have Account? Signup Now</Button>
+          <Button className={Styles.belowBtn} onClick={()=>router.push('/Signup')}  >Dont have Account? Signup Now</Button>
         </Stack>
       </div>  
       <div className={Styles.copyrightDiv}>

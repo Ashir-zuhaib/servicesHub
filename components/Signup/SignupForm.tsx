@@ -4,6 +4,10 @@ import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import firebase from "../../config";
 import { SelectChangeEvent } from "@mui/material/Select";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+
+import { useRouter } from "next/router";
+
 import {
   Stack,
   Typography,
@@ -31,6 +35,8 @@ interface signupForm {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   phone: string;
   setPhone: React.Dispatch<React.SetStateAction<string>>;
+  hourlyRate:number;
+  setHourlyRate: React.Dispatch<React.SetStateAction<number>>;
   locations: any[];
   setLocation: React.Dispatch<React.SetStateAction<any[]>>;
   userPassword: string;
@@ -43,6 +49,8 @@ interface signupForm {
   setWorker: React.Dispatch<React.SetStateAction<boolean>>;
   roles: any[];
   setRoles: React.Dispatch<React.SetStateAction<any[]>>;
+  profileImage: string;
+  setProfileImage: React.Dispatch<React.SetStateAction<string>>;
   submitLoginForm: () => void;
   errorMessage: string;
 }
@@ -67,12 +75,26 @@ export default function SignupForm({
   roles,
   setRoles,
   errorMessage,
+  hourlyRate,
+  setHourlyRate,
+  profileImage,
+  setProfileImage
 }: signupForm) {
   // Change Password to Text Field
-
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const handleImageUpload = async(e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("e",e);
+    
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      console.log("file", file);
+      const profileUrl = await uploadImageToFirebase(file)
+      setProfileImage(profileUrl);
+    }
+  };
   const getLocation = async () => {
     let locationArray: any[] = [];
     let getLocation = await firebase.firestore().collection("Location").get();
@@ -85,10 +107,24 @@ export default function SignupForm({
       setLocation(locationArray);
     });
   };
+  const uploadImageToFirebase = async (imageFile: File) => {
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child(`profileImage/${imageFile.name}`);
 
+    try {
+      const snapshot = await imageRef.put(imageFile);
+      const downloadURL = await snapshot.ref.getDownloadURL();
+      console.log("downloadURL",downloadURL);
+      
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image to Firebase Storage:", error);
+      throw error;
+    }
+  };
   const getRoles = async () => {
     let rolesArray = [];
-    let getRoles = await firebase.firestore().collection("Roles").get();
+    let getRoles = await firebase.firestore().collection("Services").get();
     console.log("Roles size", getRoles.size);
 
     getRoles.docs.forEach((doc) => {
@@ -121,7 +157,7 @@ export default function SignupForm({
     }
   };
   return (
-    <Grid item xs={12} md={4} className={Styles.formContainer}>
+    <Grid item xs={12} md={6} className={Styles.formContainer}>
       <div className="login-form-container px-2">
         <Stack
           flexDirection="column"
@@ -234,6 +270,23 @@ export default function SignupForm({
           />
           {worker ? (
             <>
+             <TextField
+            className={Styles.idField}
+            id="outlined-basic"
+            label="Set Hourly Rate"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+      <AccessTimeIcon fontSize="small" className="mr-1" />
+
+                </InputAdornment>
+              ),
+            }}
+            value={hourlyRate}
+            onChange={(e) => setHourlyRate(Number(e.target.value))}
+          />
+
               <InputLabel id="demo-simple-select-label">Occupation</InputLabel>
               <Select
                 className={Styles.idField}
@@ -248,7 +301,28 @@ export default function SignupForm({
                   </MenuItem>
                 ))}
               </Select>
+              {profileImage?
+              (<p>Profile Picture Uploaded</p>)
+              :<label htmlFor="profile-image-input">
+              <Button
+                className={Styles.loginButton}
+                variant="contained"
+                component="span" // This makes the button act as a file input trigger
+              >
+                      <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+              id="profile-image-input"
+            />
+                Upload Profile Picture
+              </Button>
+            </label>
+              }
+    
             </>
+            
           ) : (
             ""
           )}
@@ -256,25 +330,25 @@ export default function SignupForm({
             {errorMessage}
           </p>
           <Button
-            className={Styles.loginButton}
-            variant="contained"
-            type="submit"
-            onClick={submitLoginForm}>
-            Sign up
-          </Button>
+          className={Styles.loginButton}
+          variant="contained"
+          type="button" // Set type to "button" to prevent form submission
+          onClick={submitLoginForm}>
+          Sign up
+        </Button>
 
           <Button
             className={Styles.belowBtn}
-            onClick={() => (window.location.href = "./login")}>
+            onClick={() => router.push("./Login")}>
             Already have Account? Login Now
           </Button>
         </Stack>
       </div>
-      <div className={Styles.copyrightDiv}>
+      {/* <div className={Styles.copyrightDiv}>
         <Typography variant="subtitle1" className={Styles.bottomPara}>
           © 2023 ServiceHub.pk, All Rights Reserved.
         </Typography>
-      </div>
+      </div> */}
     </Grid>
   );
 }
