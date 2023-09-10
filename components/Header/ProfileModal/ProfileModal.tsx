@@ -15,15 +15,13 @@ const style = {
 };
 interface ProfileModal {
   currentUserId:string;
-  userData:string;
+  userData:any;
   setUserData:React.Dispatch<React.SetStateAction<string>>;
 }
-export default function ProfileModal( userData,{ setUserData}:ProfileModal) {
+export default function ProfileModal( {userData, setUserData}:ProfileModal) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-console.log("userData", userData);
-console.log("fullName", userData.full_name);
 const handleLogout =()=>{
   localStorage.clear()
   setOpen(false)
@@ -44,7 +42,7 @@ const handleLogout =()=>{
           <div className="bg-gray px-4 py-4 br-xl">
             <Stack alignItems="center" direction="row" className="mb-2">
               <Avatar />
-              <p className="has-text-weight-semibold ml-2">{userData.userData.full_name}</p>
+              <p className="has-text-weight-semibold ml-2">{userData?.userData?.full_name}</p>
             </Stack>
             <Stack
               alignItems="center"

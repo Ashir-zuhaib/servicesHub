@@ -27,7 +27,7 @@ export default function BookingSteps({ providerId }) {
     apptDate: "",
     startTime: "",
     endTime: "",
-    noOfHours: 1,
+    noOfHours: count,
     address: "", // Add the address field
     contactNumber: "",
     serviceProvider: providerId,
@@ -35,6 +35,7 @@ export default function BookingSteps({ providerId }) {
     serviceCharges: "",
     subTotal: "",
     total: "",
+    status:"active",
     customerId: "",
   });
   const getCurrentUser = async () => {
@@ -48,8 +49,9 @@ export default function BookingSteps({ providerId }) {
   React.useEffect(() => {
     getCurrentUser();
   }, []);
+  
   console.log("ggg", bookingData);
-
+  console.log("gggcount", count);
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -157,6 +159,11 @@ export default function BookingSteps({ providerId }) {
                   InputValue={count}
                   isWhite={true}
                   updateCount={setCount}
+                  updateBookingData={(newNoOfHours) =>
+                    setBookingData((prevBookingData) => ({
+                      ...prevBookingData,
+                      noOfHours: newNoOfHours,
+                    }))}
                 />{" "}
               </div>
             </div>
