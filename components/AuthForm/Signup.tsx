@@ -42,8 +42,6 @@ export default function SignupMain() {
     }
   };
   const onFinish = async (values) => {
-    console.log("valusssse", values);
-
     await firebase
       .auth()
       .createUserWithEmailAndPassword(values.email, values.password)
