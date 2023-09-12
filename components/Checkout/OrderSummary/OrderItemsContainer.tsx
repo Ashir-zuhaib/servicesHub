@@ -9,9 +9,7 @@ interface OrderItemsContainer {
   bookingDetail:any;
   providerData:any;
 }
-const OrderItemsContainer = ({bookingDetail, providerData}:OrderItemsContainer) => {
-  console.log("bookingDetailvv",bookingDetail);
-  
+const OrderItemsContainer = ({bookingDetail, providerData}:OrderItemsContainer) => {  
   const [bookingData, setBookingData] = useState()
   const [serviceName , setServiceName] = useState()
   const gettingService = async () => {

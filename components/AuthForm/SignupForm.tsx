@@ -87,11 +87,9 @@ export default function SignupForm({
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("e", e);
 
     const file = e.target.files && e.target.files[0];
     if (file) {
-      console.log("file", file);
       const profileUrl = await uploadImageToFirebase(file);
       setProfileImage(profileUrl);
     }
@@ -99,7 +97,6 @@ export default function SignupForm({
   const getLocation = async () => {
     let locationArray: any[] = [];
     let getLocation = await firebase.firestore().collection("Location").get();
-    console.log("location size", getLocation.size);
 
     getLocation.docs.forEach((doc) => {
       let data = doc.data();
@@ -115,18 +112,15 @@ export default function SignupForm({
     try {
       const snapshot = await imageRef.put(imageFile);
       const downloadURL = await snapshot.ref.getDownloadURL();
-      console.log("downloadURL", downloadURL);
 
       return downloadURL;
     } catch (error) {
-      console.error("Error uploading image to Firebase Storage:", error);
       throw error;
     }
   };
   const getRoles = async () => {
     let rolesArray = [];
     let getRoles = await firebase.firestore().collection("Services").get();
-    console.log("Roles size", getRoles.size);
 
     getRoles.docs.forEach((doc) => {
       let data = doc.data();
@@ -135,7 +129,6 @@ export default function SignupForm({
       setRoles(rolesArray);
     });
   };
-  console.log("locationArray", locations);
 
   useEffect(() => {
     getRoles();

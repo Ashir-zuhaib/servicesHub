@@ -36,7 +36,6 @@ export default function SignupMain() {
         hourlyRate: hourlyRate,
         profileImage: profileImage ||""
       };
-      console.log("datass", data);
       await onFinish(data);
       // location.href = "..";
     }
@@ -48,7 +47,6 @@ export default function SignupMain() {
       .then(async (userCredential) => {
         // Signed in
         var user = userCredential.user;
-        console.log("user created", user);
         // ...
         await firebase
           .firestore()

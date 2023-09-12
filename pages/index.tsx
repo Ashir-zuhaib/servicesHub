@@ -15,7 +15,6 @@ const Home: React.FC = () => {
   const data = useSelector((state: any) => state.data);
   useEffect(() => {
     if (data.length == 0) {
-      console.log('first call')
       const fetchData = async () => {
         const serviceData = await getAllService();
         dispatch(setData(serviceData)); // Dispatch the data to the Redux store

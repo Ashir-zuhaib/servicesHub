@@ -50,8 +50,6 @@ export default function BookingSteps({ providerId }) {
     getCurrentUser();
   }, []);
   
-  console.log("ggg", bookingData);
-  console.log("gggcount", count);
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -93,8 +91,6 @@ export default function BookingSteps({ providerId }) {
   };
 
   const handleSelectDateAndTime = (selectedDate, selectedTime, endTime) => {
-    console.log("bookingTIme", selectedDate, selectedTime, endTime);
-
     setBookingData({
       ...bookingData,
       apptDate: selectedDate,
@@ -117,7 +113,6 @@ export default function BookingSteps({ providerId }) {
     });
   };
   const handleSubmit = () => {
-    console.log("bookingdata", bookingData);
     bookingData?.customerId
       ? router.push({
           pathname: "/Checkout",

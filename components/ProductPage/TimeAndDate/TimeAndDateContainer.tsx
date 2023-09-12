@@ -78,18 +78,14 @@ export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDa
     setSelectedDate(moment().add(newValue, 'day').format("DD-MMM-YYYY"));
   };
 
-  console.log("selectedDate", selectedDate);
-
   const getTime = async () => {
     const time = await getAvailableTime(selectedDate, noOfHours, providerId);
-    console.log("ttttt", time);
     setAvailableTime(time);
   };
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
     let end = moment(selectedDate+ " " + time).add(noOfHours, 'hours').format("HH:mm") 
-    console.log("end", end);
     setEndTime(end)
     onSelectDateAndTime(selectedDate, time, end);
   };

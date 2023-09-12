@@ -33,7 +33,6 @@ const ServiceProviderProfile = ({ isLoading }: ServiceProviderProfile) => {
         ? (providerData.locationName = location?.value)
         : ""
     );
-    console.log("ProviderData", providerData);
     setServiceProviderData(providerData);
   };
   useEffect(() => {

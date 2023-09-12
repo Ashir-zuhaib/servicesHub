@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 import { getAllService } from "../../../utils/getData";
 
 const OrderSummaryItems = ({ confirmData, providerData }) => {
-  const [serviceName,setServiceName]=useState("")
-  console.log("profileImgprofileImg",providerData);
-  
+  const [serviceName,setServiceName]=useState("")  
   const gettingService = async () => {
     const getService = await getAllService();
       const filter = getService?.filter((service) =>

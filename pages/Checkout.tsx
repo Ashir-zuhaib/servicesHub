@@ -22,25 +22,19 @@ const Checkout: any = () => {
 
   const setCalculation = async () => {
     const currentUser = await localStorage.getItem("uid");
-    // console.log("currentUserString", currentUserString);
-    // const currentUser = await JSON.parse(currentUserString);
-    console.log("Parsed user:", currentUser);
-
     const subTotal = checkoutData?.noOfHours * providerData?.hourlyRate;
-    console.log("sub", subTotal);
     const serviceCharges = subTotal * 0.1;
-    console.log("serv", serviceCharges);
     const total = Number(subTotal) + Number(serviceCharges);
-    console.log("total", total);
-    currentUser?
-    setCheckoutData({
-      ...checkoutData,
-      subTotal: subTotal,
-      chargesPerHour: providerData?.hourlyRate,
-      serviceCharges: serviceCharges,
-      total: total,
-      customerId: currentUser,
-    }):router.push("/Login")
+    currentUser
+      ? setCheckoutData({
+          ...checkoutData,
+          subTotal: subTotal,
+          chargesPerHour: providerData?.hourlyRate,
+          serviceCharges: serviceCharges,
+          total: total,
+          customerId: currentUser,
+        })
+      : router.push("/Login");
   };
 
   useEffect(() => {
@@ -50,9 +44,7 @@ const Checkout: any = () => {
           ? await JSON.parse(bookingData[0])
           : await JSON.parse(bookingData);
         setCheckoutData(data);
-        console.log("data", data);
         const user = await getUser(data?.serviceProvider);
-        console.log("use", user);
         setProviderData(user);
       }
     };
@@ -69,7 +61,6 @@ const Checkout: any = () => {
       .collection("Bookings")
       .add(checkoutData)
       .then((doc) => {
-        console.log("added", doc.id);
         swal("Success");
         router.push({
           pathname: "/Thankyou",
@@ -80,11 +71,9 @@ const Checkout: any = () => {
         });
       })
       .catch((e) => {
-        console.log(e);
         swal("Failed", e);
       });
   };
-  console.log("ss", checkoutData);
   if (loading) {
     return <div>Loading...</div>; // Display a loading indicator
   }
