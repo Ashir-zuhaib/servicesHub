@@ -13,6 +13,7 @@ interface Title {
   id: string;
 }
 const CategoryCard = ({ worker }) => {
+
   const [locations, setLocation] = useState([]);
   const gettingLocation = async () => {
     const getLocation = await getAllLocation();
@@ -23,15 +24,16 @@ const CategoryCard = ({ worker }) => {
     );
     setLocation(filter);
   };
+
   const router = useRouter()
   const handleNavigation = (id) => {
-    console.log("idddddd",id);
     
     router.push({
       pathname: '/ServiceProvider',
       query: {providerId: id},
     });
   };
+  
   useEffect(() => {
     gettingLocation();
   }, []);
@@ -41,19 +43,19 @@ const CategoryCard = ({ worker }) => {
         <Grid
           item
           direction="row"
-          justifyContent="center"
           alignItems="center"
+          justifyContent={"space-around"}
           className={Styles.CategoryCard}>
           <Image
             src={worker?.profileImg}
             alt="Picture of the author"
             width={100}
-            height={200}
+            height={250}
             placeholder="blur" // Optional blur-up while loading
             blurDataURL="data:..."
-            className="p-2"
+            className={`px-2 ${Styles.image}`}
           />
-          <div className="px-2 py-2">
+          <div className="pr-2 py-2">
             <ProductTitle ProductName={worker?.full_name} TagName={"p"} />
             <ProductPrice Price={worker?.hourlyRate} />
             <p className={Styles.rating}>
@@ -71,7 +73,7 @@ const CategoryCard = ({ worker }) => {
                   stroke-linecap="round"
                   stroke-linejoin="round"></path>
               </svg>
-              {worker?.rating ? worker?.rating : "N/A"}
+              {worker?.rating ? worker?.rating : "N/A"}/5
             </p>
 
             <p className="mb-0">Areas Available: {worker.locationName}</p>

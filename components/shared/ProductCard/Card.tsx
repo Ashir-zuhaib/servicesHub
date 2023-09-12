@@ -46,7 +46,7 @@ const ProductCard = ({
           />
           <div className="px-2 pb-2">
             <ProductTitle ProductName={ProductName} TagName={"p"} />
-            <p className="mb-0 elipsis">
+            <p className="mb-0 elipsis text-14">
             {productDescription}
             </p>
             <Button
