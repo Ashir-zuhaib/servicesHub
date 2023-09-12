@@ -9,20 +9,23 @@ interface QuantityUpdateProps {
   InputValue: number;
   isWhite: boolean;
   updateCount: (newCount: number) => void;
+  updateBookingData: (newNoOfHours: number) => void;
 }
 
-function QuantityUpdateButtons({ InputValue, isWhite, updateCount }: QuantityUpdateProps) {
+function QuantityUpdateButtons({ InputValue, isWhite, updateCount,updateBookingData }: QuantityUpdateProps) {
   const [count, setCount] = useState(InputValue);
 
   const handleIncrement = () => {
     setCount(count + 1);
     updateCount(count + 1);
+    updateBookingData(count + 1);
   };
 
   const handleDecrement = () => {
     if (count > 0) {
       setCount(count - 1);
       updateCount(count - 1);
+      updateBookingData(count - 1);
     }
   };
 
