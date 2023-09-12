@@ -11,7 +11,7 @@ export function HomeCarousel({ items }: any) {
         <div key={i}>
           <Image
             src={item?.imageSrc}
-            alt="Picture of the author"
+            alt="image"
             width={1024}
             placeholder="blur" // Optional blur-up while loading
             blurDataURL="data:..."
