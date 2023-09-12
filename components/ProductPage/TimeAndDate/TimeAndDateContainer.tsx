@@ -40,7 +40,7 @@ function CustomTabPanel(props: TabPanelProps) {
 function TimeSlotButton({
   time,
   selectedTime,
-  handleTimeSelect
+  handleTimeSelect,
 }: {
   time: string;
   selectedTime: string;
@@ -52,9 +52,10 @@ function TimeSlotButton({
     <Button
       variant="outlined"
       size="small"
-      className={`${Styles.packBtn} ${isSelected ? Styles.selectedTimeSlot : ''}`}
-      onClick={() => handleTimeSelect(time)}
-    >
+      className={`${Styles.packBtn} ${
+        isSelected ? Styles.selectedTimeSlot : ""
+      }`}
+      onClick={() => handleTimeSelect(time)}>
       <AccessTimeIcon fontSize="small" className="mr-1" />
       {time}
     </Button>
@@ -64,18 +65,28 @@ function TimeSlotButton({
 interface TimeAndDateContainerProps {
   noOfHours: number;
   providerId: string;
-  onSelectDateAndTime: (selectedDate: string, selectedTime: string, endTime:string) => void;
+  onSelectDateAndTime: (
+    selectedDate: string,
+    selectedTime: string,
+    endTime: string
+  ) => void;
 }
 
-export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDateAndTime }: TimeAndDateContainerProps) {
+export default function TimeAndDateContainer({
+  noOfHours,
+  providerId,
+  onSelectDateAndTime,
+}: TimeAndDateContainerProps) {
   const [value, setValue] = React.useState(0);
-  const [selectedDate, setSelectedDate] = React.useState(moment().format("DD-MMM-YYYY"));
+  const [selectedDate, setSelectedDate] = React.useState(
+    moment().format("DD-MMM-YYYY")
+  );
   const [availableTime, setAvailableTime] = React.useState([]);
   const [selectedTime, setSelectedTime] = React.useState("");
-  const [endTime, setEndTime] = React.useState("")
+  const [endTime, setEndTime] = React.useState("");
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    setSelectedDate(moment().add(newValue, 'day').format("DD-MMM-YYYY"));
+    setSelectedDate(moment().add(newValue, "day").format("DD-MMM-YYYY"));
   };
 
   const getTime = async () => {
@@ -85,8 +96,10 @@ export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDa
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
-    let end = moment(selectedDate+ " " + time).add(noOfHours, 'hours').format("HH:mm") 
-    setEndTime(end)
+    let end = moment(selectedDate + " " + time)
+      .add(noOfHours, "hours")
+      .format("HH:mm");
+    setEndTime(end);
     onSelectDateAndTime(selectedDate, time, end);
   };
 
@@ -103,7 +116,12 @@ export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDa
         flexWrap={"wrap"}
         justifyContent="start">
         {availableTime?.map((avTime) => (
-          <TimeSlotButton time={avTime} key={avTime} selectedTime={selectedTime} handleTimeSelect={handleTimeSelect} />
+          <TimeSlotButton
+            time={avTime}
+            key={avTime}
+            selectedTime={selectedTime}
+            handleTimeSelect={handleTimeSelect}
+          />
         ))}
       </Stack>
     );
@@ -118,12 +136,18 @@ export default function TimeAndDateContainer({ noOfHours, providerId, onSelectDa
             onChange={handleChange}
             aria-label="basic tabs example">
             <Tab label={moment().format("DD-MMM-YYYY")} {...a11yProps(0)} />
-            <Tab label={moment().add(1, 'day').format("DD-MMM-YYYY")} {...a11yProps(1)} />
-            <Tab label={moment().add(2, 'day').format("DD-MMM-YYYY")} {...a11yProps(2)} />
+            <Tab
+              label={moment().add(1, "day").format("DD-MMM-YYYY")}
+              {...a11yProps(1)}
+            />
+            <Tab
+              label={moment().add(2, "day").format("DD-MMM-YYYY")}
+              {...a11yProps(2)}
+            />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0} noOfHours={noOfHours}>
-          {renderTimeSlots()}
+          {renderTimeSlots() ? renderTimeSlots() : "lorem ahbhsag"}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1} noOfHours={noOfHours}>
           {renderTimeSlots()}

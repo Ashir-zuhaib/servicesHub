@@ -106,3 +106,9 @@ header .productSearchField .MuiOutlinedInput-notchedOutline {
     justify-content: center;
   }
 }
+.swal-title{
+  color: var(--dark-text);
+}
+.swal-button{
+  background-color: var(--primary-color);
+}

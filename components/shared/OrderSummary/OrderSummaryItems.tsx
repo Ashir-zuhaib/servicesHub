@@ -4,6 +4,7 @@ import ProductImage from "../../../public/carpenter.png";
 import { Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getAllService } from "../../../utils/getData";
+import imagePlaceholder from "../../../public/images/image-placeholder.jpeg";
 
 const OrderSummaryItems = ({ confirmData, providerData }) => {
   const [serviceName,setServiceName]=useState("")  
@@ -29,7 +30,7 @@ const OrderSummaryItems = ({ confirmData, providerData }) => {
           alignItems="center">
           <Grid item xs={12} className="text-center">
             <Image
-              src={providerData?.profileImg}
+              src={providerData?.profileImg ? providerData?.profileImg : imagePlaceholder }
               width={120}
               height={120}
               alt="service provider"

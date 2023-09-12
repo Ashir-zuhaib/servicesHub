@@ -26,7 +26,7 @@ export default function LoginMain() {
       .signInWithEmailAndPassword(user_email, password)
       .then((doc) => {
         localStorage.setItem("uid", doc.user.uid);
-        swal("Login Successfull")
+        swal("Login Successful")
         readyForcheckout?
           router.push({
             pathname: "/Checkout",
