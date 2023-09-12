@@ -27,3 +27,6 @@
 .border {
   border: 1px solid #ddebf8;
 }
+.image{
+  border-radius: 100%;
+}
