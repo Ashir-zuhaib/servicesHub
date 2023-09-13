@@ -1,8 +1,9 @@
 .pricingContainer {
   border-radius: 10px;
-  background-color: var(--gray-bg)!important;
+  background-color: var(--gray-bg) !important;
   padding: 15px 15px;
   margin-top: 30px;
+  min-height: 165px;
 }
 
 .packBtn {
@@ -11,17 +12,22 @@
   border-width: 1px;
   border-radius: 10px;
   font-weight: 500;
-  padding: 12px!important;
+  padding: 12px !important;
   margin-right: 14px;
   margin-bottom: 10px;
   font-size: 14px;
   width: 31%;
+  transition: all 0.3s;
 }
-.packBtn:last-child{
+
+.packBtn:hover {
+  background-color: #1976d2;
+  color: #fff;
+}
+.packBtn:last-child {
   margin-right: 0px;
 }
 .selectedTimeSlot {
-  background-color:#1976D2;
+  background-color: #1976d2;
   color: #fff;
-  /* Add other styling properties as needed */
 }

@@ -4,9 +4,7 @@ import TextInColumnForPricing from "../TextInTwoColumns/TextInColumnForPricing";
 import OrderSummaryItems from "./OrderSummaryItems";
 import { useEffect, useState } from "react";
 
-const OrderSummaryContainer = ({confirmData,providerData} ) => {
-  console.log("providerData..",providerData);
-  
+const OrderSummaryContainer = ({confirmData,providerData} ) => {  
   return (
     <div className="bg-gray br-lg py-3 px-3">
       <div className="px-3">

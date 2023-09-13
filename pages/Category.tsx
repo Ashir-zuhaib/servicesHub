@@ -28,7 +28,7 @@ const AllCategories = () => {
           <Title title={processedServiceName} />
           <Grid container rowSpacing={2} columnSpacing={2} className="mb-5">
             {workers?.map((worker) => (
-              <Grid container item xs={12} md={6}>
+              <Grid container item xs={12} md={4}>
                 <CategoryCard worker={worker} />
               </Grid>
             ))}

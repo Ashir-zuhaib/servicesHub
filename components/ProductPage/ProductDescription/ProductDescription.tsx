@@ -1,11 +1,12 @@
 import ProductPrice from "../../ServicesCard/productPrice/productPrice";
 import Divider from "@mui/material/Divider";
 import BookingSteps from "../BookingSteps";
-const productDetails = ({userProfile}) => {
-  
+const productDetails = ({ userProfile }) => {
   return (
     <div>
-      <p className="has-text-weight-semibold is-size-6">{userProfile?.roleName}</p>
+      <p className="has-text-weight-semibold is-size-6">
+        {userProfile?.roleName}
+      </p>
       <h1 className="is-size-3">{userProfile?.full_name}</h1>
       <div className="is-flex">
         <ProductPrice Price={userProfile?.hourlyRate} />
@@ -35,16 +36,15 @@ const productDetails = ({userProfile}) => {
       </p>
       <Divider />
       <p className="my-2">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero harum
-        impedit laboriosam, eligendi laudantium doloremque natus odio architecto
-        repudiandae debitis tempore! Facere beatae nisi reiciendis ducimus
-        labore molestiae dolores atque.Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Libero harum impedit laboriosam, eligendi laudantium
-        doloremque natus odio architecto repudiandae debitis tempore! Facere
-        beatae nisi reiciendis ducimus labore molestiae dolores atque.
+        Welcome to services offered by {userProfile?.full_name} , where quality
+        and customer satisfaction is one of the top priorities.{" "}
+        {userProfile?.full_name} offer a range of expertise to meet your needs,
+        including {userProfile?.roleName} . His services are competitively
+        priced, and we serve various locations, including{" "}
+        {userProfile?.locationName}. For more details and appointments, please
+        get in touch with us. We're here to assist you.
       </p>
     </div>
-    
   );
 };
 

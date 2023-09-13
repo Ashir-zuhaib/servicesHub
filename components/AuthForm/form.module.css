@@ -15,9 +15,13 @@
   height: 100vh;
   display: grid;
   place-content: center;
+  background-color: #f1f1f1;
 }
-.formContainer > div {
-  width: 350px;
+.formContainer > div:first-child {
+  width: 380px;
+  padding: 16px 20px 20px 20px;
+  background-color: white;
+  border-radius: 12px;
 }
 .bottomPara {
   position: absolute;
@@ -47,10 +51,11 @@
 }
 
 .loginText {
-  font-weight: 500;
-  margin-bottom: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .loginPara {
@@ -72,12 +77,9 @@
   }
 
   .formContainer {
-    height: 60vh;
+    height: auto;
     top: -10%;
-  }
-
-  .loginForm {
-    height: 0;
+    background-color: white;
   }
 
   .bottomPara {

@@ -26,11 +26,8 @@ const Thankyou = () => {
         setBookingId(bookingID);
 
         const currentUserString = await localStorage.getItem("uid");
-        // const currentUserget = JSON.parse(currentUserString);
         const user = await getUser(data?.serviceProvider);
         const currentUserData = await getUser(currentUserString);
-        console.log("current", currentUserString);
-
         setcurrentUser(currentUserData);
         setProviderData(user);
       }

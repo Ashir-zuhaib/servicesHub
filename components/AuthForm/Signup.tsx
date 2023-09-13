@@ -5,7 +5,7 @@ import { useState } from "react";
 import SignupForm from "./SignupForm";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
-
+// import { useRouter } from 'next/router';
 export default function SignupMain() {
   const router = useRouter();
   const [fullName, setFullName] = useState<string>("");
@@ -20,6 +20,9 @@ export default function SignupMain() {
   const [area, setArea] = useState<string>("");
   const [worker, setWorker] = useState<boolean>(false);
   const [occupation, setOccupation] = useState("QUoP0oYjQaPHrMhzznNN");
+  const { checkoutData } = router.query;
+  console.log("chec", checkoutData);
+  
   const submitSignupForm = async () => {
     if (fullName == "" || email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");
@@ -36,21 +39,17 @@ export default function SignupMain() {
         hourlyRate: hourlyRate,
         profileImage: profileImage ||""
       };
-      console.log("datass", data);
       await onFinish(data);
       // location.href = "..";
     }
   };
   const onFinish = async (values) => {
-    console.log("valusssse", values);
-
     await firebase
       .auth()
       .createUserWithEmailAndPassword(values.email, values.password)
       .then(async (userCredential) => {
         // Signed in
         var user = userCredential.user;
-        console.log("user created", user);
         // ...
         await firebase
           .firestore()
@@ -70,6 +69,10 @@ export default function SignupMain() {
             localStorage.setItem("uid", user?.uid);
             swal("Account Created");
             // location.href = "..";
+            checkoutData?router.push({
+              pathname: "/Checkout",
+              query: { bookingData: checkoutData },
+            }):
             router.push("/");
           })
           .catch((e) => swal("Failed"));

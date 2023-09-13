@@ -26,12 +26,11 @@ export default function LoginMain() {
       .signInWithEmailAndPassword(user_email, password)
       .then((doc) => {
         localStorage.setItem("uid", doc.user.uid);
-        console.log("uid", doc.user.uid);
-        swal("Login Successfull")
+        swal("Login Successful")
         readyForcheckout?
           router.push({
             pathname: "/Checkout",
-            query: { bookingData: JSON.stringify(readyForcheckout) },
+            query: { bookingData: readyForcheckout },
           }):
       location.href = "..";
 
@@ -52,6 +51,7 @@ export default function LoginMain() {
         setUserPassword={setUserPassword}
         submitLoginForm={submitLoginForm}
         errorMessage={errorMessage}
+        readyForcheckout ={readyForcheckout }
       />
     </Grid>
   );

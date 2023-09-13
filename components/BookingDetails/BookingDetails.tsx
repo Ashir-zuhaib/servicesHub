@@ -51,8 +51,6 @@ export default function BookingTabs({currentUser}) {
     setUSerId(currentUser)    
     let status = "active";
     status = value == 1 ? "completed" : value == 2 ? "cancelled" : "active";
-    console.log("getBookings", status);
-    console.log("current", currentUser);
 
     let bookingData = await getBookings(status,currentUser );
     // Fetch customerData and serviceProviderData for each booking item
@@ -70,8 +68,6 @@ export default function BookingTabs({currentUser}) {
         };
       })
     );
-    console.log("booo", updatedBookingData);
-
     setBookingItems(updatedBookingData);
   };
 
@@ -138,7 +134,7 @@ export default function BookingTabs({currentUser}) {
             )
           )
         ) : (
-          <p>no active booking</p>
+          <p>No Active Booking</p>
         )}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
@@ -152,7 +148,7 @@ export default function BookingTabs({currentUser}) {
             )
           )
         ) : (
-          <p>no Complete Booking</p>
+          <p>No Complete Booking</p>
         )}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
@@ -166,7 +162,7 @@ export default function BookingTabs({currentUser}) {
             )
           )
         ) : (
-          <p>no Cancelled Booking </p>
+          <p>No Cancelled Booking </p>
         )}
       </CustomTabPanel>
     </Box>

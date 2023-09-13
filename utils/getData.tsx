@@ -17,8 +17,6 @@ const getAllService = async () => {
   return services;
 };
 const getWorkerByService = async (role) => {
-  console.log("rossle", role);
-
   let services = [];
   if (role) {
     await firebase
@@ -28,8 +26,6 @@ const getWorkerByService = async (role) => {
       .where("role", "==", role)
       .get()
       .then((querySnapshot) => {
-        console.log("sixe", querySnapshot.size);
-
         querySnapshot.forEach((doc) => {
           let data = doc.data();
           data.id = doc.id;
@@ -46,7 +42,6 @@ const getAllLocation = async () => {
     .collection("Location")
     .get()
     .then((querySnapshot) => {
-      console.log("sixe", querySnapshot.size);
       querySnapshot.forEach((doc) => {
         let data = doc.data();
         data.id = doc.id;
@@ -66,7 +61,6 @@ const getUser = async (id) => {
       data.id = doc.id;
       return data;
     } else {
-      console.log("User document not found");
       return null;
     }
   } catch (error) {
@@ -82,7 +76,6 @@ const getService = async (id) => {
       data.id = doc.id;
       return data;
     } else {
-      console.log("Service document not found");
       return null;
     }
   } catch (error) {
@@ -105,8 +98,6 @@ const getAvailableTime = async (date, noOfHours, providerId) => {
   // Iterate over time slots
   for (let i = 0; i < 12 / noOfHours; i++) {
     let isAvailable = true;
-    // console.log("bbbb", bookingsSnapshot.size);
-
     // Compare each booking with the current time slot
     bookingsSnapshot.forEach((doc) => {
       let data = doc.data();
@@ -159,7 +150,6 @@ const getBookings = async (status, id) => {
     .where("status", "==", status)
     .get()
     .then((querySnapshot) => {
-      console.log("sixe", querySnapshot.size);
       querySnapshot.forEach((doc) => {
         let data = doc.data();
         data.id = doc.id;

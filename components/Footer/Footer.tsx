@@ -10,29 +10,12 @@ function Footer() {
       container
       justifyContent="center"
       className="mt-5"
-      sx={{ backgroundColor: "#f9f9fc" }}>
-      <Grid container item xs={12} md={8} className="px-5 py-5">
-        <Grid item xs={12} md={3}>
-          <Link href={"/"} className="flex-center">
-            <Image src={websiteLogo} alt="Logo" width={180} height={60} />
-          </Link>
-          <p>200-A, SMCHS, Karachi Sindh Pakistan</p>
-        </Grid>
-        <Grid item xs={1}>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            sx={{ width: "1px", margin: "auto" }}
-          />
-        </Grid>
-        <Grid container item xs={12} md={8}>
-          <Grid item xs={12} md={8}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum
-            totam optio voluptates architecto. Saepe voluptatibus nisi deserunt
-            nobis nam. Explicabo ullam mollitia corporis eius cupiditate
-            laboriosam repellat minima a quia!
-          </Grid>
-        </Grid>
+      sx={{ backgroundColor: "#1976d2" }}>
+      <Grid container item xs={12} md={9} className="px-5 py-5 has-text-centered">
+        <p className="mx-auto has-text-white">
+          © 2023 Services Hub. All Rights Reserved. Your trusted partner in
+          service excellence.
+        </p>
       </Grid>
     </Grid>
   );

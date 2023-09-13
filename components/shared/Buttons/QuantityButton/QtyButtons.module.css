@@ -51,7 +51,6 @@
 .updateQtyButtons input:focus,
 .updateQtyButtons input:focus-visible {
   width: 100%;
-  -webkit-appearance: none;
   border: none;
   outline: none;
   background-color: var(--white);

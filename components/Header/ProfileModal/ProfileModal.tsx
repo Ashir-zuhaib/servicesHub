@@ -16,17 +16,17 @@ const style = {
 interface ProfileModal {
   currentUserId:string;
   userData:any;
-  setUserData:React.Dispatch<React.SetStateAction<any>>;
+  setUserData:React.Dispatch<React.SetStateAction<string>>;
 }
-export default function ProfileModal( {userData, setUserData, currentUserId}:ProfileModal) {
+export default function ProfileModal( {userData, setUserData}:ProfileModal) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-const handleLogout =()=>{
-  localStorage.clear()
-  setOpen(false)
-  setUserData(null)
-}
+  const handleLogout = () => {
+    localStorage.clear();
+    setOpen(false);
+    setUserData(null);
+  };
   return (
     <div>
       <Button onClick={handleOpen}>
@@ -36,32 +36,12 @@ const handleLogout =()=>{
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description">
         <Box sx={style}>
           <div className="bg-gray px-4 py-4 br-xl">
-            <Stack alignItems="center" direction="row" className="mb-2">
-              <Avatar />
-              <p className="has-text-weight-semibold ml-2">{userData?.userData?.full_name}</p>
-            </Stack>
-            <Stack
-              alignItems="center"
-              direction="row"
-              justifyContent="space-between"
-            >
-              <div>
-                <span className="is-size-7">Available Credit</span>
-                <p className="has-text-weight-bold is-size-4">Rs, 19.927</p>
-              </div>
-              <Link href="#" legacyBehavior>
-                <a className="is-size-7 has-text-weight-bold text-primary-color underline">
-                  View History
-                </a>
-              </Link>
-            </Stack>
-            <Button variant="contained" color="primary" onClick={handleLogout}>
-      Log out
-    </Button>
+            <Link href={'#'} className="text-primary" onClick={handleLogout}>
+              Log out
+            </Link>
           </div>
         </Box>
       </Modal>

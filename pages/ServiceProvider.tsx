@@ -6,15 +6,12 @@ import BookingSteps from "../components/ProductPage/BookingSteps";
 import { useRouter } from "next/router";
 import { getAllLocation, getAllService, getUser } from "../utils/getData";
 import { useEffect, useState } from "react";
+import imagePlaceholder from "../public/images/image-placeholder.jpeg";
 interface ServiceProvider {
   profileImg: string;
 }
-interface ServiceProviderProfile {
-  isLoading: boolean;
-}
 
-const ServiceProviderProfile = ({ isLoading }: ServiceProviderProfile) => {
-  isLoading = false;
+const ServiceProviderProfile = () => {
   const router = useRouter();
   const [serviceProviderData, setServiceProviderData] =
     useState<ServiceProvider | null>(null);
@@ -33,7 +30,6 @@ const ServiceProviderProfile = ({ isLoading }: ServiceProviderProfile) => {
         ? (providerData.locationName = location?.value)
         : ""
     );
-    console.log("ProviderData", providerData);
     setServiceProviderData(providerData);
   };
   useEffect(() => {
@@ -43,11 +39,8 @@ const ServiceProviderProfile = ({ isLoading }: ServiceProviderProfile) => {
     <Layout>
       <Grid container justifyContent="center" className="py-2 px-2">
         <Grid container item xs={12} md={8} spacing={2}>
-          {isLoading ? (
+          {!serviceProviderData ? (
             <>
-              <Grid item xs={12}>
-                <Skeleton variant="text" animation="wave" />
-              </Grid>
               <Grid item xs={12} md={3}>
                 <Skeleton
                   variant="circular"
@@ -62,16 +55,23 @@ const ServiceProviderProfile = ({ isLoading }: ServiceProviderProfile) => {
                 <Skeleton variant="text" animation="wave" />
                 <Skeleton variant="text" animation="wave" />
               </Grid>
+              <Grid item xs={12}>
+                <Skeleton variant="rectangular" height={200} animation="wave" />
+              </Grid>
             </>
           ) : (
             <>
               <Grid item xs={12}></Grid>
               <Grid item xs={12} md={3}>
                 <Image
-                  src={serviceProviderData?.profileImg}
-                  width={400}
-                  height={1200}
-                  alt="hhd"
+                  src={
+                    serviceProviderData?.profileImg
+                      ? serviceProviderData?.profileImg
+                      : imagePlaceholder
+                  }
+                  width={200}
+                  height={200}
+                  alt="service provider"
                 />
               </Grid>
               <Grid item xs={12} md={9}>

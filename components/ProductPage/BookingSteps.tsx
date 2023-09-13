@@ -31,11 +31,12 @@ export default function BookingSteps({ providerId }) {
     address: "", // Add the address field
     contactNumber: "",
     serviceProvider: providerId,
+    serviceProviderData:"",
     chargesPerHour: "",
     serviceCharges: "",
     subTotal: "",
     total: "",
-    status:"active",
+    status: "active",
     customerId: "",
   });
   const getCurrentUser = async () => {
@@ -49,9 +50,7 @@ export default function BookingSteps({ providerId }) {
   React.useEffect(() => {
     getCurrentUser();
   }, []);
-  
-  console.log("ggg", bookingData);
-  console.log("gggcount", count);
+
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -93,8 +92,6 @@ export default function BookingSteps({ providerId }) {
   };
 
   const handleSelectDateAndTime = (selectedDate, selectedTime, endTime) => {
-    console.log("bookingTIme", selectedDate, selectedTime, endTime);
-
     setBookingData({
       ...bookingData,
       apptDate: selectedDate,
@@ -117,7 +114,6 @@ export default function BookingSteps({ providerId }) {
     });
   };
   const handleSubmit = () => {
-    console.log("bookingdata", bookingData);
     bookingData?.customerId
       ? router.push({
           pathname: "/Checkout",
@@ -127,7 +123,6 @@ export default function BookingSteps({ providerId }) {
           pathname: "/Login",
           query: { readyForcheckout: JSON.stringify(bookingData) },
         });
-    // firebase.firestore().collection("Bookings").add(bookingData)
   };
   return (
     <Box sx={{ width: "100%" }}>
@@ -163,7 +158,8 @@ export default function BookingSteps({ providerId }) {
                     setBookingData((prevBookingData) => ({
                       ...prevBookingData,
                       noOfHours: newNoOfHours,
-                    }))}
+                    }))
+                  }
                 />{" "}
               </div>
             </div>
@@ -182,8 +178,7 @@ export default function BookingSteps({ providerId }) {
                 "& .MuiTextField-root": { m: 1, width: "60ch" },
               }}
               noValidate
-              autoComplete="off"
-            >
+              autoComplete="off">
               <div className="bg-white w-lg-65 p-4 is-rounded mx-auto has-text-centered br-lg">
                 <div className="pl-2 mb-3">
                   <SubTitle title="Complete Your Booking" />
@@ -191,10 +186,11 @@ export default function BookingSteps({ providerId }) {
                 <TextField
                   required
                   id="outlined-required"
-                  label="Enter Your Address"
+                  label="Enter Your Complete Address"
                   value={bookingData.address}
                   onChange={handleAddressChange}
                 />
+                
                 <TextField
                   required
                   id="outlined-required"
@@ -207,14 +203,17 @@ export default function BookingSteps({ providerId }) {
           </div>
         )}
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-          <Button
-            color="inherit"
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            sx={{ mr: 1 }}
-          >
-            Back
-          </Button>
+          {activeStep !== 0 ? (
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}>
+              Back
+            </Button>
+          ) : (
+            ""
+          )}
           <Box sx={{ flex: "1 1 auto" }} />
           {activeStep == 2 ? (
             <Button onClick={handleSubmit} variant="contained">
