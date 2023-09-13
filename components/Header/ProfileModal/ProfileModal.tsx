@@ -16,9 +16,9 @@ const style = {
 interface ProfileModal {
   currentUserId:string;
   userData:any;
-  setUserData:React.Dispatch<React.SetStateAction<string>>;
+  setUserData:React.Dispatch<React.SetStateAction<any>>;
 }
-export default function ProfileModal( {userData, setUserData}:ProfileModal) {
+export default function ProfileModal( {userData, setUserData, currentUserId}:ProfileModal) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

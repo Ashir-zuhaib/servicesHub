@@ -12,7 +12,7 @@ import Image from "next/image";
 import websiteLogo from "../../public/logo.png";
 
 function Header() {
-  const [userData, setUserData] = useState<any[]>(null);
+  const [userData, setUserData] = useState<any | null>(null);
   const checkLogin = async () => {
     let currentUserId = await localStorage?.getItem("uid");
     if (currentUserId) {
@@ -59,7 +59,7 @@ function Header() {
           </Grid>
           <Grid item xs={12} md={'auto'} className={Styles.profile}>
             {userData ? (
-              <ProfileModal userData={userData} setUserData={setUserData} />
+              <ProfileModal currentUserId={userData?.userId} userData={userData} setUserData={setUserData} />
             ) : (
               <DropdownComponent />
             )}

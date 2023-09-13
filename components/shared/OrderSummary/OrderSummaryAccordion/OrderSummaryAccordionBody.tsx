@@ -5,7 +5,7 @@ import OrderSummaryItems from "../OrderSummaryItems";
 const OrderSummaryAccordionBody = () => {
   return (
     <div>
-      <OrderSummaryItems />
+      {/* <OrderSummaryItems /> */}
       <SubHeading title="Order Summary" />
       <div className="is-size-7">
         <TextInColumnForPricing
