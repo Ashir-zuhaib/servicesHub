@@ -30,13 +30,14 @@ const Checkout: any = () => {
           ...checkoutData,
           subTotal: subTotal,
           chargesPerHour: providerData?.hourlyRate,
+          serviceProviderData:providerData,
           serviceCharges: serviceCharges,
           total: total,
           customerId: currentUser,
         })
       : router.push("/Login");
   };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       if (bookingData) {

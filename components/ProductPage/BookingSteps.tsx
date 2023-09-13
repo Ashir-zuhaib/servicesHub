@@ -31,6 +31,7 @@ export default function BookingSteps({ providerId }) {
     address: "", // Add the address field
     contactNumber: "",
     serviceProvider: providerId,
+    serviceProviderData:"",
     chargesPerHour: "",
     serviceCharges: "",
     subTotal: "",

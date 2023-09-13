@@ -26,6 +26,7 @@ interface loginForm {
   setUserPassword: React.Dispatch<React.SetStateAction<string>>;
   submitLoginForm: () => void;
   errorMessage: string;
+  readyForcheckout:any;
 }
 export default function LoginForm({
   email,
@@ -34,6 +35,7 @@ export default function LoginForm({
   setUserPassword,
   submitLoginForm,
   errorMessage,
+  readyForcheckout
 }: loginForm) {
   // Change Password to Text Field
   const [showPassword, setShowPassword] = useState(false);
@@ -108,7 +110,7 @@ export default function LoginForm({
           onClick={submitLoginForm}>
           Login
         </Button>
-        <Link href={"/Signup"} className={Styles.link}>
+        <Link href={readyForcheckout?`/Signup?checkoutData=${readyForcheckout}`:"/Signup"} className={Styles.link}>
           Dont have Account? Signup Now
         </Link>
       </Stack>

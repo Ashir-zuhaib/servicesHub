@@ -30,7 +30,7 @@ export default function LoginMain() {
         readyForcheckout?
           router.push({
             pathname: "/Checkout",
-            query: { bookingData: JSON.stringify(readyForcheckout) },
+            query: { bookingData: readyForcheckout },
           }):
       location.href = "..";
 
@@ -51,6 +51,7 @@ export default function LoginMain() {
         setUserPassword={setUserPassword}
         submitLoginForm={submitLoginForm}
         errorMessage={errorMessage}
+        readyForcheckout ={readyForcheckout }
       />
     </Grid>
   );
