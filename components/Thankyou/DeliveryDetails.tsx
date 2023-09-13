@@ -4,7 +4,7 @@ import SubHeading from "../shared/Headings/SubHeading";
 const DeliveryDetails:any = ({confirmData, bookingId}) => {
   return (
     <div className="bg-gray br-lg px-4 pb-4 pt-3 is-size-6">
-      <SubHeading title="Delivery Details" />
+      <SubHeading title="Booking Details" />
       <Grid container className="is-size-14" spacing={1}>
         <Grid item xs={5}>
           <p> Order Reference</p>

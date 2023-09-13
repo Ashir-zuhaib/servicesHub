@@ -11,12 +11,14 @@ import { useEffect, useState } from "react";
 import { getUser } from "../utils/getData";
 import firebase from "../config";
 import swal from "sweetalert";
+import * as React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const Checkout: any = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [checkoutData, setCheckoutData] = useState<any>({});
-  const [currentUser, setcurrentUser] = useState<any>({});
   const { bookingData } = router.query;
   const [providerData, setProviderData] = useState<any>({});
 
@@ -30,14 +32,14 @@ const Checkout: any = () => {
           ...checkoutData,
           subTotal: subTotal,
           chargesPerHour: providerData?.hourlyRate,
-          serviceProviderData:providerData,
+          serviceProviderData: providerData,
           serviceCharges: serviceCharges,
           total: total,
           customerId: currentUser,
         })
       : router.push("/Login");
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       if (bookingData) {
@@ -48,14 +50,18 @@ const Checkout: any = () => {
         const user = await getUser(data?.serviceProvider);
         setProviderData(user);
       }
+      setLoading(false); // Set loading to false after attempting to fetch data
     };
 
     fetchData();
   }, [bookingData]);
+
   useEffect(() => {
-    setCalculation(); // Perform calculations after setting checkoutData
-    setLoading(false);
-  }, [providerData]);
+    if (!loading) {
+      setCalculation(); // Perform calculations after setting checkoutData
+    }
+  }, [loading, providerData]);
+
   const handleConfirm = async () => {
     await firebase
       .firestore()
@@ -75,8 +81,22 @@ const Checkout: any = () => {
         swal("Failed", e);
       });
   };
+
   if (loading) {
-    return <div>Loading...</div>; // Display a loading indicator
+    return (
+      <Layout>
+        <Box
+          sx={{
+            height: "100vh",
+            width: "100vw",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+          <CircularProgress />
+        </Box>
+      </Layout>
+    );
   }
 
   return (
@@ -86,13 +106,9 @@ const Checkout: any = () => {
           <Heading title={"Checkout"} />
           <Grid container spacing={2} flexDirection="row-reverse">
             <Grid item xs={12} md={4}>
-              {/* <AvailableBalance /> */}
-
               <TotalPricing isBackgroundColor={true} pricing={checkoutData} />
-
               <PrimaryRoundedLinkButton
                 onclick={handleConfirm}
-                // buttonLink="/Thankyou"
                 buttonText="Confirm Order"
               />
             </Grid>

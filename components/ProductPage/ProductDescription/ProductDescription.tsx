@@ -7,7 +7,7 @@ const productDetails = ({ userProfile }) => {
       <p className="has-text-weight-semibold is-size-6">
         {userProfile?.roleName}
       </p>
-      <h1 className="is-size-3">{userProfile?.full_name}</h1>
+      <h1 className="is-size-3 is-capitalized">{userProfile?.full_name}</h1>
       <div className="is-flex">
         <ProductPrice Price={userProfile?.hourlyRate} />
         <p className="pl-4">

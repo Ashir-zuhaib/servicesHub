@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getAllLocation } from "../../../utils/getData";
 import { useRouter } from "next/router";
 import { Skeleton } from "@mui/material";
+import imagePlaceholder from "../../../public/images/image-placeholder.jpeg";
 
 const CategoryCard = ({ worker }) => {
   const [locations, setLocation] = useState([]);
@@ -42,7 +43,7 @@ const CategoryCard = ({ worker }) => {
           className={Styles.CategoryCard}>
           <div>
             <Image
-              src={worker?.profileImg}
+              src={worker?.profileImg ? worker?.profileImg : imagePlaceholder}
               alt="image"
               width={100}
               height={100}
@@ -52,7 +53,9 @@ const CategoryCard = ({ worker }) => {
             />
           </div>
           <div>
-            <h2 className="is-size-5 mb-0">{worker?.full_name}</h2>
+            <h2 className="is-size-5 mb-0 is-capitalized">
+              {worker?.full_name}
+            </h2>
             <ProductPrice Price={worker?.hourlyRate} />
             <p className={Styles.rating}>
               <svg
@@ -71,7 +74,9 @@ const CategoryCard = ({ worker }) => {
               </svg>
               {worker?.rating ? worker?.rating : "N/A"}/5
             </p>
-            <p className="mb-0 text-16 has-text-capitalize">
+            <p
+              className="mb-0 text-16 has-text-capitalize"
+              style={{ height: "38px", lineHeight: "20px" }}>
               Areas Available: {worker.locationName}
             </p>
           </div>

@@ -31,7 +31,7 @@ export default function BookingSteps({ providerId }) {
     address: "", // Add the address field
     contactNumber: "",
     serviceProvider: providerId,
-    serviceProviderData:"",
+    serviceProviderData: "",
     chargesPerHour: "",
     serviceCharges: "",
     subTotal: "",
@@ -87,10 +87,6 @@ export default function BookingSteps({ providerId }) {
     });
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   const handleSelectDateAndTime = (selectedDate, selectedTime, endTime) => {
     setBookingData({
       ...bookingData,
@@ -114,6 +110,7 @@ export default function BookingSteps({ providerId }) {
     });
   };
   const handleSubmit = () => {
+    console.log("data for checkout", bookingData);
     bookingData?.customerId
       ? router.push({
           pathname: "/Checkout",
@@ -190,7 +187,7 @@ export default function BookingSteps({ providerId }) {
                   value={bookingData.address}
                   onChange={handleAddressChange}
                 />
-                
+
                 <TextField
                   required
                   id="outlined-required"

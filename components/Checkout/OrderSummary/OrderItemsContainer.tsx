@@ -1,4 +1,3 @@
-import ProductImage from "../../../public/carpenter.png";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Image from "next/image";
@@ -32,16 +31,17 @@ const OrderItemsContainer = ({
               ? providerData?.profileImg
               : imagePlaceholder
           }
-          width={400}
-          height={400}
+          width={200}
+          height={200}
           style={{ borderRadius: "60%" }}
           alt="service provider"
+          className="p-3"
         />
       </Grid>
       <Grid container item xs={10} justifyContent="center" alignItems="center">
         <Grid item xs={8}>
-          <p className="text-primary-color is-size-6">{serviceName}</p>
-          <p className="has-text-weight-semibold mr-2 is-size-5">
+          <p className="text-primary-color is-size-6 is-capitalized">{serviceName}</p>
+          <p className="has-text-weight-semibold mr-2 is-size-5 is-capitalized">
             {providerData?.full_name}
           </p>
           <p className="text-light is-size-6 ">{bookingDetail?.address}</p>
