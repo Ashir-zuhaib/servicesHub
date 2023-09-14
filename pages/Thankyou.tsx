@@ -15,7 +15,24 @@ const Thankyou = () => {
   const [bookingid, setBookingId] = useState<any>("");
   const [currentUser, setcurrentUser] = useState<any>({});
   const [providerData, setProviderData] = useState<any>({});
+  useEffect(() => {
+    // Disable the back button
+    window.history.pushState(null, null, window.location.pathname);
+    
+    // Listen for the browser's back button click
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      // Navigate to the home page
+      router.push('/');
+    };
 
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (checkoutData) {

@@ -68,8 +68,7 @@ const Checkout: any = () => {
       .collection("Bookings")
       .add(checkoutData)
       .then((doc) => {
-        swal("Success");
-        router.push({
+        router.replace({
           pathname: "/Thankyou",
           query: {
             checkoutData: JSON.stringify(checkoutData),

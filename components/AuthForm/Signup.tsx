@@ -22,7 +22,7 @@ export default function SignupMain() {
   const [occupation, setOccupation] = useState("QUoP0oYjQaPHrMhzznNN");
   const { checkoutData } = router.query;
   console.log("chec", checkoutData);
-  
+
   const submitSignupForm = async () => {
     if (fullName == "" || email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");
@@ -37,7 +37,7 @@ export default function SignupMain() {
         worker: worker,
         occupation: occupation,
         hourlyRate: hourlyRate,
-        profileImage: profileImage ||""
+        profileImage: profileImage || "",
       };
       await onFinish(data);
       // location.href = "..";
@@ -63,19 +63,24 @@ export default function SignupMain() {
             role: values.occupation || "",
             location: values.location,
             hourlyRate: values.hourlyRate,
-            profileImg: profileImage ||""
+            profileImg: profileImage || "",
           })
           .then(() => {
             localStorage.setItem("uid", user?.uid);
-            swal("Account Created");
-            // location.href = "..";
-            checkoutData?router.push({
-              pathname: "/Checkout",
-              query: { bookingData: checkoutData },
-            }):
-            router.push("/");
+            if (!values.worker) {
+              swal("Account Created");
+              // location.href = "..";
+              checkoutData
+                ? router.push({
+                    pathname: "/Checkout",
+                    query: { bookingData: checkoutData },
+                  })
+                : router.push("/");
+            } else {
+              router.push("/Dashboard");
+            }
           })
-          .catch((e) => swal("Failed"));
+          .catch((e) => swal("Failed",`${e.message}`));
       })
       .catch((error) => {
         var errorCode = error.code;

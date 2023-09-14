@@ -39,7 +39,7 @@ export default function ProfileModal( {userData, setUserData}:ProfileModal) {
         aria-describedby="modal-modal-description">
         <Box sx={style}>
           <div className="bg-gray px-4 py-4 br-xl">
-            <Link href={'#'} className="text-primary" onClick={handleLogout}>
+            <Link href={'/'} className="text-primary" onClick={handleLogout}>
               Log out
             </Link>
           </div>

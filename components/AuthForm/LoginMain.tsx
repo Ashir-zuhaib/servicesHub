@@ -5,35 +5,40 @@ import { useState } from "react";
 import firebase from "../../config";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
+import { getUser } from "../../utils/getData";
 
 export default function LoginMain() {
   const [email, setEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const router = useRouter()
-  const {readyForcheckout} = router.query
+  const router = useRouter();
+  const { readyForcheckout } = router.query;
   const submitLoginForm = () => {
     if (email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");
     } else {
       setErrorMessage("");
-      onFinishLogin(email, userPassword)
+      onFinishLogin(email, userPassword);
     }
   };
   const onFinishLogin = async (user_email, password) => {
     await firebase
       .auth()
       .signInWithEmailAndPassword(user_email, password)
-      .then((doc) => {
+      .then(async (doc) => {
+        let userData = await getUser(doc.user.uid);
         localStorage.setItem("uid", doc.user.uid);
-        swal("Login Successful")
-        readyForcheckout?
-          router.push({
-            pathname: "/Checkout",
-            query: { bookingData: readyForcheckout },
-          }):
-      location.href = "..";
-
+        if (!userData.worker) {
+          swal("Login Successful");
+          readyForcheckout
+            ? router.push({
+                pathname: "/Checkout",
+                query: { bookingData: readyForcheckout },
+              })
+            : (location.href = "..");
+        } else {
+          router.push("/Dashboard");
+        }
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -51,7 +56,7 @@ export default function LoginMain() {
         setUserPassword={setUserPassword}
         submitLoginForm={submitLoginForm}
         errorMessage={errorMessage}
-        readyForcheckout ={readyForcheckout }
+        readyForcheckout={readyForcheckout}
       />
     </Grid>
   );

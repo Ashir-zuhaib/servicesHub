@@ -30,7 +30,7 @@ function Header() {
 
   useEffect(() => {
     checkLogin();
-  }, [userData]);
+  }, []);
 
   return (
     <header>
