@@ -7,6 +7,7 @@ import { BookingCard } from "./BookingCard";
 import swal from "sweetalert";
 import firebase from "../../config";
 import { CircularProgress } from "@mui/material";
+import { Grid } from "@material-ui/core";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -50,6 +51,7 @@ export default function BookingTabs({ currentUser }) {
 
     const updatedBookingData = await Promise.all(
       bookingData.map(async (item) => {
+        console.log("I wie", item);
         const customerData = await getUser(item?.customerId);
         const serviceProviderData = await getUser(item?.serviceProvider);
         const serviceData = await getService(serviceProviderData?.role);
@@ -123,7 +125,7 @@ export default function BookingTabs({ currentUser }) {
         {isLoading ? ( // Display loading indicator while data is loading
           <Box
             sx={{
-              height: "100vh",
+              height: "80vh",
               width: "100%",
               display: "flex",
               alignItems: "center",
@@ -132,27 +134,36 @@ export default function BookingTabs({ currentUser }) {
             <CircularProgress />
           </Box>
         ) : bookingItem.length ? (
-          bookingItem?.map((item) =>
-            item?.status == "active" ? (
-              <BookingCard
-                key={item.id}
-                item={item}
-                onComplete={() => handleCompleteBooking(item.id)}
-                onCancel={() => handleCancelBooking(item.id)}
-              />
-            ) : (
-              ""
-            )
-          )
+          <Grid container spacing={2}>
+            {" "}
+            {/* Added Grid container */}
+            {bookingItem?.map((item) =>
+              item?.status == "active" ? (
+                <Grid item xs={12}  md={4} key={item.id}>
+                  {" "}
+                  {/* Added Grid item */}
+                  <BookingCard
+                    key={item.id}
+                    item={item}
+                    onComplete={() => handleCompleteBooking(item.id)}
+                    onCancel={() => handleCancelBooking(item.id)}
+                  />
+                </Grid>
+              ) : (
+                ""
+              )
+            )}
+          </Grid>
         ) : (
           <p>No Active Booking</p>
         )}
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={1}>
         {isLoading ? ( // Display loading indicator while data is loading
           <Box
             sx={{
-              height: "100vh",
+              height: "80vh",
               width: "100%",
               display: "flex",
               alignItems: "center",
@@ -161,27 +172,34 @@ export default function BookingTabs({ currentUser }) {
             <CircularProgress />
           </Box>
         ) : bookingItem.length ? (
-          bookingItem?.map((item) =>
-            item?.status == "completed" ? (
-              <BookingCard
-                key={item.id}
-                item={item}
-                onComplete={() => handleCompleteBooking(item.id)}
-                onCancel={() => handleCancelBooking(item.id)}
-              />
-            ) : (
-              ""
-            )
-          )
+          <Grid container>
+            {" "}
+            {/* Render the Grid outside the map */}
+            {bookingItem.map((item) =>
+              item?.status == "completed" ? (
+                <Grid item xs={12}  md={4} key={item.id}>
+                  <BookingCard
+                    key={item.id}
+                    item={item}
+                    onComplete={() => handleCompleteBooking(item.id)}
+                    onCancel={() => handleCancelBooking(item.id)}
+                  />
+                </Grid>
+              ) : (
+                ""
+              )
+            )}
+          </Grid>
         ) : (
           <p>No Complete Booking</p>
         )}
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={2}>
-        {isLoading ? ( // Display loading indicator while data is loading
+        {isLoading ? (
           <Box
             sx={{
-              height: "100vh",
+              height: "80vh",
               width: "100%",
               display: "flex",
               alignItems: "center",
@@ -190,18 +208,26 @@ export default function BookingTabs({ currentUser }) {
             <CircularProgress />
           </Box>
         ) : bookingItem.length ? (
-          bookingItem?.map((item) =>
-            item?.status == "cancelled" ? (
-              <BookingCard
-                key={item.id}
-                item={item}
-                onComplete={() => handleCompleteBooking(item.id)}
-                onCancel={() => handleCancelBooking(item.id)}
-              />
-            ) : (
-              ""
-            )
-          )
+          <Grid container spacing={2}>
+            {" "}
+            {/* Added Grid container */}
+            {bookingItem?.map((item) =>
+              item?.status == "cancelled" ? (
+                <Grid item xs={12}  md={4} key={item.id}>
+                  {" "}
+                  {/* Added Grid item */}
+                  <BookingCard
+                    key={item.id}
+                    item={item}
+                    onComplete={() => handleCompleteBooking(item.id)}
+                    onCancel={() => handleCancelBooking(item.id)}
+                  />
+                </Grid>
+              ) : (
+                ""
+              )
+            )}
+          </Grid>
         ) : (
           <p>No Cancelled Booking </p>
         )}

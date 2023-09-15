@@ -6,8 +6,24 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 export const BookingCard = ({ ...props }) => {
   return (
-    <Card key={props.item.id} sx={{ maxWidth: 345, margin: "16px" }}>
-      <CardContent className="pb-0">
+    <Card
+      key={props.item.id}
+      sx={{
+        maxWidth: 345,
+        margin: "8px 4px",
+        boxShadow: "none",
+        padding: "4px 0px",
+        border: "1px solid #e8e8e8",
+      }}>
+      {props.item?.status !== "active" ? (
+        <p className="px-4 py-3 is-uppercase has-font-bold is-size-6 has-background-grey-lighter has-text-weight-semibold has-text-centered">
+          {" "}
+          {props.item?.status}
+        </p>
+      ) : (
+        ""
+      )}
+      <CardContent className="py-2">
         <Typography
           gutterBottom
           variant="h6"
@@ -36,8 +52,12 @@ export const BookingCard = ({ ...props }) => {
         </Typography>
       </CardContent>
       {props.item?.status == "active" ? (
-        <CardActions>
-          <Button size="small" color="primary" onClick={props.onComplete}>
+        <CardActions className="px-4">
+          <Button
+            size="small"
+            color="primary"
+            className="primary-color has-text-white px-2"
+            onClick={props.onComplete}>
             Complete
           </Button>
           <Button size="small" color="error" onClick={props.onCancel}>
@@ -45,7 +65,7 @@ export const BookingCard = ({ ...props }) => {
           </Button>
         </CardActions>
       ) : (
-        <p> {props.item?.status}</p>
+        ""
       )}
     </Card>
   );
