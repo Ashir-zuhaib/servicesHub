@@ -62,7 +62,7 @@ const Thankyou = () => {
       <Grid container justifyContent="center" className="py-2 px-2">
         <Grid container item xs={12} md={10} lg={8} spacing={3}>
           <Grid item xs={12} md={10} lg={8}>
-            <ThankyouMessage currentUser={currentUser} />
+            <ThankyouMessage bookingId={bookingid} />
 
             <div className="mt-5 pt-2">
               <DeliveryDetails
