@@ -1,8 +1,4 @@
 import { Grid } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import Image from "next/image";
-import Link from "next/link";
-import websiteLogo from "../../public/logo.png";
 
 function Footer() {
   return (

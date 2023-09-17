@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../redux/dataSlice";
 import bannerImage1 from "../public/images/banner-img.png";
-import bannerImage2 from "../public/images/banner-img2.png";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,11 +26,7 @@ const Home: React.FC = () => {
     {
       name: "Random Name #1",
       imageSrc: bannerImage1,
-    },
-    {
-      name: "Random Name #1",
-      imageSrc: bannerImage2,
-    },
+    }
   ];
 
   return (
