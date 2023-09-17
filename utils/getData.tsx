@@ -17,8 +17,6 @@ const getAllService = async () => {
   return services;
 };
 const getWorkerByService = async (role) => {
-  console.log("rossle", role);
-
   let services = [];
   if (role) {
     await firebase
@@ -28,8 +26,6 @@ const getWorkerByService = async (role) => {
       .where("role", "==", role)
       .get()
       .then((querySnapshot) => {
-        console.log("sixe", querySnapshot.size);
-
         querySnapshot.forEach((doc) => {
           let data = doc.data();
           data.id = doc.id;
@@ -46,7 +42,6 @@ const getAllLocation = async () => {
     .collection("Location")
     .get()
     .then((querySnapshot) => {
-      console.log("sixe", querySnapshot.size);
       querySnapshot.forEach((doc) => {
         let data = doc.data();
         data.id = doc.id;
@@ -59,22 +54,39 @@ const getAllLocation = async () => {
 // Function to check if a service provider is available for the selected hours on a specific date
 
 const getUser = async (id) => {
-  let data;
-  await firebase
-    .firestore()
-    .collection("Users")
-    .doc(id)
-    .get()
-    .then((doc) => {
-      data = doc.data();
+  try {
+    const doc = await firebase.firestore().collection("Users").doc(id).get();
+    if (doc.exists) {
+      const data = doc.data();
       data.id = doc.id;
-    });
-  return data;
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return null;
+  }
+};
+const getService = async (id) => {
+  try {
+    const doc = await firebase.firestore().collection("Services").doc(id).get();
+    if (doc.exists) {
+      const data = doc.data();
+      data.id = doc.id;
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return null;
+  }
 };
 const getAvailableTime = async (date, noOfHours, providerId) => {
   let availableTime = [];
-  let startTime = moment().startOf('day').hour(8).minute(0); // Start at 08:00
-  
+  let startTime = moment().startOf("day").hour(8).minute(0); // Start at 08:00
+
   // Fetch bookings for the given provider and date
   let bookingsSnapshot = await firebase
     .firestore()
@@ -84,10 +96,8 @@ const getAvailableTime = async (date, noOfHours, providerId) => {
     .get();
 
   // Iterate over time slots
-  for (let i = 0; i < 12/noOfHours; i++) {
+  for (let i = 0; i < 12 / noOfHours; i++) {
     let isAvailable = true;
-// console.log("bbbb", bookingsSnapshot.size);
-
     // Compare each booking with the current time slot
     bookingsSnapshot.forEach((doc) => {
       let data = doc.data();
@@ -95,13 +105,28 @@ const getAvailableTime = async (date, noOfHours, providerId) => {
       let bookingEndTime = moment(data.endTime, "HH:mm");
 
       let adjustedStartTime = startTime.clone(); // Create a clone of startTime
-      let adjustedEndTime = adjustedStartTime.clone().add(noOfHours, 'hours'); // Calculate adjusted end time
-      
+      let adjustedEndTime = adjustedStartTime.clone().add(noOfHours, "hours"); // Calculate adjusted end time
+
       if (
-        (adjustedStartTime.isBetween(bookingStartTime, bookingEndTime, null, '[]')) ||
-        (adjustedEndTime.isBetween(bookingStartTime, bookingEndTime, null, '[]')) ||
-        (bookingStartTime.isBetween(adjustedStartTime, adjustedEndTime, null, '[]')) ||
-        (bookingEndTime.isBetween(adjustedStartTime, adjustedEndTime, null, '[]'))
+        adjustedStartTime.isBetween(
+          bookingStartTime,
+          bookingEndTime,
+          null,
+          "[]"
+        ) ||
+        adjustedEndTime.isBetween(
+          bookingStartTime,
+          bookingEndTime,
+          null,
+          "[]"
+        ) ||
+        bookingStartTime.isBetween(
+          adjustedStartTime,
+          adjustedEndTime,
+          null,
+          "[]"
+        ) ||
+        bookingEndTime.isBetween(adjustedStartTime, adjustedEndTime, null, "[]")
       ) {
         isAvailable = false;
       }
@@ -111,11 +136,35 @@ const getAvailableTime = async (date, noOfHours, providerId) => {
       availableTime.push(startTime.format("HH:mm"));
     }
 
-    startTime.add(noOfHours, 'hours'); // Move to the next time slot
+    startTime.add(noOfHours, "hours"); // Move to the next time slot
   }
 
   return availableTime;
 };
+const getBookings = async (status, id) => {
+  let bookings = [];
+  await firebase
+    .firestore()
+    .collection("Bookings")
+    .where("serviceProvider", "==", id)
+    .where("status", "==", status)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        let data = doc.data();
+        data.id = doc.id;
+        bookings.push(data);
+      });
+    });
+  return bookings;
+};
 
-  
-export { getAllService, getWorkerByService, getAllLocation, getUser,getAvailableTime };
+export {
+  getAllService,
+  getWorkerByService,
+  getService,
+  getAllLocation,
+  getUser,
+  getAvailableTime,
+  getBookings,
+};

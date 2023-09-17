@@ -2,15 +2,15 @@ import Button from "@mui/material/Button";
 import Styles from "./customButtons.module.css";
 
 interface primaryRoundedLinkButton {
-  buttonLink: string;
   buttonText: string;
+  onclick:any;
 }
 const PrimaryRoundedLinkButton = ({
-  buttonLink,
   buttonText,
+  onclick
 }: primaryRoundedLinkButton) => {
   return (
-    <Button className={Styles.roundedButton} variant="text" href={buttonLink}>
+    <Button className={Styles.roundedButton} variant="text" onClick={onclick}>
       {buttonText}
     </Button>
   );

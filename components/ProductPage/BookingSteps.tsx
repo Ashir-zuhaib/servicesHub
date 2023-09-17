@@ -9,6 +9,8 @@ import Styles from "./bookingSteps.module.css";
 import TimeAndDateContainer from "./TimeAndDate/TimeAndDateContainer";
 import TextField from "@mui/material/TextField";
 import SubTitle from "../shared/Headings/SubTitle";
+import firebase from "../../config";
+import { useRouter } from "next/router";
 
 const steps = [
   "Select the service hours",
@@ -17,11 +19,37 @@ const steps = [
 ];
 
 export default function BookingSteps({ providerId }) {
+  const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const [count, setCount] = React.useState<number>(1);
-  const [address, setAddress] = React.useState("");
-  const [contact, setContact] = React.useState("");
+  const [bookingData, setBookingData] = React.useState({
+    apptDate: "",
+    startTime: "",
+    endTime: "",
+    noOfHours: count,
+    address: "", // Add the address field
+    contactNumber: "",
+    serviceProvider: providerId,
+    serviceProviderData: "",
+    chargesPerHour: "",
+    serviceCharges: "",
+    subTotal: "",
+    total: "",
+    status: "active",
+    customerId: "",
+  });
+  const getCurrentUser = async () => {
+    const currentUser = await localStorage.getItem("uid");
+    // const currentUser = await JSON.parse(currentUserString);
+    setBookingData({
+      ...bookingData,
+      customerId: currentUser,
+    });
+  };
+  React.useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   const isStepOptional = (step: number) => {
     return step === 1;
@@ -46,6 +74,53 @@ export default function BookingSteps({ providerId }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const handleSkip = () => {
+    if (!isStepOptional(activeStep)) {
+      throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+      const newSkipped = new Set(prevSkipped.values());
+      newSkipped.add(activeStep);
+      return newSkipped;
+    });
+  };
+
+  const handleSelectDateAndTime = (selectedDate, selectedTime, endTime) => {
+    setBookingData({
+      ...bookingData,
+      apptDate: selectedDate,
+      startTime: selectedTime,
+      endTime: endTime,
+    });
+  };
+
+  const handleAddressChange = (event) => {
+    setBookingData({
+      ...bookingData,
+      address: event.target.value,
+    });
+  };
+
+  const handleContactNumberChange = (event) => {
+    setBookingData({
+      ...bookingData,
+      contactNumber: event.target.value,
+    });
+  };
+  const handleSubmit = () => {
+    console.log("data for checkout", bookingData);
+    bookingData?.customerId
+      ? router.push({
+          pathname: "/Checkout",
+          query: { bookingData: JSON.stringify(bookingData) },
+        })
+      : router.push({
+          pathname: "/Login",
+          query: { readyForcheckout: JSON.stringify(bookingData) },
+        });
+  };
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -76,12 +151,22 @@ export default function BookingSteps({ providerId }) {
                   InputValue={count}
                   isWhite={true}
                   updateCount={setCount}
+                  updateBookingData={(newNoOfHours) =>
+                    setBookingData((prevBookingData) => ({
+                      ...prevBookingData,
+                      noOfHours: newNoOfHours,
+                    }))
+                  }
                 />{" "}
               </div>
             </div>
           </div>
         ) : activeStep == 1 ? (
-          <TimeAndDateContainer noOfHours={count} providerId={providerId} />
+          <TimeAndDateContainer
+            noOfHours={count}
+            providerId={providerId}
+            onSelectDateAndTime={handleSelectDateAndTime}
+          />
         ) : (
           <div className={Styles.pricingContainer}>
             <Box
@@ -98,30 +183,37 @@ export default function BookingSteps({ providerId }) {
                 <TextField
                   required
                   id="outlined-required"
-                  label="Enter Your Address"
-                  value={address}
+                  label="Enter Your Complete Address"
+                  value={bookingData.address}
+                  onChange={handleAddressChange}
                 />
+
                 <TextField
                   required
                   id="outlined-required"
                   label="Enter Contact Number"
-                  value={contact}
+                  value={bookingData.contactNumber}
+                  onChange={handleContactNumberChange}
                 />
               </div>
             </Box>
           </div>
         )}
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-          <Button
-            color="inherit"
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            sx={{ mr: 1 }}>
-            Back
-          </Button>
+          {activeStep !== 0 ? (
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}>
+              Back
+            </Button>
+          ) : (
+            ""
+          )}
           <Box sx={{ flex: "1 1 auto" }} />
           {activeStep == 2 ? (
-            <Button href="/Checkout" variant="contained">
+            <Button onClick={handleSubmit} variant="contained">
               Submit
             </Button>
           ) : (

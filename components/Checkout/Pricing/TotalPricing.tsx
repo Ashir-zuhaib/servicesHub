@@ -4,32 +4,33 @@ import TextInColumnForPricing from "../../shared/TextInTwoColumns/TextInColumnFo
 
 interface totalPricing {
   isBackgroundColor: boolean;
+  pricing:any;
 }
-const TotalPricing = ({ isBackgroundColor }: totalPricing) => {
+const TotalPricing = ({ isBackgroundColor, pricing }: totalPricing) => {
   return (
     <div
       className={isBackgroundColor ? "bg-gray br-lg px-3 py-2" : "px-3 py-2"}>
       <SubHeading title="Order Summary" />
       <TextInColumnForPricing
         leftText={"Charges For  1 Hours"}
-        rightText={"500"}
+        rightText={pricing?.chargesPerHour}
         isBold={false}
       />
       <TextInColumnForPricing
         leftText={"SubTotal:"}
-        rightText={"1000"}
+        rightText={pricing?.subTotal}
         isBold={false}
       />
 
       <TextInColumnForPricing
         leftText={"Service Charges:"}
-        rightText={"200"}
+        rightText={pricing?.serviceCharges}
         isBold={false}
       />
       <div className="has-text-weight-bold">
         <TextInColumnForPricing
           leftText={"Total:"}
-          rightText={"1800"}
+          rightText={pricing?.total}
           isBold={false}
         />
       </div>

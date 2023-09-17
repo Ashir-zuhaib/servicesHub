@@ -4,25 +4,25 @@ import CardCarousel from "../components/shared/CardsCarousel/CardCarousel";
 import ProductsContainerWithButton from "../components/shared/ProductsContainer/ProductsContainerWithButton";
 import { HomeCarousel } from "../components/HomeCarousel/HomeCarousel";
 import { getAllService } from "../utils/getData";
-import { useEffect, useState } from "react";
-// DUMMY IMAGES
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setData } from "../redux/dataSlice";
 import bannerImage1 from "../public/images/banner-img.png";
 import bannerImage2 from "../public/images/banner-img2.png";
 
-const Home: any = () => {
-  let isMobileValue = false;
-  const [data, setData] = useState([]);
-
-  // FETCH SERVICES DATA
+const Home: React.FC = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state: any) => state.data);
   useEffect(() => {
-    const fetchData = async () => {
-      const serviceData = await getAllService();
-      setData(serviceData);
-    };
-    fetchData();
-  }, []);
+    if (data.length == 0) {
+      const fetchData = async () => {
+        const serviceData = await getAllService();
+        dispatch(setData(serviceData)); // Dispatch the data to the Redux store
+      };
+      fetchData();
+    }
+  }, [dispatch]);
 
-  // CAROUSEL IMAGES
   var items = [
     {
       name: "Random Name #1",
@@ -33,9 +33,10 @@ const Home: any = () => {
       imageSrc: bannerImage2,
     },
   ];
+
   return (
     <>
-      <Layout isMobile={isMobileValue}>
+      <Layout>
         <Container maxWidth="lg">
           <HomeCarousel items={items} />
           <div className="py-5">

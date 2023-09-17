@@ -1,27 +1,50 @@
-import ProductImage from "../../../public/carpenter.png";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Image from "next/image";
 import Styles from "./OrderSummary.module.css";
+import { useState } from "react";
+import { getAllService } from "../../../utils/getData";
+import imagePlaceholder from "../../../public/images/image-placeholder.jpeg";
 
-const OrderItemsContainer = () => {
+interface OrderItemsContainer {
+  bookingDetail: any;
+  providerData: any;
+}
+const OrderItemsContainer = ({
+  bookingDetail,
+  providerData,
+}: OrderItemsContainer) => {
+  const [bookingData, setBookingData] = useState();
+  const [serviceName, setServiceName] = useState();
+  const gettingService = async () => {
+    const getService = await getAllService();
+    const filter = getService?.filter((service) =>
+      service?.id == providerData?.role ? setServiceName(service?.name) : ""
+    );
+  };
   return (
     <Grid container className={"py-2 px-2 has-background-white br-lg mb-4"}>
       <Grid item xs={2}>
         <Image
-          src={ProductImage}
+          src={
+            providerData?.profileImg
+              ? providerData?.profileImg
+              : imagePlaceholder
+          }
           width={200}
           height={200}
+          style={{ borderRadius: "60%" }}
           alt="service provider"
+          className="p-3"
         />
       </Grid>
       <Grid container item xs={10} justifyContent="center" alignItems="center">
         <Grid item xs={8}>
-          <p className="text-primary-color is-size-6">Carpenter</p>
-          <p className="has-text-weight-semibold mr-2 is-size-5">Zia Farooqi</p>
-          <p className="text-light is-size-6 ">
-            Address Selected: 2/3 Nazimabad no 5
+          <p className="text-primary-color is-size-6 is-capitalized">{serviceName}</p>
+          <p className="has-text-weight-semibold mr-2 is-size-5 is-capitalized">
+            {providerData?.full_name}
           </p>
+          <p className="text-light is-size-6 ">{bookingDetail?.address}</p>
         </Grid>
         <Grid item xs={4}>
           <Stack
@@ -29,9 +52,13 @@ const OrderItemsContainer = () => {
             direction="column"
             justifyContent="center"
             alignItems="end">
-            <p className={Styles.actualPrice}>23-July-2023</p>
-            <p className={Styles.discountedPrice}>4:00 pm - 6:00 pm</p>
-            <p className="text-light is-size-6 ">2 hrs</p>
+            <p className={Styles.actualPrice}>{bookingDetail?.apptDate}</p>
+            <p className={Styles.discountedPrice}>
+              {bookingDetail?.startTime} - {bookingDetail?.endTime}
+            </p>
+            <p className="text-light is-size-6 ">
+              {bookingDetail?.noOfHours} hrs
+            </p>
           </Stack>
         </Grid>
       </Grid>

@@ -1,17 +1,14 @@
 import Grid from "@mui/material/Grid";
 import Styles from "./CategoryCard.module.css";
-import ProductTitle from "../../ServicesCard/productTitle/productTitle";
 import ProductPrice from "../../ServicesCard/productPrice/productPrice";
 import Button from "@mui/material/Button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getAllLocation } from "../../../utils/getData";
 import { useRouter } from "next/router";
+import { Skeleton } from "@mui/material";
+import imagePlaceholder from "../../../public/images/image-placeholder.jpeg";
 
-interface Title {
-  worker: {};
-  id: string;
-}
 const CategoryCard = ({ worker }) => {
   const [locations, setLocation] = useState([]);
   const gettingLocation = async () => {
@@ -23,38 +20,42 @@ const CategoryCard = ({ worker }) => {
     );
     setLocation(filter);
   };
-  const router = useRouter()
+
+  const router = useRouter();
   const handleNavigation = (id) => {
-    console.log("idddddd",id);
-    
     router.push({
-      pathname: '/ServiceProvider',
-      query: {providerId: id},
+      pathname: "/ServiceProvider",
+      query: { providerId: id },
     });
   };
+
   useEffect(() => {
     gettingLocation();
   }, []);
-  return (
+  return worker.locationName ? (
     <>
       <Grid item xs={12} md={12} className={Styles.border}>
         <Grid
           item
           direction="row"
-          justifyContent="center"
           alignItems="center"
+          justifyContent={"space-around"}
           className={Styles.CategoryCard}>
-          <Image
-            src={worker?.profileImg}
-            alt="Picture of the author"
-            width={100}
-            height={200}
-            placeholder="blur" // Optional blur-up while loading
-            blurDataURL="data:..."
-            className="p-2"
-          />
-          <div className="px-2 py-2">
-            <ProductTitle ProductName={worker?.full_name} TagName={"p"} />
+          <div>
+            <Image
+              src={worker?.profileImg ? worker?.profileImg : imagePlaceholder}
+              alt="image"
+              width={100}
+              height={100}
+              placeholder="blur" // Optional blur-up while loading
+              blurDataURL="data:..."
+              className={`px-2 ${Styles.image}`}
+            />
+          </div>
+          <div>
+            <h2 className="is-size-5 mb-0 is-capitalized">
+              {worker?.full_name}
+            </h2>
             <ProductPrice Price={worker?.hourlyRate} />
             <p className={Styles.rating}>
               <svg
@@ -71,13 +72,19 @@ const CategoryCard = ({ worker }) => {
                   stroke-linecap="round"
                   stroke-linejoin="round"></path>
               </svg>
-              {worker?.rating ? worker?.rating : "N/A"}
+              {worker?.rating ? worker?.rating : "N/A"}/5
             </p>
-
-            <p className="mb-0">Areas Available: {worker.locationName}</p>
+            <p
+              className="mb-0 text-16 has-text-capitalize"
+              style={{ height: "38px", lineHeight: "20px" }}>
+              Areas Available: {worker.locationName}
+            </p>
           </div>
         </Grid>
-        <Button onClick={()=>handleNavigation(worker?.id)} className={Styles.ctaAtcart} variant="text" >
+        <Button
+          onClick={() => handleNavigation(worker?.id)}
+          className={Styles.ctaAtcart}
+          variant="text">
           <svg
             className="mr-2"
             xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +99,24 @@ const CategoryCard = ({ worker }) => {
         </Button>
       </Grid>
     </>
+  ) : (
+    <Grid container className="mb-4">
+      <Grid item xs={12} md={4}>
+        <Skeleton
+          variant="circular"
+          width={100}
+          height={100}
+          className="mb-3"
+        />
+        <Skeleton
+          variant="rectangular"
+          width={310}
+          height={30}
+          className="mb-3"
+        />
+        <Skeleton variant="rounded" width={310} height={70} />
+      </Grid>
+    </Grid>
   );
 };
 

@@ -1,15 +1,18 @@
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, message, Space } from 'antd';
 import Link from 'next/link';
+import { useRouter } from "next/router";
 
 const DropdownComponent = () =>{
+  const router = useRouter();
+
     const onClick = ({ key}) => {
         message.info(`Page loading...` );
         if(key == "1"){
-            window.location.href = './Login';
+            router.push('./Login');
         }
         else{
-            window.location.href = './Signup';
+            router.push('./Signup');
         }
       };
       const items = [

@@ -1,10 +1,24 @@
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Image from "next/image";
 import ProductImage from "../../../public/carpenter.png";
 import { Divider } from "@mui/material";
+import { useEffect, useState } from "react";
+import { getAllService } from "../../../utils/getData";
+import imagePlaceholder from "../../../public/images/image-placeholder.jpeg";
 
-const OrderSummaryItems = () => {
+const OrderSummaryItems = ({ confirmData, providerData }) => {
+  const [serviceName,setServiceName]=useState("")  
+  const gettingService = async () => {
+    const getService = await getAllService();
+      const filter = getService?.filter((service) =>
+        service?.id == providerData?.role
+          ? setServiceName(service?.name)
+          : ""
+      );
+    }
+    useEffect(()=>{
+      gettingService()
+    },[])
   return (
     <>
       <Grid container className={"py-2 px-2 mt-1 is-size-6"}>
@@ -16,19 +30,19 @@ const OrderSummaryItems = () => {
           alignItems="center">
           <Grid item xs={12} className="text-center">
             <Image
-              src={ProductImage}
+              src={providerData?.profileImg ? providerData?.profileImg : imagePlaceholder }
               width={120}
               height={120}
               alt="service provider"
             />
           </Grid>
           <Grid item xs={9}>
-            <p className="has-text-weight-semibold mr-2 ">Zia Farooqi</p>
-            <p className="text-blury ">Carpenter</p>
+            <p className="has-text-weight-semibold mr-2 ">{providerData?.full_name}</p>
+            <p className="text-blury ">{serviceName}</p>
           </Grid>
           <Grid item xs={3} className="text-right">
-            <span className="text-blury">x2 hrs</span>
-            <p>Rs.1000</p>
+            <span className="text-blury">x{confirmData?.noOfHours} hrs</span>
+            <p>Rs. {confirmData?.chargesPerHour}</p>
           </Grid>
         </Grid>
       </Grid>
