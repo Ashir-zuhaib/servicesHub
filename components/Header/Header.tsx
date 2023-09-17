@@ -50,9 +50,8 @@ function Header() {
               <Image
                 src={websiteLogo}
                 alt="Logo"
-                width={180}
-                height={60}
-                className="my-2"
+                width={210}
+                height={90}
               />
             </Link>
             <MainSearch />

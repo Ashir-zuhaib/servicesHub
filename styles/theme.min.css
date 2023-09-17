@@ -34,7 +34,7 @@ body {
   --green: #28a745;
 }
 .primary-color {
-  background: var(--primary-color);
+  background: var(--primary-color)!important;
 }
 h1,
 h2,

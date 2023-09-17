@@ -4,7 +4,7 @@ import CardCarousel from "../components/shared/CardsCarousel/CardCarousel";
 import ProductsContainerWithButton from "../components/shared/ProductsContainer/ProductsContainerWithButton";
 import { HomeCarousel } from "../components/HomeCarousel/HomeCarousel";
 import { getAllService } from "../utils/getData";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../redux/dataSlice";
 import bannerImage1 from "../public/images/banner-img.png";
@@ -13,6 +13,8 @@ import bannerImage2 from "../public/images/banner-img2.png";
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.data);
+  const [bannerImageSrc, setBannerImageSrc] = useState(bannerImage1);
+
   useEffect(() => {
     if (data.length == 0) {
       const fetchData = async () => {
@@ -23,14 +25,31 @@ const Home: React.FC = () => {
     }
   }, [dispatch]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setBannerImageSrc(bannerImage2);
+      } else {
+        setBannerImageSrc(bannerImage1);
+      }
+    };
+
+    // Listen for window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Initialize the image source based on the initial screen size
+    handleResize();
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   var items = [
     {
       name: "Random Name #1",
-      imageSrc: bannerImage1,
-    },
-    {
-      name: "Random Name #1",
-      imageSrc: bannerImage2,
+      imageSrc: bannerImageSrc,
     },
   ];
 
@@ -51,6 +70,13 @@ const Home: React.FC = () => {
           </div>
         </Container>
       </Layout>
+      <style jsx>{`
+        .banner-image {
+          max-height: 500px; /* Fixed height for screens wider than 768px */
+          height: auto; /* Auto height for screens 768px and below */
+          width: 100%;
+        }
+      `}</style>
     </>
   );
 };
