@@ -1,8 +1,24 @@
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { getAllService } from "../../../utils/getData";
+import { useSelector, useDispatch } from "react-redux";
+import { setData } from "../../../redux/dataSlice";
 
+import { useEffect } from "react";
 function MainSearch() {
+  const dispatch = useDispatch();
+  const data = useSelector((state: any) => state.data);
+  useEffect(() => {
+    if (data.length === 0) {
+      const fetchData = async () => {
+        const serviceData = await getAllService();
+        dispatch(setData(serviceData)); // Dispatch the data to the Redux store
+      };
+      fetchData();
+    }
+  }, [dispatch, data]); // Include 'data' as a dependency to ensure it's updated
+  console.log(data)
   return (
     <>
       <FormControl fullWidth>
@@ -15,7 +31,7 @@ function MainSearch() {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Search Your Help"
+              label="Search Services"
               InputProps={{
                 ...params.InputProps,
                 type: "search",
