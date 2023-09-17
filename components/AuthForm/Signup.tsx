@@ -21,8 +21,6 @@ export default function SignupMain() {
   const [worker, setWorker] = useState<boolean>(false);
   const [occupation, setOccupation] = useState("QUoP0oYjQaPHrMhzznNN");
   const { checkoutData } = router.query;
-  console.log("chec", checkoutData);
-
   const submitSignupForm = async () => {
     if (fullName == "" || email == "" || userPassword == "") {
       setErrorMessage("Fields cannot be empty");

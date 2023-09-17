@@ -3,6 +3,9 @@
 }
 @media (max-width: 768px) {
     .Carousel{
-        max-height: 212px!important;
+        max-height: 250px!important;
+    }
+    .Carousel>div:first-child{
+        height: 250px!important;
     }
 }

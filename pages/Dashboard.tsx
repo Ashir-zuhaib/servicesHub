@@ -25,7 +25,6 @@ const Dashboard = () => {
     getData();
   }, []);
 
-  console.log('l',userId)
   return (
     <>
       <div className="w-100 primary-color">

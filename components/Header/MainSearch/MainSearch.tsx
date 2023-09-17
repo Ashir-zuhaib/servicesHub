@@ -11,7 +11,6 @@ function MainSearch() {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.data);
   const router = useRouter(); // Initialize the useRouter hook
-  console.log("h", data);
   useEffect(() => {
     if (data.length === 0) {
       const fetchData = async () => {

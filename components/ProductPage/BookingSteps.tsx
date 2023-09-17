@@ -110,7 +110,6 @@ export default function BookingSteps({ providerId }) {
     });
   };
   const handleSubmit = () => {
-    console.log("data for checkout", bookingData);
     bookingData?.customerId
       ? router.push({
           pathname: "/Checkout",

@@ -51,7 +51,6 @@ export default function BookingTabs({ currentUser }) {
 
     const updatedBookingData = await Promise.all(
       bookingData.map(async (item) => {
-        console.log("I wie", item);
         const customerData = await getUser(item?.customerId);
         const serviceProviderData = await getUser(item?.serviceProvider);
         const serviceData = await getService(serviceProviderData?.role);

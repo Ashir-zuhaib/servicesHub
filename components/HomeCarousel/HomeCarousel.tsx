@@ -8,16 +8,15 @@ export function HomeCarousel({ items }: any) {
   return (
     <Carousel className={Styles.Carousel}>
       {items.map((item, i) => (
-        <div key={i} className="overflow-hidden">
-          <Image
-            src={item?.imageSrc}
-            alt="image"
-            width={1024}
-            placeholder="blur" // Optional blur-up while loading
-            blurDataURL="data:..."
-            style={{ borderRadius: '10px' }}
-          />
-        </div>
+        <Image
+          src={item?.imageSrc}
+          alt="image"
+          width={1024}
+          placeholder="blur" // Optional blur-up while loading
+          blurDataURL="data:..."
+          key={i}
+          style={{ borderRadius: "10px" }}
+        />
       ))}
     </Carousel>
   );

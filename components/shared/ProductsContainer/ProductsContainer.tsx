@@ -10,7 +10,7 @@ interface productContainer {
 
 const ProductsContainer = ({ showAll, productsData }: productContainer) => {
   const skeletonItems = Array.from({ length: showAll ? 9 : 6 }, (_, i) => (
-    <Grid container item xs={8} md={4} key={i}>
+    <Grid container item xs={12} md={4} key={i}>
       <Skeleton
         variant="rectangular"
         width={359}
