@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="w-100 primary-color">
+      <div className="w-100" style={{borderBottom: '1px solid #c9c7c7'}}>
         <Container maxWidth="lg" className="py-3">
           <Image src={websiteLogo} alt="Logo" width={180} height={60} />
         </Container>

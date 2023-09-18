@@ -7,8 +7,10 @@ import { useRouter } from "next/router";
 import { getAllLocation, getAllService, getUser } from "../utils/getData";
 import { useEffect, useState } from "react";
 import imagePlaceholder from "../public/images/image-placeholder.jpeg";
+
 interface ServiceProvider {
-  profileImg: string;
+  profileImg: any;
+  // Add other required properties here
 }
 
 const ServiceProviderProfile = () => {
@@ -16,25 +18,42 @@ const ServiceProviderProfile = () => {
   const [serviceProviderData, setServiceProviderData] =
     useState<ServiceProvider | null>(null);
   const { providerId } = router.query;
+
   const gettingProviderData = async () => {
-    const providerData = await getUser(providerId);
-    const getService = await getAllService();
-    const filter = getService?.filter((service) =>
-      service?.id == providerData?.role
-        ? (providerData.roleName = service?.name)
-        : ""
-    );
-    const getLocation = await getAllLocation();
-    getLocation?.filter((location) =>
-      location?.id == providerData?.location
-        ? (providerData.locationName = location?.value)
-        : ""
-    );
-    setServiceProviderData(providerData);
+    try {
+      if (!providerId) return; // Ensure providerId is defined
+
+      const providerData = await getUser(providerId);
+
+      // Check if providerData has the required properties
+      if (providerData && providerData.profileImg) {
+        // Convert to ServiceProvider type
+        const serviceProvider: ServiceProvider = {
+          profileImg: providerData.profileImg,
+          // Add other properties here
+        };
+
+        // Set the converted data in the state
+        setServiceProviderData(serviceProvider);
+      } else {
+        // Handle the case where profileImg is missing in providerData
+        // You can provide default values or handle it as needed
+        // Example:
+        setServiceProviderData({
+          profileImg: imagePlaceholder, // Provide a default image
+          // Add other default values here
+        });
+      }
+    } catch (error) {
+      // Handle errors here
+      console.error("Error fetching data:", error);
+    }
   };
+
   useEffect(() => {
     gettingProviderData();
-  }, []);
+  }, [providerId]);
+
   return (
     <Layout>
       <Grid container justifyContent="center" className="py-2 px-2">
@@ -65,8 +84,8 @@ const ServiceProviderProfile = () => {
               <Grid item xs={12} md={3}>
                 <Image
                   src={
-                    serviceProviderData?.profileImg
-                      ? serviceProviderData?.profileImg
+                    serviceProviderData.profileImg
+                      ? serviceProviderData.profileImg
                       : imagePlaceholder
                   }
                   width={200}
