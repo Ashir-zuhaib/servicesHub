@@ -16,9 +16,12 @@ function QuantityUpdateButtons({ InputValue, isWhite, updateCount,updateBookingD
   const [count, setCount] = useState(InputValue);
 
   const handleIncrement = () => {
-    setCount(count + 1);
-    updateCount(count + 1);
-    updateBookingData(count + 1);
+    if(count<=3){
+
+      setCount(count + 1);
+      updateCount(count + 1);
+      updateBookingData(count + 1);
+    }
   };
 
   const handleDecrement = () => {
@@ -42,7 +45,7 @@ function QuantityUpdateButtons({ InputValue, isWhite, updateCount,updateBookingD
         aria-label="small button group"
         className={isWhite ? Styles.updateQtyButtons : Styles.updateQtyButtonsGray}
       >
-        <Button onClick={handleDecrement}>
+        <Button onClick={handleDecrement} disabled={InputValue <= 0}>
           <RemoveIcon />
         </Button>
         <Button>
@@ -53,7 +56,7 @@ function QuantityUpdateButtons({ InputValue, isWhite, updateCount,updateBookingD
             onChange={handleInputChange}
           />
         </Button>
-        <Button onClick={handleIncrement}>
+        <Button onClick={handleIncrement} disabled={InputValue >= 3}>
           <AddIcon />
         </Button>
       </ButtonGroup>

@@ -10,6 +10,10 @@ import imagePlaceholder from "../public/images/image-placeholder.jpeg";
 
 interface ServiceProvider {
   profileImg: any;
+  hourlyRate:any;
+  rating :any;
+  locationName:any;
+  full_name:any; 
   // Add other required properties here
 }
 
@@ -24,12 +28,22 @@ const ServiceProviderProfile = () => {
       if (!providerId) return; // Ensure providerId is defined
 
       const providerData = await getUser(providerId);
+console.log("pr", providerData);
 
       // Check if providerData has the required properties
-      if (providerData && providerData.profileImg) {
+      if (providerData) {
         // Convert to ServiceProvider type
+        const locations = await getAllLocation()
+        
+        const locationName  = await locations?.filter((value)=>value.id == providerData?.location)
+        console.log("locationmm", locationName);
+        
         const serviceProvider: ServiceProvider = {
-          profileImg: providerData.profileImg,
+          profileImg: providerData?.profileImg,
+          hourlyRate:providerData?.hourlyRate,
+          rating:providerData?.rating,
+          locationName:locationName[0].value,
+          full_name:providerData?.full_name
           // Add other properties here
         };
 
@@ -41,6 +55,10 @@ const ServiceProviderProfile = () => {
         // Example:
         setServiceProviderData({
           profileImg: imagePlaceholder, // Provide a default image
+          hourlyRate:0,
+          rating:0,
+          locationName:"not preferrable",
+          full_name:providerData?.full_name
           // Add other default values here
         });
       }
