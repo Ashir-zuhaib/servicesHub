@@ -112,3 +112,6 @@ header .productSearchField .MuiOutlinedInput-notchedOutline {
 .swal-button{
   background-color: var(--primary-color);
 }
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium{
+  display: none;
+}
